@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span>
+    <span th:text="${car.model}"></span>
+    <span th:text="${car.brandCar.brandCar}"></span>
+    <span th:text="${car.yearOfIssue}"></span>
+</span>
+<div th:each="car:${cars}">
+    <span th:text="${car.brandCar.brandCar}"></span>
+    <span th:text="${car.model}"></span>
+    <span th:text="${car.yearOfIssue}"></span>
+    <span th:text="${car.transmission}"></span>
+    <span th:text="${car.costRentalOfDay}"></span>
+</div>
+<div>
+    <input type="checkbox" th:checked="${car.transmission}"><span>Механика</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+2019-09-27 00:21:46,251 INFO  - HHH000412: Hibernate Core {5.4.2.Final}
+2019-09-27 00:21:46,757 INFO  - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2019-09-27 00:21:47,771 INFO  - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2019-09-27 00:21:50,282 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,282 WARN  - constraint "fk66m9rlnegtu1qs9mdq1efi9p5" of relation "black_list" does not exist, skipping
+2019-09-27 00:21:50,284 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,284 WARN  - constraint "fkotveh3os09808h53lw4ki8nyo" of relation "car" does not exist, skipping
+2019-09-27 00:21:50,285 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,285 WARN  - constraint "fkjjeui0fav3qgfus7mgi2sd24v" of relation "order_rental_car" does not exist, skipping
+2019-09-27 00:21:50,286 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,287 WARN  - constraint "fk8wwjn5pofueuirgiydedrrppj" of relation "order_rental_car" does not exist, skipping
+2019-09-27 00:21:50,288 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,288 WARN  - constraint "fkag27095omgtdcs68pujeqg090" of relation "order_rental_car" does not exist, skipping
+2019-09-27 00:21:50,306 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,306 WARN  - drop cascades to constraint order_rental_car_additional_services_id_fkey on table car_storage.order_rental_car
+2019-09-27 00:21:50,327 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,327 WARN  - drop cascades to constraint car_brand_car_id_fkey on table car_storage.car
+2019-09-27 00:21:50,331 WARN  - SQL Warning Code: 0, SQLState: 00000
+2019-09-27 00:21:50,331 WARN  - drop cascades to constraint order_rental_car_car_id_fkey on table car_storage.order_rental_car
+2019-09-27 00:21:50,599 INFO  - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/car}" method="post">
+    <div>
+        <span>Model</span>
+        <input type="text" name="model">
+    </div>
+    <div th:each="transmission:${transmissions}">
+        <span th:text="${transmission}">AKPP</span>
+        <input type="checkbox" name="Transmission" th:value="${transmission}">
+    </div>
+    <div>
+        <input type="submit" value="Save">
+    </div>
+</form>
+
+</body>
+</html>

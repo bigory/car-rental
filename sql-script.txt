@@ -1,0 +1,63 @@
+CREATE DATABASE car_repository;
+CREATE SCHEMA car_storage;
+
+SET SEARCH_PATH = car_storage;
+
+CREATE TABLE user_service
+(
+    id              BIGSERIAL PRIMARY KEY UNIQUE NOT NULL,
+    first_name      VARCHAR(256),
+    second_name     VARCHAR(256),
+    passport_number VARCHAR(128) UNIQUE          NOT NULL,
+    telephone       VARCHAR(64)                  NOT NULL,
+    email           VARCHAR(256)                 NOT NULL,
+    password        VARCHAR(128)                 NOT NULL,
+    isAdmin         BOOLEAN
+);
+
+CREATE TABLE black_list
+(
+    id      BIGINT PRIMARY KEY,
+    user_id BIGINT UNIQUE NOT NULL REFERENCES user_service (id),
+    cause   TEXT
+);
+
+
+CREATE TABLE brand_car
+(
+    id    BIGINT PRIMARY KEY,
+    brand VARCHAR(256) UNIQUE NOT NULL
+);
+
+DROP TABLE car;
+
+CREATE TABLE car
+(
+    id                 BIGINT PRIMARY KEY,
+    brand_car_id       BIGINT             NOT NULL REFERENCES brand_car (id),
+    model              VARCHAR(256)       NOT NULL,
+    vin_number         VARCHAR(64) UNIQUE NOT NULL,
+    year_of_issue      INTEGER            NOT NULL,
+    transmission       VARCHAR(64)        NOT NULL,
+    class_car          VARCHAR(64)        NOT NULL,
+    cost_rental_of_day INTEGER            NOT NULL
+);
+
+CREATE TABLE additional_services
+(
+    id       BIGINT PRIMARY KEY,
+    services VARCHAR(256) UNIQUE NOT NULL,
+    cost     INTEGER             NOT NULL
+);
+
+CREATE TABLE order_rental_car
+(
+    id                     BIGINT PRIMARY KEY,
+    user_service_id        BIGINT       NOT NULL REFERENCES user_service (id),
+    car_id                 BIGINT       NOT NULL REFERENCES car (id),
+    additional_services_id BIGINT       NOT NULL REFERENCES additional_services (id),
+    date_start_rental      DATE         NOT NULL,
+    date_finish_rental     DATE         NOT NULL,
+    cost                   INTEGER      NOT NULL,
+    status_order           VARCHAR(128) NOT NULL
+);
