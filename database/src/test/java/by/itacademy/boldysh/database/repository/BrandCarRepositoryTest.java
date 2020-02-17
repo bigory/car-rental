@@ -31,7 +31,6 @@ public class BrandCarRepositoryTest {
         databaseHelper.prepareData();
     }
 
-
     @Test
     public void findByBrandCar() {
         BrandCar brandCars = brandCarRepository.findByBrand("BMW");

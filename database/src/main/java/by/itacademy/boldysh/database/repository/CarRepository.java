@@ -16,11 +16,11 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> /*,
 
     Car findByVinNumber(String vinNumber);
 
-    List<Car> findAllByBrandCar(BrandCar brandCar);
+    List<Car> findAllByBrandCarBrand(String brandCar);
 
     List<Car> findAllByBrandCarBrandAndCostRentalOfDayAndCarClassAndTransmission(String brandCar,
-                                                                                    Integer costRentalOfDay,
-                                                                                    CarClass carClass, Transmission transmission);
+                                                                                 Integer costRentalOfDay,
+                                                                                 CarClass carClass, Transmission transmission);
 
 
 }

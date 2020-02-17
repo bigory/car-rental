@@ -52,9 +52,7 @@ public class CarRepositoryTest {
 
     @Test
     public void findByBrandCar() {
-        List<Car> list = carRepository.findAllByBrandCar(BrandCar.builder()
-                .brand("Volvo")
-                .build());
+        List<Car> list = carRepository.findAllByBrandCarBrand("BMW");
         assertEquals(1, list.size());
     }
 
