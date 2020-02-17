@@ -1,7 +1,0 @@
-2020-02-17 12:08:17,003 INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
-2020-02-17 12:08:17,075 INFO  - HHH000412: Hibernate Core {5.4.2.Final}
-2020-02-17 12:08:17,077 INFO  - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.hbm2ddl.auto=create-drop, hibernate.format_sql=true}
-2020-02-17 12:08:17,220 INFO  - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2020-02-17 12:08:17,844 INFO  - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2020-02-17 12:08:18,794 INFO  - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2020-02-17 12:08:19,643 INFO  - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
