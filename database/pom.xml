@@ -91,7 +91,6 @@
             </plugin>
         </plugins>
 
-
         <finalName>database</finalName>
     </build>
 

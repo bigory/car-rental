@@ -1,0 +1,7 @@
+by\itacademy\boldysh\web\config\ThymeleafConfig.class
+by\itacademy\boldysh\web\controller\ControllerHelper.class
+by\itacademy\boldysh\web\config\InternationalizationConfig.class
+by\itacademy\boldysh\web\controller\DaoExeption.class
+by\itacademy\boldysh\web\controller\CarController.class
+by\itacademy\boldysh\web\config\WebConfiguration.class
+by\itacademy\boldysh\web\initializer\WebApplicationInitializer.class
