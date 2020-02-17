@@ -28,14 +28,13 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCar(Model model) {
-        model.addAttribute("car", carRepository.findByVinNumber("XCSD2133412"));
         model.addAttribute("cars", carService.findAll());
         return "car";
     }
 
-    @GetMapping
+   /* @GetMapping
     public String getPage() {
         return "create-car";
     }
@@ -44,5 +43,5 @@ public class CarController {
     public String createCar(Car car) {
         System.out.println(car);
         return "/redirect:/car";
-    }
+    }*/
 }
