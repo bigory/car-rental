@@ -9,33 +9,6 @@
     <list default="true" id="160a090e-d61f-44ca-afe5-ee4da36caf52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.iml" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/log4j.log" beforeDir="false" afterPath="$PROJECT_DIR$/database/log4j.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/by/itacademy/boldysh/database/repository/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/by/itacademy/boldysh/database/repository/CarRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/test/java/by/itacademy/boldysh/database/repository/BrandCarRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/test/java/by/itacademy/boldysh/database/repository/BrandCarRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/test/java/by/itacademy/boldysh/database/repository/CarRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/test/java/by/itacademy/boldysh/database/repository/CarRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/classes/by/itacademy/boldysh/database/repository/CarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/classes/by/itacademy/boldysh/database/repository/CarRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.AdditionalServiceRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.AdditionalServiceRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.BlackListUserServiceRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.BlackListUserServiceRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.BrandCarRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.BrandCarRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.CarRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.CarRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.OrderCarRentalCarRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.OrderCarRentalCarRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.UserServiceRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/TEST-by.itacademy.boldysh.database.repository.UserServiceRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.AdditionalServiceRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.AdditionalServiceRepositoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.BlackListUserServiceRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.BlackListUserServiceRepositoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.BrandCarRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.BrandCarRepositoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.CarRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.CarRepositoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.OrderCarRentalCarRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.OrderCarRentalCarRepositoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.UserServiceRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/surefire-reports/by.itacademy.boldysh.database.repository.UserServiceRepositoryTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/test-classes/by/itacademy/boldysh/database/repository/BrandCarRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/test-classes/by/itacademy/boldysh/database/repository/BrandCarRepositoryTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/target/test-classes/by/itacademy/boldysh/database/repository/CarRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/database/target/test-classes/by/itacademy/boldysh/database/repository/CarRepositoryTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/log4j.log" beforeDir="false" afterPath="$PROJECT_DIR$/service/log4j.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/service/service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/by/itacademy/boldysh/web/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/by/itacademy/boldysh/web/controller/CarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/webapp/WEB-INF/templates/car.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/webapp/WEB-INF/templates/car.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/web/web.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,6 +76,11 @@
     <select />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
@@ -131,7 +109,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -409,63 +387,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1581926066065</updated>
-      <workItem from="1581926073353" duration="495000" />
+      <workItem from="1581926073353" duration="1305000" />
     </task>
+    <task id="LOCAL-00001" summary="Start commit">
+      <created>1581926734816</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581926734816</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Start commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Start commit" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581930938970">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581930938970" />
-    <state x="740" y="262" key="FileChooserDialogImpl" timestamp="1581926283187">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581926283187" />
-    <state width="1293" height="282" key="GridCell.Tab.0.bottom" timestamp="1581932943179">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581932943179" />
-    <state width="1293" height="282" key="GridCell.Tab.0.center" timestamp="1581932943179">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581932943179" />
-    <state width="1293" height="282" key="GridCell.Tab.0.left" timestamp="1581932943178">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581932943178" />
-    <state width="1293" height="282" key="GridCell.Tab.0.right" timestamp="1581932943179">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581932943179" />
-    <state width="1293" height="282" key="GridCell.Tab.1.bottom" timestamp="1581931650825">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650825" />
-    <state width="1293" height="282" key="GridCell.Tab.1.center" timestamp="1581931650825">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650825" />
-    <state width="1293" height="282" key="GridCell.Tab.1.left" timestamp="1581931650825">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650825" />
-    <state width="1293" height="282" key="GridCell.Tab.1.right" timestamp="1581931650825">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650825" />
-    <state width="1293" height="282" key="GridCell.Tab.2.bottom" timestamp="1581931650826">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650826" />
-    <state width="1293" height="282" key="GridCell.Tab.2.center" timestamp="1581931650825">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1293" height="282" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650825" />
-    <state width="1293" height="282" key="GridCell.Tab.2.left" timestamp="1581931650825">
+
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1293" height="282" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931650825" />
@@ -480,10 +422,3 @@
     <state x="440" y="95" key="SettingsEditor" timestamp="1581929812410">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="95" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581929812410" />
-    <state x="616" y="173" width="670" height="676" key="search.everywhere.popup" timestamp="1581929546875">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="173" width="670" height="676" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581929546875" />
-  </component>
-</project>
