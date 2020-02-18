@@ -41,9 +41,10 @@ public class CarController {
     }
 
     @RequestMapping(value = "/addCars", method = RequestMethod.GET)
-    public String getPage(Model model) {
+    public String getPage(Model model, Transmission transmissions) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
+        model.addAttribute("transmission", transmissions);
         return "addCars";
     }
 

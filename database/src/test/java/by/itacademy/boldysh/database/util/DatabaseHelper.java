@@ -63,9 +63,9 @@ public class DatabaseHelper {
         entityManager.persist(blackListUserServiceThree);
 
 
-        Car bmw = new Car("750", 2019, "DSDS233232", Transmission.MACHINE, CarClass.STANDART, 30, brandCarBMW);
-        Car vw = new Car("Polo", 2019, "VFS211312213", Transmission.MECHANIC, CarClass.COMFORT, 20, brandCarVW);
-        Car volvo = new Car("S80", 2017, "ZXS2312121", Transmission.MACHINE, CarClass.BUSINESS, 45, brandCarVolvo);
+        Car bmw = new Car(brandCarBMW,"750", 2019, "DSDS233232", Transmission.MACHINE, CarClass.STANDART, 30 );
+        Car vw = new Car(brandCarVW,"Polo", 2019, "VFS211312213", Transmission.MECHANIC, CarClass.COMFORT, 20);
+        Car volvo = new Car(brandCarVolvo,"S80", 2017, "ZXS2312121", Transmission.MACHINE, CarClass.BUSINESS, 45);
         entityManager.persist(bmw);
         entityManager.persist(vw);
         entityManager.persist(volvo);
