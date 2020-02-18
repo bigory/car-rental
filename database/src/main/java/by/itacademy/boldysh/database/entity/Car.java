@@ -67,7 +67,7 @@ public class Car extends BaseEntity<Long> {
     /*@Version
     private Long version;*/
 
-    public Car(String model, Integer yearOfIssue, String vinNumber, Transmission transmission, CarClass carClass, Integer costRentalOfDay, BrandCar brandCar) {
+    public Car(BrandCar brandCar, String model, Integer yearOfIssue, String vinNumber, Transmission transmission, CarClass carClass, Integer costRentalOfDay) {
         this.model = model;
         this.yearOfIssue = yearOfIssue;
         this.vinNumber = vinNumber;

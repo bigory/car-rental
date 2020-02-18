@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/car}" method="post">
+<form th:action="@{/addCars.html}" th:object="${carDto}" method="post">
     <div>
         <span>Model</span>
         <input type="text" name="model">
     </div>
-    <div th:each="transmission:${transmissions}">
+    <div th:each="transmissions:${transmission}">
         <span th:text="${transmission}">AKPP</span>
         <input type="checkbox" name="Transmission" th:value="${transmission}">
     </div>
