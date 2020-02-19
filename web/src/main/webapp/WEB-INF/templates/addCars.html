@@ -6,14 +6,37 @@
 </head>
 <body>
 <form th:action="@{/addCars.html}" th:object="${carDto}" method="post">
+
+    <br>
     <div>
         <span>Model</span>
-        <input type="text" name="model">
+        <input type="text" th:field="*{modelCar}">
     </div>
-    <div th:each="transmissions:${transmission}">
+
+    <br>
+    <div>
+        <span>VinNumber</span>
+        <input type="text" th:field="*{vinNumber}">
+    </div>
+
+    <br>
+    <span>Transmission</span>
+    <div th:each="transmission:${transmissions}">
         <span th:text="${transmission}">AKPP</span>
         <input type="checkbox" name="Transmission" th:value="${transmission}">
     </div>
+
+    <br>
+    <span>Class</span>
+    <div>
+        <select th:field="*{classCar}">
+            <option th:each="class: ${carClasss}"
+                    th:value="${class}"
+                    th:text="${class}"></option>
+        </select>
+    </div>
+
+    <br>
     <div>
         <input type="submit" value="Save">
     </div>
