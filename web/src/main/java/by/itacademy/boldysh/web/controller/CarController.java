@@ -3,6 +3,7 @@ package by.itacademy.boldysh.web.controller;
 import by.itacademy.boldysh.database.dto.CarDto;
 import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.CarRepository;
+import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,10 @@ public class CarController {
     }
 
     @Autowired
-    private CarRepository carRepository;
+    private CarService carService;
 
     @Autowired
-    private CarService carService;
+    private BrandCarService brandCarService;
 
     @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCar(Model model) {
@@ -41,15 +42,18 @@ public class CarController {
     }
 
     @RequestMapping(value = "/addCars", method = RequestMethod.GET)
-    public String getPage(Model model, Transmission transmissions) {
+    public String getPage(Model model) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
-        model.addAttribute("transmission", transmissions);
+        model.addAttribute("carClasss", CarClass.values());
+        model.addAttribute("brandCarss", brandCarService.findAll());
+        model.addAttribute("transmissions", Transmission.values());
         return "addCars";
     }
 
     @RequestMapping(value = "/addCars", method = RequestMethod.POST)
     public String createCar(Model model, @ModelAttribute("carDto") CarDto carDto) {
+
         BrandCar brandCar = carDto.getBrandCar();
         String modelCar = carDto.getModelCar();
         Integer yearOfIssue = carDto.getYearOfIssue();
