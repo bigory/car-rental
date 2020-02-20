@@ -29,7 +29,6 @@ CREATE TABLE brand_car
     brand VARCHAR(256) UNIQUE NOT NULL
 );
 
-DROP TABLE car;
 
 CREATE TABLE car
 (
@@ -61,3 +60,24 @@ CREATE TABLE order_rental_car
     cost                   INTEGER      NOT NULL,
     status_order           VARCHAR(128) NOT NULL
 );
+
+DROP TABLE user_service;
+DROP TABLE order_rental_car;
+DROP TABLE black_list;
+DROP TABLE brand_car;
+DROP TABLE car;
+DROP TABLE additional_services;
+
+INSERT INTO brand_car
+VALUES (3, 'TOYOTA');
+INSERT INTO brand_car
+VALUES (2, 'VW');
+INSERT INTO brand_car
+VALUES (1, 'BMW');
+
+INSERT INTO car
+VALUES (1, 1, 750, 'XER12343243', 2017, 'MACHINE', 'COMFORT', 30);
+INSERT INTO car
+VALUES (2, 2, 'Polo', 'XWR123431243', 2017, 'MECHANIC', 'COMFORT', 20);
+INSERT INTO car
+VALUES (3, 3, 'Rav4', 'XER12312143', 2017, 'MACHINE', 'COMFORT', 20);
