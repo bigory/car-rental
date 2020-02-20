@@ -33,9 +33,6 @@ public class CarController {
     @Autowired
     private BrandCarService brandCarService;
 
-    @Autowired
-    private BrandCarRepository brandCarRepository;
-
     @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCar(Model model) {
         model.addAttribute("cars", carService.findAll());
@@ -48,7 +45,7 @@ public class CarController {
         model.addAttribute("carDto", carDto);
         model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("brandCars", brandCarService.findAll());
-        model.addAttribute("carClasss", CarClass.values());
+        model.addAttribute("carClass", CarClass.values());
         model.addAttribute("transmissions", Transmission.values());
         return "addCars";
     }

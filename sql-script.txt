@@ -17,7 +17,7 @@ CREATE TABLE user_service
 
 CREATE TABLE black_list
 (
-    id      BIGINT PRIMARY KEY,
+    id      BIGSERIAL PRIMARY KEY,
     user_id BIGINT UNIQUE NOT NULL REFERENCES user_service (id),
     cause   TEXT
 );
@@ -25,14 +25,14 @@ CREATE TABLE black_list
 
 CREATE TABLE brand_car
 (
-    id    BIGINT PRIMARY KEY,
+    id    BIGSERIAL PRIMARY KEY,
     brand VARCHAR(256) UNIQUE NOT NULL
 );
 
 
 CREATE TABLE car
 (
-    id                 BIGINT PRIMARY KEY,
+    id                 BIGSERIAL PRIMARY KEY,
     brand_car_id       BIGINT             NOT NULL REFERENCES brand_car (id),
     model              VARCHAR(256)       NOT NULL,
     vin_number         VARCHAR(64) UNIQUE NOT NULL,
@@ -44,14 +44,14 @@ CREATE TABLE car
 
 CREATE TABLE additional_services
 (
-    id       BIGINT PRIMARY KEY,
+    id       BIGSERIAL PRIMARY KEY,
     services VARCHAR(256) UNIQUE NOT NULL,
     cost     INTEGER             NOT NULL
 );
 
 CREATE TABLE order_rental_car
 (
-    id                     BIGINT PRIMARY KEY,
+    id                     BIGSERIAL PRIMARY KEY,
     user_service_id        BIGINT       NOT NULL REFERENCES user_service (id),
     car_id                 BIGINT       NOT NULL REFERENCES car (id),
     additional_services_id BIGINT       NOT NULL REFERENCES additional_services (id),

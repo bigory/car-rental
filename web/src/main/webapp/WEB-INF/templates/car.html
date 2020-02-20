@@ -7,13 +7,11 @@
 <body>
 
 <div th:each="car:${cars}">
-    <a href="addCars.html">
-        <span th:text="${car.brandCar.brand}"></span>
-        <span th:text="${car.model}"></span>
-        <span th:text="${car.yearOfIssue}"></span>
-        <span th:text="${car.transmission}"></span>
-        <span th:text="${car.costRentalOfDay}"></span>
-    </a>
+    <span th:text="${car.brandCar.brand}"></span>
+    <span th:text="${car.model}"></span>
+    <span th:text="${car.yearOfIssue}"></span>
+    <span th:text="${car.transmission}"></span>
+    <span th:text="${car.costRentalOfDay}"></span>
 </div>
 
 </body>
