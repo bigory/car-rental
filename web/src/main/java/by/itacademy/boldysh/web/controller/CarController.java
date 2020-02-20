@@ -47,6 +47,7 @@ public class CarController {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
         model.addAttribute("brandCars", brandCarService.findAll());
+        model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("carClasss", CarClass.values());
         model.addAttribute("transmissions", Transmission.values());
         return "addCars";
