@@ -19,20 +19,15 @@
     <br>
     <div>
         <span>Model</span>
+        <br>
         <input type="text" th:field="*{modelCar}">
     </div>
 
     <br>
     <div>
-        <span>VinNumber</span>
+        <span>Vin number</span>
+        <br>
         <input type="text" th:field="*{vinNumber}">
-    </div>
-
-    <br>
-    <span>Transmission</span>
-    <div th:each="transmission:${transmissions}">
-        <span th:text="${transmission}">AKPP</span>
-        <input type="checkbox" name="Transmission" th:value="${transmission}">
     </div>
 
     <br>

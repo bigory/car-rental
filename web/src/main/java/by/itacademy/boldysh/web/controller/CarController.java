@@ -2,6 +2,7 @@ package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.CarDto;
 import by.itacademy.boldysh.database.entity.*;
+import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
@@ -9,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -35,6 +33,9 @@ public class CarController {
     @Autowired
     private BrandCarService brandCarService;
 
+    @Autowired
+    private BrandCarRepository brandCarRepository;
+
     @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCar(Model model) {
         model.addAttribute("cars", carService.findAll());
@@ -45,8 +46,9 @@ public class CarController {
     public String getPage(Model model) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
-        model.addAttribute("carClasss", CarClass.values());
         model.addAttribute("brandCars", brandCarService.findAll());
+        model.addAttribute("brandCars", brandCarService.findAll());
+        model.addAttribute("carClasss", CarClass.values());
         model.addAttribute("transmissions", Transmission.values());
         return "addCars";
     }
