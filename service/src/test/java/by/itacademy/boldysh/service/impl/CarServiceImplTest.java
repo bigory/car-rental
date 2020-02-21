@@ -44,14 +44,6 @@ public class CarServiceImplTest {
     }
 
     @Test
-    public void delete() {
-        carService.delete(carRepository.findByVinNumber("DSDS233232"));
-        Optional<Car> car = carRepository.findById(1L);
-        assertFalse(String.valueOf(car), false);
-        System.out.println(car);
-    }
-
-    @Test
     public void findAll() {
         List<Car> cars = carService.findAll();
         cars.forEach(System.out::println);

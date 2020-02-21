@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add cars</title>
 </head>
 <body>
 <form th:action="@{/addCars.html}" th:object="${carDto}" method="post">
@@ -10,7 +10,7 @@
     <div>
         <select th:field="*{brandCar}">
             <option th:each="brand: ${brandCars}"
-                    th:value="${brand.getId()}"
+                    th:value="${brand.getBrand()}"
                     th:text="${brand.getBrand()}">
         </select>
     </div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DeleteCars</title>
+</head>
+<body>
+
+<form th:action="@{/deleteCars.html}" th:object="${carDto}" method="post">
+    <span>Input vin number</span>
+
+    <br>
+    <div>
+        <span>Vin number</span>
+
+        <input type="text" th:field="*{vinNumber}">
+    </div>
+
+    <br>
+    <div>
+        <input type="submit" value="Delete">
+    </div>
+</form>
+</body>
+</html>

@@ -8,11 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +26,7 @@ public class BrandCar extends BaseEntity<Long> {
     @Column(name = "brand")
     private String brand;
 
-    @OneToMany(mappedBy = "brandCar", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "brandCar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Car> cars = new ArrayList<>();
 
     public BrandCar(String brand) {

@@ -28,10 +28,17 @@ public class CarController {
     }
 
     @Autowired
+    private CarRepository carRepository;
+
+    @Autowired
     private CarService carService;
 
     @Autowired
     private BrandCarService brandCarService;
+
+    @Autowired
+    BrandCarRepository brandCarRepository;
+
 
     @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCar(Model model) {
@@ -40,10 +47,9 @@ public class CarController {
     }
 
     @RequestMapping(value = "/addCars", method = RequestMethod.GET)
-    public String getPage(Model model) {
+    public String getPageAddCars(Model model) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
-        model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("carClass", CarClass.values());
         model.addAttribute("transmissions", Transmission.values());
@@ -51,9 +57,9 @@ public class CarController {
     }
 
     @RequestMapping(value = "/addCars", method = RequestMethod.POST)
-    public String createCar(Model model, @ModelAttribute("carDto") CarDto carDto) {
+    public String createCar(CarDto carDto) {
 
-        BrandCar brandCar = carDto.getBrandCar();
+        String brand = carDto.getBrandCar();
         String modelCar = carDto.getModelCar();
         Integer yearOfIssue = carDto.getYearOfIssue();
         String vinNumber = carDto.getVinNumber();
@@ -61,8 +67,24 @@ public class CarController {
         CarClass carClass = carDto.getClassCar();
         Integer costRentalOfDay = carDto.getCostRentalOfDay();
 
+        BrandCar brandCar = brandCarRepository.findByBrand(brand);
         Car car = new Car(brandCar, modelCar, yearOfIssue, vinNumber, transmission, carClass, costRentalOfDay);
         carService.save(car);
-        return "redirect:car";
+        return "redirect:addCars";
+    }
+
+    @RequestMapping(value = "/deleteCars", method = RequestMethod.GET)
+    public String getPageDeleteCar(Model model) {
+        CarDto carDto = new CarDto();
+        model.addAttribute("carDto", carDto);
+        model.addAttribute("vinNumber", carDto.getVinNumber());
+        return "deleteCars";
+    }
+
+    @RequestMapping(value = "/deleteCars", method = RequestMethod.POST)
+    public String deleteCar(CarDto carDto) {
+        String vinNumber = carDto.getVinNumber();
+        carRepository.deleteByVinNumber(vinNumber);
+        return "redirect:deleteCars";
     }
 }

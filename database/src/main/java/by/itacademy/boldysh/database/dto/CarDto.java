@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class CarDto {
 
     private String modelCar;
-    private BrandCar brandCar;
+    private String brandCar;
     private String vinNumber;
     private Integer yearOfIssue;
     private Integer costRentalOfDay;
