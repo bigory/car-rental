@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.soap.SAAJResult;
+
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -40,13 +42,13 @@ public class CarController {
     BrandCarRepository brandCarRepository;
 
 
-    @RequestMapping(value = "/car", method = RequestMethod.GET)
-    public String getCar(Model model) {
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    public String getCars(Model model) {
         model.addAttribute("cars", carService.findAll());
-        return "car";
+        return "cars";
     }
 
-    @RequestMapping(value = "/addCars", method = RequestMethod.GET)
+    @RequestMapping(value = "/add-cars", method = RequestMethod.GET)
     public String getPageAddCars(Model model) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
@@ -56,7 +58,7 @@ public class CarController {
         return "addCars";
     }
 
-    @RequestMapping(value = "/addCars", method = RequestMethod.POST)
+    @RequestMapping(value = "/add-cars", method = RequestMethod.POST)
     public String createCar(CarDto carDto) {
 
         String brand = carDto.getBrandCar();
@@ -70,21 +72,21 @@ public class CarController {
         BrandCar brandCar = brandCarRepository.findByBrand(brand);
         Car car = new Car(brandCar, modelCar, yearOfIssue, vinNumber, transmission, carClass, costRentalOfDay);
         carService.save(car);
-        return "redirect:addCars";
+        return "car";
     }
 
-    @RequestMapping(value = "/deleteCars", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete-cars", method = RequestMethod.GET)
     public String getPageDeleteCar(Model model) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
         model.addAttribute("vinNumber", carDto.getVinNumber());
-        return "deleteCars";
+        return "delete-cars";
     }
 
-    @RequestMapping(value = "/deleteCars", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete-cars", method = RequestMethod.POST)
     public String deleteCar(CarDto carDto) {
         String vinNumber = carDto.getVinNumber();
         carRepository.deleteByVinNumber(vinNumber);
-        return "redirect:deleteCars";
+        return "delete-cars";
     }
 }

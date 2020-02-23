@@ -2,17 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ListCars</title>
+    <title>Car</title>
 </head>
 <body>
 
-<div th:each="car:${cars}">
-    <span th:text="${car.brandCar.brand}"></span>
-    <span th:text="${car.model}"></span>
-    <span th:text="${car.yearOfIssue}"></span>
-    <span th:text="${car.transmission}"></span>
-    <span th:text="${car.costRentalOfDay}"></span>
+<div>
+    <span>Added car</span><br>
+    <span>Brand</span> <span th:text="${carDto.brandCar}"></span><br>
+    <span>Model</span> <span th:text="${carDto.modelCar}"></span><br>
+    <span>VinNumber</span> <span th:text="${carDto.vinNumber}"></span><br>
+    <span>Class</span> <span th:text="${carDto.classCar}"></span><br>
+    <span>Year of issue</span> <span th:text="${carDto.yearOfIssue}"></span><br>
+    <span>Cost Rental Of Day</span> <span th:text="${carDto.costRentalOfDay}"></span>
 </div>
-
 </body>
 </html>
