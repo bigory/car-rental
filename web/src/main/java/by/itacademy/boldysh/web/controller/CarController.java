@@ -12,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.soap.SAAJResult;
-
-
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CarController {
@@ -41,7 +38,6 @@ public class CarController {
     @Autowired
     BrandCarRepository brandCarRepository;
 
-
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public String getCars(Model model) {
         model.addAttribute("cars", carService.findAll());
@@ -55,7 +51,7 @@ public class CarController {
         model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("carClass", CarClass.values());
         model.addAttribute("transmissions", Transmission.values());
-        return "addCars";
+        return "add-cars";
     }
 
     @RequestMapping(value = "/add-cars", method = RequestMethod.POST)

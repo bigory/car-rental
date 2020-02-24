@@ -1,6 +1,6 @@
-/*package by.itacademy.boldysh.database.repository;
+package by.itacademy.boldysh.database.repository;
 
-
+/*
 import by.itacademy.boldysh.database.entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 //Filter
-public class CustomMovieRepositoryImpl implements CustomCarRepository {
+public abstract class CustomCarRepositoryImpl implements CustomCarRepository {
 
     @Autowired
     private EntityManager entityManager;
@@ -17,4 +17,6 @@ public class CustomMovieRepositoryImpl implements CustomCarRepository {
     public List<Car> customMethodFilter(String filter) {
         return null;
     }
+
+
 }*/

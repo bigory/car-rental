@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface CarRepository extends PagingAndSortingRepository<Car, Long> /*, CustomCarRepository*/ {
+public interface CarRepository extends PagingAndSortingRepository<Car, Long> /*, CustomCarRepository */{
 
     List<Car> findByModel(String name);
 
