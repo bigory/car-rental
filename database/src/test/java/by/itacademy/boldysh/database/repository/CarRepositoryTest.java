@@ -2,7 +2,6 @@ package by.itacademy.boldysh.database.repository;
 
 
 import by.itacademy.boldysh.database.config.TestConfiguration;
-import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
@@ -61,5 +60,12 @@ public class CarRepositoryTest {
         List<Car> list = carRepository.findAllByBrandCarBrandAndCostRentalOfDayAndCarClassAndTransmission("Volvo",
                 45, CarClass.BUSINESS, Transmission.MACHINE);
         assertEquals(1, list.size());
+    }
+
+    @Test
+    public void delete() {
+        carRepository.deleteByVinNumber("ZXS2312121");
+        Car car = carRepository.findByVinNumber("ZXS2312121");
+        System.out.println(car);
     }
 }

@@ -1,7 +1,8 @@
-.idea
-.iml
+/.idea
+*.iml
 log4j.log
-/target/
+target/
 checkstyle.xml
 workspace.xml
 .bin
+.class

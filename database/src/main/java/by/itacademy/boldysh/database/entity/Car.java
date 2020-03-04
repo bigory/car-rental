@@ -46,7 +46,7 @@ public class Car extends BaseEntity<Long> {
     @Column(name = "cost_rental_of_day")
     private Integer costRentalOfDay;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "brand_car_id")
     private BrandCar brandCar;
 
