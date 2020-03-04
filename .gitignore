@@ -1,8 +1,6 @@
 /.idea
-database.iml
-service.iml
-web.iml
-*.log
+*.iml
+log4j.log
 target/
 checkstyle.xml
 workspace.xml
