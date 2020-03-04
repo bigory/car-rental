@@ -1,5 +1,7 @@
-.idea
-*.iml
+/.idea
+database.iml
+service.iml
+web.iml
 *.log
 target/
 checkstyle.xml
