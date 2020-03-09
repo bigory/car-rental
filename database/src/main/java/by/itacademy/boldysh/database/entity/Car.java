@@ -56,8 +56,9 @@ public class Car extends BaseEntity<Long> {
             inverseJoinColumns = @JoinColumn(name = "user_service_id"))
     private List<UserService> userServices = new ArrayList<>();
 
-    /*@Version
-    private Long version;*/
+    @Version
+    @Column(name = "version")
+    private Long version;
 
     public Car(BrandCar brandCar, String model, Integer yearOfIssue, String vinNumber, Transmission transmission, CarClass carClass, Integer costRentalOfDay) {
         this.model = model;

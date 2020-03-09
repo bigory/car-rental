@@ -81,8 +81,13 @@ public class CarController {
 
     @RequestMapping(value = "/delete-cars", method = RequestMethod.POST)
     public String deleteCar(CarDto carDto) {
-        String vinNumber = carDto.getVinNumber();
-        carRepository.deleteByVinNumber(vinNumber);
-        return "delete-cars";
+        Car car = carRepository.findByVinNumber(carDto.getVinNumber());
+        carDto.setBrandCar(car.getBrandCar().getBrand());
+        carDto.setClassCar(car.getCarClass());
+        carDto.setCostRentalOfDay(car.getCostRentalOfDay());
+        carDto.setModelCar(car.getModel());
+        carDto.setYearOfIssue(car.getYearOfIssue());
+        carRepository.deleteByVinNumber(carDto.getVinNumber());
+        return "car";
     }
 }

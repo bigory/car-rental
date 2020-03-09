@@ -4,11 +4,13 @@ import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 @Repository
@@ -24,8 +26,9 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long>, Qu
                                                                                  Integer costRentalOfDay,
                                                                                  CarClass carClass, Transmission transmission);
 
-    @Transactional
     @Modifying
+    @Transactional
+    @Query("delete from Car c where c.vinNumber=?1")
     void deleteByVinNumber(String vinNumber);
 
 }

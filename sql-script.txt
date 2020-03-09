@@ -29,7 +29,6 @@ CREATE TABLE brand_car
     brand VARCHAR(256) UNIQUE NOT NULL
 );
 
-
 CREATE TABLE car
 (
     id                 BIGSERIAL PRIMARY KEY,
@@ -39,7 +38,8 @@ CREATE TABLE car
     year_of_issue      INTEGER            NOT NULL,
     transmission       VARCHAR(64)        NOT NULL,
     class_car          VARCHAR(64)        NOT NULL,
-    cost_rental_of_day INTEGER            NOT NULL
+    cost_rental_of_day INTEGER            NOT NULL,
+    version            INTEGER
 );
 
 CREATE TABLE additional_services
