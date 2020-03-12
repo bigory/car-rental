@@ -1,5 +1,6 @@
 package by.itacademy.boldysh.database.repository;
 
+import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
@@ -30,5 +31,4 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long>, Qu
     @Transactional
     @Query("delete from Car c where c.vinNumber=?1")
     void deleteByVinNumber(String vinNumber);
-
 }
