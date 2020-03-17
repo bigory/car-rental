@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface CarRepository extends PagingAndSortingRepository<Car, Long>, QuerydslPredicateExecutor<Car> {
+public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
     List<Car> findByModel(String name);
 
