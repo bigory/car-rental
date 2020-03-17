@@ -7,6 +7,7 @@ import by.itacademy.boldysh.database.entity.Transmission;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
+import by.itacademy.boldysh.service.interfaces.CustomFilterCars;
 import by.itacademy.boldysh.service.util.DatabaseHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -36,6 +35,9 @@ public class CarServiceImplTest {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private CustomFilterCars customFilterCars;
 
     @Before
     public void init() {
@@ -73,5 +75,12 @@ public class CarServiceImplTest {
         carService.updateCar("DSDS233232", 60);
         Integer finishCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
         assertTrue(startCost < finishCost);
+    }
+
+
+    @Test
+    public void findByFilterCars() {
+        List<Car> cars = customFilterCars.findByFilterCars(null, null, null, null, null, null);
+        assertEquals(0, 0);
     }
 }
