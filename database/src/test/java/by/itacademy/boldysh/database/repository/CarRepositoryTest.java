@@ -18,6 +18,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 
 @RunWith(SpringRunner.class)
@@ -63,9 +64,9 @@ public class CarRepositoryTest {
     }
 
     @Test
-    public void delete() {
-        carRepository.deleteByVinNumber("ZXS2312121");
+    public void deleteByVinNumber() {
         Car car = carRepository.findByVinNumber("ZXS2312121");
-        System.out.println(car);
+        carRepository.deleteByVinNumber("ZXS2312121");
+        assertNull(carRepository.findByVinNumber("ZXS2312121"));
     }
 }
