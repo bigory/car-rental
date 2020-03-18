@@ -44,10 +44,12 @@
     </div>
 
     <br>
-    <span>Transmission</span>
+    <span>Transmission</span><br>
+    <span th:text="All"></span>
+    <input type="radio" name="Transmission" th:value="${transmission} ">
     <div th:each="transmission:${transmissions}">
         <span th:text="${transmission}">AKPP</span>
-        <input type="checkbox" name="Transmission" th:value="${transmission}">
+        <input type="radio" name="Transmission" th:value="${transmission}">
     </div>
 
     <br>

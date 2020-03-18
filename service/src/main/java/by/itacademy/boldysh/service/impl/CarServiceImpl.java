@@ -85,7 +85,7 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
-        List<Car> cars = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+        List<Car> cars = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(4).getResultList();
 
         if (criteria.isNull() == null) {
             cars = StreamSupport.stream(carRepository.findAll().spliterator(), false).collect(Collectors.toList());
