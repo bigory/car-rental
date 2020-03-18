@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface CustomFilterCars {
 
-    List<Car> findByFilterCars(String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, BrandCar brandCar);
+    List<Car> findByFilterCars(String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay/*, BrandCar brandCar*/);
 }

@@ -51,20 +51,20 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Car> findByFilterCars(String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, BrandCar brandCar) {
+    public List<Car> findByFilterCars(String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay/*, BrandCar brandCar*/) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
-        carRoot.fetch(Car_.brandCar, JoinType.LEFT);
+        /*carRoot.fetch(Car_.brandCar, JoinType.LEFT);*/
         criteriaQuery.select(carRoot).distinct(true);
 
         Predicate criteria = criteriaBuilder.conjunction();
 
-        if (brandCar != null) {
+      /*  if (brandCar != null) {
             Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar), brandCar);
             criteria = criteriaBuilder.and(criteria, brand);
-        }
-        if (model != null) {
+        }*/
+        if (!model.equals("")) {
             Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), model);
             criteria = criteriaBuilder.and(criteria, modelCar);
         }
@@ -85,7 +85,12 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        List<Car> cars = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (criteria.isNull() == null) {
+            cars = StreamSupport.stream(carRepository.findAll().spliterator(), false).collect(Collectors.toList());
+        }
+        return cars;
     }
 }
 

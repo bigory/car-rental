@@ -1,11 +1,13 @@
 package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.CarDto;
+import by.itacademy.boldysh.database.dto.FilterDto;
 import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
+import by.itacademy.boldysh.service.interfaces.CustomFilterCars;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,9 @@ public class CarController {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private CustomFilterCars customFilterCars;
 
     @Autowired
     private BrandCarService brandCarService;
@@ -89,5 +94,26 @@ public class CarController {
         carDto.setYearOfIssue(car.getYearOfIssue());
         carRepository.deleteByVinNumber(carDto.getVinNumber());
         return "car";
+    }
+
+    @RequestMapping(value = "filter-car", method = RequestMethod.GET)
+    public String getPageFilterCar(Model model) {
+        FilterDto filterDto = new FilterDto();
+
+        model.addAttribute("filterDto", filterDto);
+        model.addAttribute("modelCar", filterDto.getModelCar());
+        model.addAttribute("yearOfIsuue", filterDto.getYearOfIssue());
+        model.addAttribute("transmissions", Transmission.values());
+        model.addAttribute("carClass", CarClass.values());
+        model.addAttribute("costRentalOfDay", filterDto.getCostRentalOfDay());
+        /* model.addAttribute("brandCars", brandCarService.findAll());*/
+        return "filter-car";
+    }
+
+    @RequestMapping(value = "/filter-car", method = RequestMethod.POST)
+    public String filterCar(FilterDto filterDto, Model model) {
+        model.addAttribute("cars", customFilterCars.findByFilterCars(filterDto.getModelCar(), filterDto.getYearOfIssue(),
+                filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()/*, filterDto.getBrandCar()*/));
+        return "cars";
     }
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter</title>
+</head>
+<body>
+<form th:action="@{/filter-car.html}" th:object="${filterDto}" method="post">
+
+    <!-- <br>
+  <div>
+      <span>Brand</span>
+      <select th:field="*{brandCar}">
+          <option value="">    </option>
+          <option th:each="brand: ${brandCars}"
+                  th:value="${brand.getBrand()}"
+                  th:text="${brand.getBrand()}">
+      </select>
+  </div>-->
+
+    <br>
+    <div>
+        <span>Model</span>
+        <br>
+        <input type="text" th:field="*{modelCar}">
+    </div>
+
+    <br>
+    <div>
+        <span>Class</span>
+        <select th:field="*{classCar}">
+            <option value=""></option>
+            <option th:each="class: ${carClass}"
+                    th:value="${class}"
+                    th:text="${class}"></option>
+        </select>
+    </div>
+
+    <br>
+    <div>
+        <span>Year of issue</span>
+        <br>
+        <input type="text" th:field="*{yearOfIssue}">
+    </div>
+
+    <br>
+    <span>Transmission</span>
+    <div th:each="transmission:${transmissions}">
+        <span th:text="${transmission}">AKPP</span>
+        <input type="checkbox" name="Transmission" th:value="${transmission}">
+    </div>
+
+    <br>
+    <div>
+        <span>Cost</span>
+        <br>
+        <input type="text" th:field="*{costRentalOfDay}">
+    </div>
+
+    <br>
+    <div>
+        <input type="submit" value="Search">
+    </div>
+</form>
+
+</body>
+</html>

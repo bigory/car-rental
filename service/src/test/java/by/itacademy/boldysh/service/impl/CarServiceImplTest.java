@@ -80,7 +80,7 @@ public class CarServiceImplTest {
 
     @Test
     public void findByFilterCars() {
-        List<Car> cars = customFilterCars.findByFilterCars(null, null, null, null, null, null);
-        assertEquals(0, 0);
+        List<Car> cars = customFilterCars.findByFilterCars(null, null, null, null, null/*, null*/);
+        assertEquals(3, cars.size());
     }
 }

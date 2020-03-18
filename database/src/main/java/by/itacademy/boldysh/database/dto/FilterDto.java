@@ -1,5 +1,8 @@
 package by.itacademy.boldysh.database.dto;
 
+import by.itacademy.boldysh.database.entity.BrandCar;
+import by.itacademy.boldysh.database.entity.CarClass;
+import by.itacademy.boldysh.database.entity.Transmission;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +14,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FilterDto {
 
-    String brandCar;
-    String model;
-    String classCar;
-    String transmission;
+    BrandCar brandCar;
+    String modelCar;
+    CarClass classCar;
+    Transmission transmission;
     Integer yearOfIssue;
     Integer costRentalOfDay;
 }
