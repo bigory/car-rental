@@ -51,19 +51,20 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Car> findByFilterCars(String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay/*, BrandCar brandCar*/) {
+    public List<Car> findByFilterCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
-        /*carRoot.fetch(Car_.brandCar, JoinType.LEFT);*/
         criteriaQuery.select(carRoot).distinct(true);
+        int pageSize = 3;
+        int pageNumber = 1;
 
         Predicate criteria = criteriaBuilder.conjunction();
 
-      /*  if (brandCar != null) {
-            Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar), brandCar);
+        if (!brandCar.equals("")) {
+            Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar).get(BrandCar_.brand), brandCar);
             criteria = criteriaBuilder.and(criteria, brand);
-        }*/
+        }
         if (!model.equals("")) {
             Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), model);
             criteria = criteriaBuilder.and(criteria, modelCar);
@@ -85,7 +86,7 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
-        List<Car> cars = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(4).getResultList();
+        List<Car> cars = entityManager.createQuery(criteriaQuery).setFirstResult(pageNumber - 1).setMaxResults(pageSize).getResultList();
 
         if (criteria.isNull() == null) {
             cars = StreamSupport.stream(carRepository.findAll().spliterator(), false).collect(Collectors.toList());

@@ -22,7 +22,6 @@ public class BlackListUserServiceServiceImpl implements BlackListUserServiceServ
         this.blackListUserServiceRepository = blackListUserServiceRepository;
     }
 
-
     @Override
     public void save(BlackListUserService blackListUserService) {
         blackListUserServiceRepository.save(blackListUserService);

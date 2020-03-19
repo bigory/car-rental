@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FilterDto {
 
-    BrandCar brandCar;
+    String brandCar;
     String modelCar;
     CarClass classCar;
     Transmission transmission;

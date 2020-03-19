@@ -4,6 +4,7 @@ import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
+import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
@@ -38,6 +39,9 @@ public class CarServiceImplTest {
 
     @Autowired
     private CustomFilterCars customFilterCars;
+
+    @Autowired
+    private BrandCarRepository brandCarRepository;
 
     @Before
     public void init() {
@@ -80,7 +84,7 @@ public class CarServiceImplTest {
 
     @Test
     public void findByFilterCars() {
-        List<Car> cars = customFilterCars.findByFilterCars("", null, null, null, null/*, null*/);
-        assertEquals(3, cars.size());
+        List<Car> cars = customFilterCars.findByFilterCars("BMW", "", null, null, null, null);
+        assertEquals(1, cars.size());
     }
 }

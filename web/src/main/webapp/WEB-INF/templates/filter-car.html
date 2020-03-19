@@ -7,16 +7,16 @@
 <body>
 <form th:action="@{/filter-car.html}" th:object="${filterDto}" method="post">
 
-    <!-- <br>
-  <div>
-      <span>Brand</span>
-      <select th:field="*{brandCar}">
-          <option value="">    </option>
-          <option th:each="brand: ${brandCars}"
-                  th:value="${brand.getBrand()}"
-                  th:text="${brand.getBrand()}">
-      </select>
-  </div>-->
+    <br>
+    <div>
+        <span>Brand</span>
+        <select th:field="*{brandCar}">
+            <option value=""></option>
+            <option th:each="brand: ${brandCars}"
+                    th:value="${brand.getBrand()}"
+                    th:text="${brand.getBrand()}">
+        </select>
+    </div>
 
     <br>
     <div>

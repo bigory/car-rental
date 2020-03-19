@@ -101,19 +101,19 @@ public class CarController {
         FilterDto filterDto = new FilterDto();
 
         model.addAttribute("filterDto", filterDto);
+        model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("modelCar", filterDto.getModelCar());
-        model.addAttribute("yearOfIsuue", filterDto.getYearOfIssue());
+        model.addAttribute("yearOfIssue", filterDto.getYearOfIssue());
         model.addAttribute("transmissions", Transmission.values());
         model.addAttribute("carClass", CarClass.values());
         model.addAttribute("costRentalOfDay", filterDto.getCostRentalOfDay());
-        /* model.addAttribute("brandCars", brandCarService.findAll());*/
         return "filter-car";
     }
 
     @RequestMapping(value = "/filter-car", method = RequestMethod.POST)
     public String filterCar(FilterDto filterDto, Model model) {
-        model.addAttribute("cars", customFilterCars.findByFilterCars(filterDto.getModelCar(), filterDto.getYearOfIssue(),
-                filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()/*, filterDto.getBrandCar()*/));
-        return "cars";
+        model.addAttribute("cars", customFilterCars.findByFilterCars(filterDto.getBrandCar(), filterDto.getModelCar(), filterDto.getYearOfIssue(),
+                filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()));
+        return "filter-car-result";
     }
 }
