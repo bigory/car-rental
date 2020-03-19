@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.service.interfaces;
 
-import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
