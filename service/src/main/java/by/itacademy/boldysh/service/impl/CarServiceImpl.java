@@ -3,8 +3,12 @@ package by.itacademy.boldysh.service.impl;
 import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
-import by.itacademy.boldysh.service.interfaces.CustomFilterCars;
+import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,13 +18,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
-public class CarServiceImpl implements CarService, CustomFilterCars {
+public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars {
 
     private final CarRepository carRepository;
 
@@ -88,12 +93,29 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
-        List<Car> cars = entityManager.createQuery(criteriaQuery).setFirstResult(pageNumber - 1).setMaxResults(pageSize).getResultList();
+        List<Car> cars = entityManager.createQuery(criteriaQuery).getResultList();
 
         if (criteria.isNull() == null) {
             cars = StreamSupport.stream(carRepository.findAll().spliterator(), false).collect(Collectors.toList());
         }
         return cars;
+    }
+
+    public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {
+        int pageSize = pageable.getPageSize();
+        int currentPge = pageable.getPageNumber();
+        int startItem = currentPge * pageSize;
+        List<Car> listCar;
+
+        if (cars.size() < startItem) {
+            listCar = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, cars.size());
+            listCar = cars.subList(startItem, toIndex);
+        }
+
+        Page<Car> carPage = new PageImpl<Car>(listCar, PageRequest.of(currentPge, pageSize), cars.size());
+        return carPage;
     }
 }
 

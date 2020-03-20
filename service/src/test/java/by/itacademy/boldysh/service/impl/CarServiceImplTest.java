@@ -8,7 +8,7 @@ import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
-import by.itacademy.boldysh.service.interfaces.CustomFilterCars;
+import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import by.itacademy.boldysh.service.util.DatabaseHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class CarServiceImplTest {
     private CarRepository carRepository;
 
     @Autowired
-    private CustomFilterCars customFilterCars;
+    private CustomFilterAndPaginationCars customFilterAndPaginationCars;
 
     @Autowired
     private BrandCarRepository brandCarRepository;
@@ -84,7 +84,14 @@ public class CarServiceImplTest {
 
     @Test
     public void findByFilterCars() {
-        List<Car> cars = customFilterCars.findByFilterCars("BMW", "", null, null, null, null);
+        List<Car> cars = customFilterAndPaginationCars.findByFilterCars("BMW", "", null, null, null, null);
         assertEquals(1, cars.size());
+    }
+
+
+    @Test
+    public void findByPaginated() {
+        List<Car> cars = customFilterAndPaginationCars.findByFilterCars("BMW", "", null, null, null, null);
+
     }
 }
