@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
@@ -94,10 +95,10 @@ public class CarServiceImplTest {
     @Test
     public void findByPaginated() {
         Pageable pageable = PageRequest.of(0, 2);
-        List<Car> cars = customFilterAndPaginationCars.findByPaginated(pageable, customFilterAndPaginationCars.findByFilterCars("", "", null, null, null, null));
+        Page<Car> cars = customFilterAndPaginationCars.findByPaginated(pageable, customFilterAndPaginationCars.findByFilterCars("", "", null, null, null, null));
         System.out.println(cars);
         pageable = PageRequest.of(1, 2);
-        List<Car> cars1 = customFilterAndPaginationCars.findByPaginated(pageable, customFilterAndPaginationCars.findByFilterCars("", "", null, null, null, null));
+        Page<Car> cars1 = customFilterAndPaginationCars.findByPaginated(pageable, customFilterAndPaginationCars.findByFilterCars("", "", null, null, null, null));
         System.out.println(cars1);
     }
 }

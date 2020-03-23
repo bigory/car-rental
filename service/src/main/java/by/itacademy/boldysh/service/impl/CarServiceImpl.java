@@ -94,11 +94,10 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
         }
         criteriaQuery.where(criteria);
         List<Car> cars = entityManager.createQuery(criteriaQuery).getResultList();
-
         return cars;
     }
 
-    public List<Car> findByPaginated(Pageable pageable, List<Car> cars) {
+    public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -112,8 +111,8 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
         }
 
         Page<Car> carPage = new PageImpl<Car>(listCar, PageRequest.of(currentPage, pageSize), cars.size());
-        List<Car> cars1 = carPage.getContent();
-        return cars1;
+
+        return carPage;
     }
 }
 
