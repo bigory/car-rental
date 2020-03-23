@@ -13,11 +13,8 @@
     <span th:text="${car.transmission}"></span>
     <span th:text="${car.costRentalOfDay}"></span>
 </div>
-<div th:if="${carPage.totalPages > 0}" class="pagination"
-     th:each="pageNumber:${pageNumbers}">
-    <a th:href="@{/filter-car-result(size=${carPage.size},page=${pageNumber})}"
-       th:text="${pageNumber}"
-       th:class="${pageNumber==carPage.number+1}?active"></a>
+<div th:each="">
+    <a th:href="@{/cars}" th:text="1"></a>
 </div>
 <div></div>
 

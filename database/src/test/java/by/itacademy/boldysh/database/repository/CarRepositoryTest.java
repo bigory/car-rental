@@ -69,4 +69,10 @@ public class CarRepositoryTest {
         carRepository.deleteByVinNumber("ZXS2312121");
         assertNull(carRepository.findByVinNumber("ZXS2312121"));
     }
+
+    @Test
+    public void findByOrderByCostRentalOfDayAsc() {
+        List<Car> cars = carRepository.findByOrderByCostRentalOfDayAsc();
+        System.out.println(cars);
+    }
 }

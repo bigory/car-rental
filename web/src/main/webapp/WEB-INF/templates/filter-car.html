@@ -11,7 +11,7 @@
     <div>
         <span>Brand</span>
         <select th:field="*{brandCar}">
-            <option value=""></option>
+            <option value="" th:text="All"></option>
             <option th:each="brand: ${brandCars}"
                     th:value="${brand.getBrand()}"
                     th:text="${brand.getBrand()}">
@@ -29,7 +29,7 @@
     <div>
         <span>Class</span>
         <select th:field="*{classCar}">
-            <option value=""></option>
+            <option value="" th:text="All"></option>
             <option th:each="class: ${carClass}"
                     th:value="${class}"
                     th:text="${class}"></option>
