@@ -63,8 +63,6 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
         criteriaQuery.select(carRoot).distinct(true);
-        int pageSize = 3;
-        int pageNumber = 1;
 
         Predicate criteria = criteriaBuilder.conjunction();
 

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -56,8 +57,21 @@ public class CarController {
     BrandCarRepository brandCarRepository;
 
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
-    public String getCars(Model model) {
-        model.addAttribute("cars", carService.findAll());
+    public String getPagesCar(Model model, @RequestParam(value = "page") Optional<Integer> page,
+                              @RequestParam(value = "size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(3);
+
+        Page<Car> pageCars = customFilterAndPaginationCars.findByPaginated(PageRequest.of(currentPage - 1, pageSize),
+                carService.findAll());
+
+        model.addAttribute("pageCars", pageCars);
+
+        int totalPages = pageCars.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "cars";
     }
 
@@ -108,8 +122,8 @@ public class CarController {
         return "car";
     }
 
-    @RequestMapping(value = "filter-car", method = RequestMethod.GET)
-    public String getPageFilterCar(Model model) {
+    @RequestMapping(value = "/filter-car", method = {RequestMethod.GET})
+    public String getFilterCar(Model model) {
         FilterDto filterDto = new FilterDto();
 
         model.addAttribute("filterDto", filterDto);
@@ -122,26 +136,30 @@ public class CarController {
         return "filter-car";
     }
 
+   /* @RequestMapping(value = "/filter-car", method = RequestMethod.POST)
+    public List<Car> getFilterCars(FilterDto filterDto) {
+        return customFilterAndPaginationCars.findByFilterCars(filterDto.getBrandCar(), filterDto.getModelCar(), filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay());
+    }*/
+
+
     @RequestMapping(value = "/filter-car", method = RequestMethod.POST)
-    public String filterCar(FilterDto filterDto, Model model,
-                            @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                            @RequestParam(value = "size", required = false, defaultValue = "2") Integer size) {
-        model.addAttribute("cars", customFilterAndPaginationCars.findByFilterCars(filterDto.getBrandCar(),
-                filterDto.getModelCar(), filterDto.getYearOfIssue(),
-                filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()));
-        Page<Car> pageCars = customFilterAndPaginationCars.findByPaginated(PageRequest.of(page, size),
-                customFilterAndPaginationCars.findByFilterCars(filterDto.getBrandCar(),
-                        filterDto.getModelCar(), filterDto.getYearOfIssue(),
-                        filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()));
+    public String getPagesFilterCar(FilterDto filterDto, Model model, @RequestParam(value = "page") Optional<Integer> page,
+                                    @RequestParam(value = "size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(2);
+
+        Page<Car> pageCars = customFilterAndPaginationCars.findByPaginated(PageRequest.of(currentPage - 1, pageSize),
+                customFilterAndPaginationCars.findByFilterCars(filterDto.getBrandCar(), filterDto.getModelCar(),
+                        filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()));
+
         model.addAttribute("pageCars", pageCars);
-        model.addAttribute("numbers", IntStream.range(0, pageCars.getTotalPages()).toArray());
+
+        int totalPages = pageCars.getTotalPages();
+        List<Integer> pageNumbers;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "filter-car-result";
     }
-
-    /*@RequestMapping(value = "/filter-car-result", method = RequestMethod.GET)
-    public String listCar(Model model, FilterDto filterDto,
-                          @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                          @RequestParam(value = "size", required = false, defaultValue = "2") Integer size) {
-
-        return "filter-car-result";*/
 }

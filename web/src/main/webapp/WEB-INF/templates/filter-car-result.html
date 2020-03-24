@@ -6,19 +6,18 @@
 </head>
 <body>
 <span>List cars</span><br><br>
-<div th:each="car:${cars}">
+<div th:each="car:${pageCars}">
     <span th:text="${car.brandCar.brand}"></span>
     <span th:text="${car.model}"></span>
     <span th:text="${car.yearOfIssue}"></span>
     <span th:text="${car.transmission}"></span>
     <span th:text="${car.costRentalOfDay}"></span>
 </div>
-<div>
-    <ul th:if="${pageCars.totalPages > 0}"></ul>
-    <li th:each="pageNumber:${#numbers}"
-        th:class="${pageNumber == pageCars.number} ? active ">
-    <a th:href="@{'/filter-car-result?page=' + ${pageNumber}}"
-       th:text="${pageNumber + 1}"></a>
+<div th:if="${pageCars.totalPages > 0}"
+     th:each="pageNumber:${pageNumbers}">
+    <a th:href="@{/filter-car-result(size=${pageCars.size}, page=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==pageCars.number+1}?active"></a>
     </li>
 
 </div>
