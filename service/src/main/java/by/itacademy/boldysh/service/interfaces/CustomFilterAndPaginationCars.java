@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CustomFilterAndPaginationCars {
 
-    List<Car> findByFilterCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay);
+    Page<Car> findByFilterAndPaginationCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, Pageable page);
 
     Page<Car> findByPaginated(Pageable pageable, List<Car> cars);
 }

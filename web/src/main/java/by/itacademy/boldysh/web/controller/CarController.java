@@ -142,15 +142,15 @@ public class CarController {
     }*/
 
 
-    @RequestMapping(value = "/filter-car", method = RequestMethod.POST)
-    public String getPagesFilterCar(FilterDto filterDto, Model model, @RequestParam(value = "page") Optional<Integer> page,
-                                    @RequestParam(value = "size") Optional<Integer> size) {
+    @RequestMapping(value = "/filter-car", method = {RequestMethod.POST})
+    public String getPagesFilterCar(FilterDto filterDto, Model model, @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                    @RequestParam(value = "size", required = false) Optional<Integer> size) {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(2);
 
-        Page<Car> pageCars = customFilterAndPaginationCars.findByPaginated(PageRequest.of(currentPage - 1, pageSize),
-                customFilterAndPaginationCars.findByFilterCars(filterDto.getBrandCar(), filterDto.getModelCar(),
-                        filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay()));
+        Page<Car> pageCars = customFilterAndPaginationCars.findByFilterAndPaginationCars(filterDto.getBrandCar(),
+                filterDto.getModelCar(), filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(),
+                filterDto.getCostRentalOfDay(), PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("pageCars", pageCars);
 

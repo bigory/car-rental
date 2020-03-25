@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -58,7 +59,7 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Car> findByFilterCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay) {
+    public Page<Car> findByFilterAndPaginationCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, Pageable page) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
@@ -91,8 +92,15 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
-        List<Car> cars = entityManager.createQuery(criteriaQuery).getResultList();
-        return cars;
+
+        TypedQuery<Car> carsList = entityManager.createQuery(criteriaQuery);
+        int totalPages = carsList.getResultList().size();
+
+        carsList.setFirstResult(page.getPageNumber() * page.getPageSize());
+        carsList.setMaxResults(page.getPageSize());
+
+        Page<Car> carPage = new PageImpl<Car>(carsList.getResultList(), page, totalPages);
+        return carPage;
     }
 
     public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {

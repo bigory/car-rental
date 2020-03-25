@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,19 +85,10 @@ public class CarServiceImplTest {
 
 
     @Test
-    public void findByFilterCars() {
-        List<Car> cars = customFilterAndPaginationCars.findByFilterCars("BMW", "", null, null, null, null);
-        assertEquals(1, cars.size());
-    }
-
-
-    @Test
-    public void findByPaginated() {
-        Pageable pageable = PageRequest.of(0, 2);
-        Page<Car> cars = customFilterAndPaginationCars.findByPaginated(pageable, customFilterAndPaginationCars.findByFilterCars("", "", null, null, null, null));
-        System.out.println(cars);
-        pageable = PageRequest.of(1, 2);
-        Page<Car> cars1 = customFilterAndPaginationCars.findByPaginated(pageable, customFilterAndPaginationCars.findByFilterCars("", "", null, null, null, null));
-        System.out.println(cars1);
+    public void findByFilterAndPaginationCars() {
+        Page<Car> cars = customFilterAndPaginationCars.findByFilterAndPaginationCars("", "",
+                null, null, null, null, PageRequest.of(0, 2));
+        System.out.println(cars.getContent().get(0));
+        assertEquals(2, cars.getContent().size());
     }
 }
