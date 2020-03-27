@@ -12,6 +12,7 @@ import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +31,8 @@ import java.util.stream.IntStream;
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CarController {
+
+    private static final Logger logger = Logger.getLogger(CarController.class);
 
     @ModelAttribute("transmissions")
     public Transmission[] getTransmissions() {
@@ -122,7 +125,7 @@ public class CarController {
         return "car";
     }
 
-    @RequestMapping(value = "/filter-car", method = {RequestMethod.GET})
+    @RequestMapping(value = "/filter-car", method = RequestMethod.GET)
     public String getFilterCar(Model model) {
         FilterDto filterDto = new FilterDto();
 
@@ -136,21 +139,17 @@ public class CarController {
         return "filter-car";
     }
 
-   /* @RequestMapping(value = "/filter-car", method = RequestMethod.POST)
-    public List<Car> getFilterCars(FilterDto filterDto) {
-        return customFilterAndPaginationCars.findByFilterCars(filterDto.getBrandCar(), filterDto.getModelCar(), filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(), filterDto.getCostRentalOfDay());
-    }*/
-
-
-    @RequestMapping(value = "/filter-car", method = {RequestMethod.POST})
-    public String getPagesFilterCar(FilterDto filterDto, Model model, @RequestParam(value = "page", required = false) Optional<Integer> page,
+    @RequestMapping(value = "/filter-car-result", method = RequestMethod.GET)
+    public String getPagesFilterCar(Model model, @RequestParam(value = "brandCar") String brandCar,
+                                    @RequestParam(value = "modelCar") String modelCar, @RequestParam(value = "classCar") CarClass classCar,
+                                    @RequestParam(value = "yearOfIssue") Integer yearOfIssue, @RequestParam(value = "transmission", required = false) Transmission transmission,
+                                    @RequestParam(value = "costRentalOfDay") Integer costRentalOfDay, @RequestParam(value = "page", required = false) Optional<Integer> page,
                                     @RequestParam(value = "size", required = false) Optional<Integer> size) {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(2);
 
-        Page<Car> pageCars = customFilterAndPaginationCars.findByFilterAndPaginationCars(filterDto.getBrandCar(),
-                filterDto.getModelCar(), filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(),
-                filterDto.getCostRentalOfDay(), PageRequest.of(currentPage - 1, pageSize));
+        Page<Car> pageCars = customFilterAndPaginationCars.findByFilterAndPaginationCars(brandCar, modelCar, yearOfIssue, transmission, classCar,
+                costRentalOfDay, PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("pageCars", pageCars);
 

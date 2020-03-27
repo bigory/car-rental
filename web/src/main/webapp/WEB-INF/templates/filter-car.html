@@ -5,7 +5,7 @@
     <title>Filter</title>
 </head>
 <body>
-<form th:action="@{/filter-car}" th:object="${filterDto}" method="post">
+<form th:action="@{/filter-car-result}" th:object="${filterDto}" method="get">
 
     <br>
     <div>
@@ -64,6 +64,5 @@
         <input type="submit" value="Search">
     </div>
 </form>
-
 </body>
 </html>

@@ -15,7 +15,9 @@
 </div>
 <div th:if="${pageCars.totalPages > 0}"
      th:each="pageNumber:${pageNumbers}">
-    <a th:href="@{/filter-car-result(size=${pageCars.size}, page=${pageNumber})}"
+    <a th:href="@{/filter-car-result(brandCar=${brandCar},modelCar=${modelCar},classCar=${classCar},yearOfIssue=${yearOfIssue},
+                                     transmission=${transmission},costRentalOfDay=${costRentalOfDay},yearOfIssue=${yearOfIssue},
+                                     size=${pageCars.size},page=${pageNumber})}"
        th:text="${pageNumber}"
        th:class="${pageNumber==pageCars.number+1}?active"></a>
 </div>
