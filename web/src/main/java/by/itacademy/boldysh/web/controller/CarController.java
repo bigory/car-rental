@@ -12,16 +12,12 @@ import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +26,13 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@SessionAttributes({"filterDto"})
 public class CarController {
 
-    private static final Logger logger = Logger.getLogger(CarController.class);
+    @ModelAttribute("filterDto")
+    public FilterDto getFilterDto() {
+        return new FilterDto();
+    }
 
     @ModelAttribute("transmissions")
     public Transmission[] getTransmissions() {
@@ -126,9 +126,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/filter-car", method = RequestMethod.GET)
-    public String getFilterCar(Model model) {
-        FilterDto filterDto = new FilterDto();
-
+    public void getFilterCar(Model model, FilterDto filterDto) {
         model.addAttribute("filterDto", filterDto);
         model.addAttribute("brandCars", brandCarService.findAll());
         model.addAttribute("modelCar", filterDto.getModelCar());
@@ -136,29 +134,25 @@ public class CarController {
         model.addAttribute("transmissions", Transmission.values());
         model.addAttribute("carClass", CarClass.values());
         model.addAttribute("costRentalOfDay", filterDto.getCostRentalOfDay());
-        return "filter-car";
     }
 
-    @RequestMapping(value = "/filter-car-result", method = RequestMethod.GET)
-    public String getPagesFilterCar(Model model, @RequestParam(value = "brandCar") String brandCar,
-                                    @RequestParam(value = "modelCar") String modelCar, @RequestParam(value = "classCar") CarClass classCar,
-                                    @RequestParam(value = "yearOfIssue") Integer yearOfIssue, @RequestParam(value = "transmission", required = false) Transmission transmission,
-                                    @RequestParam(value = "costRentalOfDay") Integer costRentalOfDay, @RequestParam(value = "page", required = false) Optional<Integer> page,
-                                    @RequestParam(value = "size", required = false) Optional<Integer> size) {
+    @RequestMapping(method = RequestMethod.GET)
+    public void getPagesFilterCar(Model model, @ModelAttribute("filterDto") FilterDto filterDto,
+                                  @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                  @RequestParam(value = "size", required = false) Optional<Integer> size) {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(2);
 
-        Page<Car> pageCars = customFilterAndPaginationCars.findByFilterAndPaginationCars(brandCar, modelCar, yearOfIssue, transmission, classCar,
-                costRentalOfDay, PageRequest.of(currentPage - 1, pageSize));
+        Page<Car> pageCars = customFilterAndPaginationCars.findByFilterAndPaginationCars(filterDto.getBrandCar(),
+                filterDto.getModelCar(), filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(),
+                filterDto.getCostRentalOfDay(), PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("pageCars", pageCars);
-
         int totalPages = pageCars.getTotalPages();
         List<Integer> pageNumbers;
         if (totalPages > 0) {
             pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        return "filter-car-result";
     }
 }
