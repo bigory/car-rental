@@ -2,7 +2,6 @@ package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.BrandDto;
 import by.itacademy.boldysh.database.entity.BrandCar;
-import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ public class BrandController {
         return "add-brand";
     }
 
-    @RequestMapping(value = "/add-brand", method = RequestMethod.POST)
+    @RequestMapping(value = "/brand", method = RequestMethod.POST)
     public String addBrands(BrandDto brandDto) {
         String brand = brandDto.getBrand();
         BrandCar brandCar = new BrandCar(brand);
