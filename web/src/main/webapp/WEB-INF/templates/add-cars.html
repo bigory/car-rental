@@ -5,7 +5,7 @@
     <title>Add cars</title>
 </head>
 <body>
-<form th:action="@{/add-cars.html}" th:object="${carDto}" method="post">
+<form th:action="@{/add-cars}" th:object="${carDto}" method="post">
     <span>Brand</span>
     <div>
         <select th:field="*{brandCar}">

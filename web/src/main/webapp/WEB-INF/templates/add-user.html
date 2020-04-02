@@ -1,0 +1,54 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add cars</title>
+</head>
+<body>
+<form th:action="@{/add-user}" th:object="${userDto}" method="post">
+
+    <div>
+        <span>First Name</span>
+        <br>
+        <input type="text" th:field="*{firstName}">
+    </div>
+
+    <br>
+    <div>
+        <span>Second Name</span>
+        <br>
+        <input type="text" th:field="*{secondName}">
+    </div>
+
+    <br>
+    <div>
+        <span>Passport Number</span>
+        <br>
+        <input type="text" th:field="*{passportNumber}">
+    </div>
+
+    <div>
+        <span>Telephone</span>
+        <br>
+        <input type="text" th:field="*{telephone}">
+    </div>
+
+    <div>
+        <span>Email</span>
+        <br>
+        <input type="text" th:field="*{email}">
+    </div>
+
+    <div>
+        <span>Password</span>
+        <br>
+        <input type="text" th:field="*{password}">
+    </div>
+
+    <br>
+    <div>
+        <input type="submit" value="Save">
+    </div>
+</form>
+
+</body>
+</html>

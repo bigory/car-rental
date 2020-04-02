@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ControllerHelper {
 
-    @ExceptionHandler(DaoExeption.class)
+    @ExceptionHandler(DaoException.class)
     public String error() {
         return "error";
     }

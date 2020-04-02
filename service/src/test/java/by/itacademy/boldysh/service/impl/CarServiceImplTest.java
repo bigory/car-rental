@@ -91,4 +91,12 @@ public class CarServiceImplTest {
         System.out.println(cars.getContent().get(0));
         assertEquals(2, cars.getContent().size());
     }
+
+    @Test
+    public void findByPaginated() {
+        List<Car> cars = (List<Car>) carRepository.findAll();
+        Page<Car> pagesCar = carService.findByPaginated(PageRequest.of(0, 2), cars);
+        assertEquals(2, pagesCar.getContent().size());
+
+    }
 }

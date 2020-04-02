@@ -56,6 +56,25 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
     public void delete(Car car) {
     }
 
+    @Override
+    public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Car> listCar;
+
+        if (cars.size() < startItem) {
+            listCar = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, cars.size());
+            listCar = cars.subList(startItem, toIndex);
+        }
+
+        Page<Car> carPage = new PageImpl<Car>(listCar, PageRequest.of(currentPage, pageSize), cars.size());
+
+        return carPage;
+    }
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -100,24 +119,6 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
         carsList.setMaxResults(page.getPageSize());
 
         Page<Car> carPage = new PageImpl<Car>(carsList.getResultList(), page, totalPages);
-        return carPage;
-    }
-
-    public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<Car> listCar;
-
-        if (cars.size() < startItem) {
-            listCar = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, cars.size());
-            listCar = cars.subList(startItem, toIndex);
-        }
-
-        Page<Car> carPage = new PageImpl<Car>(listCar, PageRequest.of(currentPage, pageSize), cars.size());
-
         return carPage;
     }
 }

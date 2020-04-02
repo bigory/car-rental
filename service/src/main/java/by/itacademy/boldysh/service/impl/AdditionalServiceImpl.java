@@ -5,6 +5,8 @@ import by.itacademy.boldysh.database.entity.Services;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
 import by.itacademy.boldysh.service.interfaces.AdditionalServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +38,11 @@ public class AdditionalServiceImpl implements AdditionalServiceService {
     @Override
     public void delete(AdditionalService additionalService) {
         additionalServiceRepository.delete(additionalService);
+    }
+
+    @Override
+    public Page<AdditionalService> findByPaginated(Pageable pageable, List<AdditionalService> entities) {
+        return null;
     }
 
     @Override

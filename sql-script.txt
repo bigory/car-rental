@@ -81,3 +81,15 @@ INSERT INTO car
 VALUES (2, 2, 'Polo', 'XWR123431243', 2017, 'MECHANIC', 'COMFORT', 20);
 INSERT INTO car
 VALUES (3, 3, 'Rav4', 'XER12312143', 2017, 'MACHINE', 'COMFORT', 20);
+
+INSERT INTO user_service
+VALUES ("Ivanov", "Ivan", "MC123123213", "+375255467654", "ivan.ivanov@gmail.com", "QWE12345678", false);
+
+INSERT INTO user_service
+VALUES ("Petrov", "Petr", "MC232323232", "+375295467654", "petr.petrov@gmail.com", "QQE12345678", false);
+
+INSERT INTO user_service
+VALUES ("Sidorova", "Vera", "MP332323232", "+375335463241", "vera.sidorova@gmail.com", "ASE12345678", false);
+
+
+

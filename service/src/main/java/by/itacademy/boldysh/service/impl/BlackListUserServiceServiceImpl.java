@@ -4,6 +4,8 @@ import by.itacademy.boldysh.database.entity.BlackListUserService;
 import by.itacademy.boldysh.database.repository.BlackListUserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.BlackListUserServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,5 +37,10 @@ public class BlackListUserServiceServiceImpl implements BlackListUserServiceServ
     @Override
     public void delete(BlackListUserService blackListUserService) {
         blackListUserServiceRepository.delete(blackListUserService);
+    }
+
+    @Override
+    public Page<BlackListUserService> findByPaginated(Pageable pageable, List<BlackListUserService> entities) {
+        return null;
     }
 }

@@ -70,4 +70,13 @@ public class UserService extends BaseEntity<Long> {
         this.password = password;
         this.isAdmin = isAdmin;
     }
+
+    public UserService(String firstName, String secondName, String passportNumber, String telephone, String email, String password) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.passportNumber = passportNumber;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+    }
 }

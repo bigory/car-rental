@@ -60,12 +60,12 @@ public class CarController {
     BrandCarRepository brandCarRepository;
 
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
-    public String getPagesCar(Model model, @RequestParam(value = "page") Optional<Integer> page,
-                              @RequestParam(value = "size") Optional<Integer> size) {
+    public String getPagesCars(Model model, @RequestParam(value = "page") Optional<Integer> page,
+                               @RequestParam(value = "size") Optional<Integer> size) {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(3);
 
-        Page<Car> pageCars = customFilterAndPaginationCars.findByPaginated(PageRequest.of(currentPage - 1, pageSize),
+        Page<Car> pageCars = carService.findByPaginated(PageRequest.of(currentPage - 1, pageSize),
                 carService.findAll());
 
         model.addAttribute("pageCars", pageCars);
@@ -105,15 +105,14 @@ public class CarController {
         return "car";
     }
 
-    @RequestMapping(value = "/delete-cars", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete-car", method = RequestMethod.GET)
     public String getPageDeleteCar(Model model) {
         CarDto carDto = new CarDto();
         model.addAttribute("carDto", carDto);
-        model.addAttribute("vinNumber", carDto.getVinNumber());
-        return "delete-cars";
+        return "delete-car";
     }
 
-    @RequestMapping(value = "/delete-cars", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete-car", method = RequestMethod.POST)
     public String deleteCar(CarDto carDto) {
         Car car = carRepository.findByVinNumber(carDto.getVinNumber());
         carDto.setBrandCar(car.getBrandCar().getBrand());
