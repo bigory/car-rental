@@ -80,6 +80,4 @@ public class UserServiceController {
         userServiceRepository.delete(userService);
         return "user";
     }
-
-
 }

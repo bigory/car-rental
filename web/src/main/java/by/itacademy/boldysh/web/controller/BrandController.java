@@ -2,6 +2,7 @@ package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.BrandDto;
 import by.itacademy.boldysh.database.entity.BrandCar;
+import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class BrandController {
     @Autowired
     private BrandCarService brandCarService;
 
+    @Autowired
+    private BrandCarRepository brandCarRepository;
+
     @RequestMapping(value = "/add-brand", method = RequestMethod.GET)
     public String addBrand(Model model) {
         BrandDto brandDto = new BrandDto();
@@ -27,6 +31,21 @@ public class BrandController {
         String brand = brandDto.getBrand();
         BrandCar brandCar = new BrandCar(brand);
         brandCarService.save(brandCar);
+        return "brand";
+    }
+
+    @RequestMapping(value = "delete-brand", method = RequestMethod.GET)
+    public void getBrand(Model model) {
+        BrandDto brandDto = new BrandDto();
+        model.addAttribute("brandDto", brandDto);
+        model.addAttribute("brandCars", brandCarService.findAll());
+    }
+
+    @RequestMapping(value = "delete-brand", method = RequestMethod.POST)
+    public String deleteBrand(BrandDto brandDto) {
+        BrandCar brandCar = brandCarRepository.findByBrand(brandDto.getBrand());
+        brandDto.setBrand(brandCar.getBrand());
+        brandCarRepository.deleteBrandCarByBrand(brandDto.getBrand());
         return "brand";
     }
 }

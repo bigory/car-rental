@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.database.dto;
 
-import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
 import lombok.AllArgsConstructor;
