@@ -12,21 +12,25 @@ CREATE TABLE user_service
     telephone       VARCHAR(64)                  NOT NULL,
     email           VARCHAR(256)                 NOT NULL,
     password        VARCHAR(128)                 NOT NULL,
-    isAdmin         BOOLEAN
+    isAdmin         BOOLEAN DEFAULT FALSE,
+    version         INTEGER
 );
 
 CREATE TABLE black_list
 (
     id      BIGSERIAL PRIMARY KEY,
     user_id BIGINT UNIQUE NOT NULL REFERENCES user_service (id),
-    cause   TEXT
+    cause   TEXT,
+    version INTEGER
+
 );
 
 
 CREATE TABLE brand_car
 (
-    id    BIGSERIAL PRIMARY KEY,
-    brand VARCHAR(256) UNIQUE NOT NULL
+    id      BIGSERIAL PRIMARY KEY,
+    brand   VARCHAR(256) UNIQUE NOT NULL,
+    version INTEGER
 );
 
 CREATE TABLE car
@@ -46,7 +50,8 @@ CREATE TABLE additional_services
 (
     id       BIGSERIAL PRIMARY KEY,
     services VARCHAR(256) UNIQUE NOT NULL,
-    cost     INTEGER             NOT NULL
+    cost     INTEGER             NOT NULL,
+    version  INTEGER
 );
 
 CREATE TABLE order_rental_car
@@ -58,7 +63,8 @@ CREATE TABLE order_rental_car
     date_start_rental      DATE         NOT NULL,
     date_finish_rental     DATE         NOT NULL,
     cost                   INTEGER      NOT NULL,
-    status_order           VARCHAR(128) NOT NULL
+    status_order           VARCHAR(128) NOT NULL,
+    version                INTEGER
 );
 
 DROP TABLE user_service;
