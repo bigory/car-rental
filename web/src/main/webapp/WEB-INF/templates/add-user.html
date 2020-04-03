@@ -1,11 +1,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add cars</title>
+    <title>Registration user</title>
 </head>
 <body>
 <form th:action="@{/add-user}" th:object="${userDto}" method="post">
+    <span>Registration</span>
+    <br>
 
+    <br>
     <div>
         <span>First Name</span>
         <br>
@@ -26,18 +29,21 @@
         <input type="text" th:field="*{passportNumber}">
     </div>
 
+    <br>
     <div>
         <span>Telephone</span>
         <br>
         <input type="text" th:field="*{telephone}">
     </div>
 
+    <br>
     <div>
         <span>Email</span>
         <br>
         <input type="text" th:field="*{email}">
     </div>
 
+    <br>
     <div>
         <span>Password</span>
         <br>
@@ -46,7 +52,7 @@
 
     <br>
     <div>
-        <input type="submit" value="Save">
+        <input type="submit" value="Registration">
     </div>
 </form>
 
