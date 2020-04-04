@@ -5,15 +5,19 @@
     <title>Add brand car</title>
 </head>
 <body>
-<form th:action="@{/brand}" th:object="${brandDto}" method="post">
-    <div>
-        <span>Brand</span>
-        <br>
-        <input type="text" th:field="*{brand}">
+<div class="container">
+    <div th:insert="~{fragments::language}">
     </div>
-    <div>
-        <input type="submit" value="Save">
-    </div>
-</form>
+    <form th:action="@{/brand}" th:object="${brandDto}" method="post">
+        <div>
+            <span th:text="#{car.brand}">Brand</span>
+            <br>
+            <input type="text" th:field="*{brand}">
+        </div>
+        <div>
+            <input th:text="#{save.object}"  type="submit" value="Save" >
+        </div>
+    </form>
+</div>
 </body>
 </html>
