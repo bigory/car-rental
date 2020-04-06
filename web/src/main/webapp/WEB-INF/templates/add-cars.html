@@ -5,66 +5,69 @@
     <title>Add cars</title>
 </head>
 <body>
-<form th:action="@{/add-cars}" th:object="${carDto}" method="post">
-    <span>Brand</span>
-    <div>
-        <select th:field="*{brandCar}">
-            <option th:each="brand: ${brandCars}"
-                    th:value="${brand.getBrand()}"
-                    th:text="${brand.getBrand()}">
-        </select>
+<div class="container">
+    <div th:insert="~{fragments::language}">
     </div>
+    <form th:action="@{/add-cars}" th:object="${carDto}" method="post">
+        <span th:text="#{car.brand}"></span>
+        <div>
+            <select th:field="*{brandCar}">
+                <option th:each="brand: ${brandCars}"
+                        th:value="${brand.getBrand()}"
+                        th:text="${brand.getBrand()}">
+            </select>
+        </div>
 
-    <br>
-    <div>
-        <span>Model</span>
         <br>
-        <input type="text" th:field="*{modelCar}">
-    </div>
+        <div>
+            <span th:text="#{car.model}"></span>
+            <br>
+            <input type="text" th:field="*{modelCar}">
+        </div>
 
-    <br>
-    <div>
-        <span>Vin number</span>
         <br>
-        <input type="text" th:field="*{vinNumber}">
-    </div>
+        <div>
+            <span th:text="#{car.vinNumber}"></span>
+            <br>
+            <input type="text" th:field="*{vinNumber}">
+        </div>
 
-    <br>
-    <span>Class</span>
-    <div>
-        <select th:field="*{classCar}">
-            <option th:each="class: ${carClass}"
-                    th:value="${class}"
-                    th:text="${class}"></option>
-        </select>
-    </div>
-
-    <br>
-    <span>Transmission</span>
-    <div th:each="transmission:${transmissions}">
-        <span th:text="${transmission}">AKPP</span>
-        <input type="radio" name="Transmission" th:value="${transmission}">
-    </div>
-
-    <br>
-    <div>
-        <span>Cost</span>
         <br>
-        <input type="text" th:field="*{costRentalOfDay}">
-    </div>
+        <span th:text="#{car.class}"></span>
+        <div>
+            <select th:field="*{classCar}">
+                <option th:each="class: ${carClass}"
+                        th:value="${class}"
+                        th:text="${class}"></option>
+            </select>
+        </div>
 
-    <br>
-    <div>
-        <span>Year of issue</span>
         <br>
-        <input type="text" th:field="*{yearOfIssue}">
-    </div>
+        <span th:text="#{car.transmissions}"></span>
+        <div th:each="transmission:${transmissions}">
+            <span th:text="#{car.transmissions.value}">AKPP</span>
+            <input type="radio" name="Transmission" th:value="${transmission}">
+        </div>
 
-    <br>
-    <div>
-        <input type="submit" value="Save">
-    </div>
-</form>
+        <br>
+        <div>
+            <span>Cost</span>
+            <br>
+            <input type="text" th:field="*{costRentalOfDay}">
+        </div>
 
+        <br>
+        <div>
+            <span>Year of issue</span>
+            <br>
+            <input type="text" th:field="*{yearOfIssue}">
+        </div>
+
+        <br>
+        <div>
+            <input type="submit" value="Save">
+        </div>
+    </form>
+</div>
 </body>
 </html>
