@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface CustomFilterAndPaginationCars {
 
-    Page<Car> findByFilterAndPaginationCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, Pageable page);
+    Page<Car> findByFilterAndPaginationCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission,
+                                            CarClass carClass, Integer costRentalOfDay, Pageable page);
 
    }

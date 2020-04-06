@@ -45,7 +45,7 @@
         <br>
         <span th:text="#{car.transmissions}"></span>
         <div th:each="transmission:${transmissions}">
-            <span th:text="#{car.transmissions.value}">AKPP</span>
+            <span  th:text="#{car.transmissions.value}">AKPP</span>
             <input type="radio" name="Transmission" th:value="${transmission}">
         </div>
 
