@@ -1,5 +1,6 @@
 package by.itacademy.boldysh.service.impl;
 
+import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.UserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.UserServiceService;
@@ -8,11 +9,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -69,4 +74,17 @@ public class UserServiceServiceImpl implements UserServiceService {
         return pageUserService;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return Optional.of(email)
+                .map(userServiceRepository::findByEmail)
+                .map(user -> User.builder()
+                        .username(user.getEmail())
+                        .password(user.getPassword())
+                        .authorities(user.isAdmin().stream()
+                                .toArray(String[]::new))
+                        .build()
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 }
+

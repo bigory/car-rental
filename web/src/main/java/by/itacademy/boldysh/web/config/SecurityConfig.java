@@ -1,4 +1,3 @@
-/*
 package by.itacademy.boldysh.web.config;
 
 import lombok.RequiredArgsConstructor;
@@ -20,23 +19,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    // @formatter::off
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin").hasAuthority("ADMIN")
-                .antMatchers("/home").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/home").hasAuthority("ADMIN")
+                /*  .antMatchers("/home").hasAnyAuthority("USER", "ADMIN")*/
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/home")
+                /* .defaultSuccessUrl("/home")*/
                 .and()
                 .httpBasic()
                 .and()
                 .logout();
     }
-    // @formatter::on
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -56,4 +53,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authProvider());
     }
 }
-*/

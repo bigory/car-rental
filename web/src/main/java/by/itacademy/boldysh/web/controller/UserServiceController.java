@@ -56,9 +56,9 @@ public class UserServiceController {
     @RequestMapping(value = "/add-user", method = RequestMethod.POST)
     public String createCar(UserDto userDto) {
 
-        UserService userService = new UserService(userDto.getFirstName(), userDto.getSecondName(), userDto.getPassportNumber(),
+        UserService userServiceRentalCar = new UserService(userDto.getFirstName(), userDto.getSecondName(), userDto.getPassportNumber(),
                 userDto.getTelephone(), userDto.getEmail(), userDto.getPassword());
-        userServiceService.save(userService);
+        userServiceService.save(userServiceRentalCar);
         return "user";
     }
 
@@ -71,13 +71,13 @@ public class UserServiceController {
 
     @RequestMapping(value = "/delete-user", method = RequestMethod.POST)
     public String deleteCar(UserDto userDto) {
-        UserService userService = userServiceRepository.findByPassportNumber(userDto.getPassportNumber());
-        userDto.setFirstName(userService.getFirstName());
-        userDto.setSecondName(userService.getSecondName());
-        userDto.setPassportNumber(userService.getPassportNumber());
-        userDto.setTelephone(userService.getTelephone());
-        userDto.setEmail(userService.getEmail());
-        userServiceRepository.delete(userService);
+        UserService userServiceRentalCar = userServiceRepository.findByPassportNumber(userDto.getPassportNumber());
+        userDto.setFirstName(userServiceRentalCar.getFirstName());
+        userDto.setSecondName(userServiceRentalCar.getSecondName());
+        userDto.setPassportNumber(userServiceRentalCar.getPassportNumber());
+        userDto.setTelephone(userServiceRentalCar.getTelephone());
+        userDto.setEmail(userServiceRentalCar.getEmail());
+        userServiceRepository.delete(userServiceRentalCar);
         return "user";
     }
 }
