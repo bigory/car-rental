@@ -45,27 +45,27 @@
         <br>
         <span th:text="#{car.transmissions}"></span>
         <div th:each="transmission:${transmissions}">
-            <span  th:text="#{car.transmissions.value}">AKPP</span>
+            <span th:text="${transmission}"></span>
             <input type="radio" name="Transmission" th:value="${transmission}">
         </div>
 
         <br>
         <div>
-            <span>Cost</span>
+            <span th:text="#{car.costRentalOfDay}"></span>
             <br>
             <input type="text" th:field="*{costRentalOfDay}">
         </div>
 
         <br>
         <div>
-            <span>Year of issue</span>
+            <span th:text="#{car.yearOfIssue}"></span>
             <br>
             <input type="text" th:field="*{yearOfIssue}">
         </div>
 
         <br>
         <div>
-            <input type="submit" value="Save">
+            <input type="submit" th:value="#{save.object}">
         </div>
     </form>
 </div>
