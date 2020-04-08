@@ -7,15 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @EqualsAndHashCode(of = "id")
@@ -37,6 +29,10 @@ public class BlackListUserService extends BaseEntity<Long> {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserService userService;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 
     public BlackListUserService(String cause, UserService userService) {
         this.cause = cause;

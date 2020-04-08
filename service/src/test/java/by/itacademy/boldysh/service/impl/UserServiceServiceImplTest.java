@@ -48,7 +48,7 @@ public class UserServiceServiceImplTest {
                 .telephone("+37521324431221")
                 .email("artem.petrov@gmail.com")
                 .password("RTRVR23")
-                .isAdmin(false)
+                .role("USER")
                 .build();
         userServiceService.save(userService);
         UserService userService1 = userServiceRepository.findByPassportNumber("MC132423111");

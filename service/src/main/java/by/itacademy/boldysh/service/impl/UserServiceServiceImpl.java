@@ -1,10 +1,9 @@
 package by.itacademy.boldysh.service.impl;
 
-import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.UserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.UserServiceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -21,17 +20,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Transactional
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class UserServiceServiceImpl implements UserServiceService {
 
+
     private final UserServiceRepository userServiceRepository;
-
-    @Autowired
-    public UserServiceServiceImpl(UserServiceRepository userServiceRepository) {
-        this.userServiceRepository = userServiceRepository;
-    }
-
 
     @Override
     public void save(UserService userService) {
@@ -81,9 +76,8 @@ public class UserServiceServiceImpl implements UserServiceService {
                 .map(user -> User.builder()
                         .username(user.getEmail())
                         .password(user.getPassword())
-                        .authorities(user.isAdmin().stream()
-                                .toArray(String[]::new))
-                        .build()
+                        .authorities(user.getRole())
+                        .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

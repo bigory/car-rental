@@ -45,9 +45,9 @@ public class DatabaseHelper {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        UserService userOne = new UserService("Ivanov", "Ivan", "MC123123213", "+375255467654", "ivan.ivanov@gmail.com", "QWE12345678", false);
-        UserService userTwo = new UserService("Petrov", "Petr", "MC232323232", "+375295467654", "petr.petrov@gmail.com", "QQE12345678", false);
-        UserService userThree = new UserService("Sidorova", "Vera", "MP332323232", "+375335463241", "vera.sidorova@gmail.com", "ASE12345678", false);
+        UserService userOne = new UserService("Ivanov", "Ivan", "MC123123213", "+375255467654", "ivan.ivanov@gmail.com", "QWE12345678", "USER");
+        UserService userTwo = new UserService("Petrov", "Petr", "MC232323232", "+375295467654", "petr.petrov@gmail.com", "QQE12345678", "USER");
+        UserService userThree = new UserService("Sidorova", "Vera", "MP332323232", "+375335463241", "vera.sidorova@gmail.com", "ASE12345678", "ADMIN");
         entityManager.persist(userOne);
         entityManager.persist(userTwo);
         entityManager.persist(userThree);

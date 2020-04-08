@@ -6,13 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -45,6 +39,10 @@ public class OrderRentalCar extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "additional_services_id")
     private AdditionalService additionalService;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 
     public OrderRentalCar(Long userServiceId, Long carId, LocalDate dateStartRental, LocalDate dateFinishRental, Integer cost, StatusOrder statusOrder, AdditionalService additionalService) {
         this.userServiceId = userServiceId;

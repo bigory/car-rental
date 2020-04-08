@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,9 @@ public class UserServiceController {
 
     @Autowired
     private UserServiceRepository userServiceRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String getPageUser(Model model, @RequestParam(value = "page") Optional<Integer> page,
@@ -57,7 +61,7 @@ public class UserServiceController {
     public String createCar(UserDto userDto) {
 
         UserService userServiceRentalCar = new UserService(userDto.getFirstName(), userDto.getSecondName(), userDto.getPassportNumber(),
-                userDto.getTelephone(), userDto.getEmail(), userDto.getPassword());
+                userDto.getTelephone(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
         userServiceService.save(userServiceRentalCar);
         return "user";
     }
