@@ -19,10 +19,6 @@ import javax.persistence.*;
 @Table(name = "black_list", schema = "car_storage")
 public class BlackListUserService extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "cause")
     private String cause;
 

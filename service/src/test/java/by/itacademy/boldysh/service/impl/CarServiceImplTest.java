@@ -1,5 +1,6 @@
 package by.itacademy.boldysh.service.impl;
 
+import by.itacademy.boldysh.database.dto.FilterDto;
 import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
@@ -8,7 +9,6 @@ import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
-import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import by.itacademy.boldysh.service.util.DatabaseHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +39,6 @@ public class CarServiceImplTest {
     @Autowired
     private CarRepository carRepository;
 
-    @Autowired
-    private CustomFilterAndPaginationCars customFilterAndPaginationCars;
 
     @Autowired
     private BrandCarRepository brandCarRepository;
@@ -86,8 +84,9 @@ public class CarServiceImplTest {
 
     @Test
     public void findByFilterAndPaginationCars() {
-        Page<Car> cars = customFilterAndPaginationCars.findByFilterAndPaginationCars("", "",
-                null, null, null, null, PageRequest.of(0, 2));
+        FilterDto filterDto = new FilterDto("", "",
+                null, null, null, null);
+        Page<Car> cars = carService.findByFilterAndPaginationCars(filterDto, PageRequest.of(0, 2));
         System.out.println(cars.getContent().get(0));
         assertEquals(2, cars.getContent().size());
     }

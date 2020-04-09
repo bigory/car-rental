@@ -1,9 +1,9 @@
 package by.itacademy.boldysh.service.impl;
 
+import by.itacademy.boldysh.database.dto.FilterDto;
 import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
-import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,7 +26,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
-public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars {
+public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
 
@@ -76,9 +76,10 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
     }
 
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
-    public Page<Car> findByFilterAndPaginationCars(String brandCar, String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, Pageable page) {
+    @Override
+    public Page<Car> findByFilterAndPaginationCars(FilterDto filterDto, Pageable page) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
@@ -86,28 +87,28 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
 
         Predicate criteria = criteriaBuilder.conjunction();
 
-        if (!brandCar.equals("")) {
-            Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar).get(BrandCar_.brand), brandCar);
+        if (!filterDto.getBrandCar().equals("")) {
+            Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar).get(BrandCar_.brand), filterDto.getBrandCar());
             criteria = criteriaBuilder.and(criteria, brand);
         }
-        if (!model.equals("")) {
-            Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), model);
+        if (!filterDto.getModelCar().equals("")) {
+            Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), filterDto.getModelCar());
             criteria = criteriaBuilder.and(criteria, modelCar);
         }
-        if (yearOfIssue != null) {
-            Predicate yearOfIssueCar = criteriaBuilder.equal(carRoot.get(Car_.yearOfIssue), yearOfIssue);
+        if (filterDto.getYearOfIssue() != null) {
+            Predicate yearOfIssueCar = criteriaBuilder.equal(carRoot.get(Car_.yearOfIssue), filterDto.getYearOfIssue());
             criteria = criteriaBuilder.and(criteria, yearOfIssueCar);
         }
-        if (transmission != null) {
-            Predicate transmissionCar = criteriaBuilder.equal(carRoot.get(Car_.transmission), transmission);
+        if (filterDto.getTransmission() != null) {
+            Predicate transmissionCar = criteriaBuilder.equal(carRoot.get(Car_.transmission), filterDto.getTransmission());
             criteria = criteriaBuilder.and(criteria, transmissionCar);
         }
-        if (carClass != null) {
-            Predicate classCar = criteriaBuilder.equal(carRoot.get(Car_.carClass), carClass);
+        if (filterDto.getClassCar() != null) {
+            Predicate classCar = criteriaBuilder.equal(carRoot.get(Car_.carClass), filterDto.getClassCar());
             criteria = criteriaBuilder.and(criteria, classCar);
         }
-        if (costRentalOfDay != null) {
-            Predicate costRentalOfDayCar = criteriaBuilder.equal(carRoot.get(Car_.costRentalOfDay), costRentalOfDay);
+        if (filterDto.getCostRentalOfDay() != null) {
+            Predicate costRentalOfDayCar = criteriaBuilder.equal(carRoot.get(Car_.costRentalOfDay), filterDto.getCostRentalOfDay());
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
@@ -119,6 +120,8 @@ public class CarServiceImpl implements CarService, CustomFilterAndPaginationCars
         carsList.setMaxResults(page.getPageSize());
 
         Page<Car> carPage = new PageImpl<Car>(carsList.getResultList(), page, totalPages);
+
+        entityManager.close();
         return carPage;
     }
 }

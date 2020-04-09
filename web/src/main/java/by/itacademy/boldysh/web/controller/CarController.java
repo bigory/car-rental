@@ -10,7 +10,6 @@ import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
-import by.itacademy.boldysh.service.interfaces.CustomFilterAndPaginationCars;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,9 +48,6 @@ public class CarController {
 
     @Autowired
     private CarService carService;
-
-    @Autowired
-    private CustomFilterAndPaginationCars customFilterAndPaginationCars;
 
     @Autowired
     private BrandCarService brandCarService;
@@ -142,9 +138,7 @@ public class CarController {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(2);
 
-        Page<Car> pageCars = customFilterAndPaginationCars.findByFilterAndPaginationCars(filterDto.getBrandCar(),
-                filterDto.getModelCar(), filterDto.getYearOfIssue(), filterDto.getTransmission(), filterDto.getClassCar(),
-                filterDto.getCostRentalOfDay(), PageRequest.of(currentPage - 1, pageSize));
+        Page<Car> pageCars = carService.findByFilterAndPaginationCars(filterDto, PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("pageCars", pageCars);
         int totalPages = pageCars.getTotalPages();
