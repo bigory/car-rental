@@ -5,13 +5,14 @@
     <title>DeleteCars</title>
 </head>
 <body>
-
+<div class="container">
+    <div th:insert="~{fragments::language}">
+    </div>
 
 <form th:action="@{delete-brand}" th:object="${brandDto}" method="post">
-    <span>Brand car</span>
+    <span th:text="#{car.brand}"></span>
 
     <br>
-    <span>Brand</span>
     <div>
         <select th:field="*{brand}">
             <option th:each="brands: ${brandCars}"

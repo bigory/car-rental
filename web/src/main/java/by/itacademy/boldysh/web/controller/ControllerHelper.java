@@ -11,6 +11,6 @@ public class ControllerHelper {
     @ExceptionHandler(Exception.class)
     public String error(Model model, Exception ex) {
         model.addAttribute("message", ex.getMessage());
-        return "redirect:/error";
+        return "error";
     }
 }
