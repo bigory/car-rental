@@ -5,6 +5,7 @@ import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +42,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Cacheable("allBrandCar")
     public List<Car> findAll() {
         return StreamSupport.stream(carRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
