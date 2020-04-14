@@ -6,7 +6,7 @@
 
     <groupId>by.itacademy.boldysh</groupId>
     <artifactId>car-rental</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -109,8 +109,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>${file.encoding}</encoding>
                 </configuration>
             </plugin>
@@ -123,6 +123,14 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12.4</version>
+                </plugin>
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

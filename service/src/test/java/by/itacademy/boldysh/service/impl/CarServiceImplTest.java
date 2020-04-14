@@ -5,7 +5,6 @@ import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
-import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
@@ -39,9 +38,6 @@ public class CarServiceImplTest {
     @Autowired
     private CarRepository carRepository;
 
-
-    @Autowired
-    private BrandCarRepository brandCarRepository;
 
     @Before
     public void init() {

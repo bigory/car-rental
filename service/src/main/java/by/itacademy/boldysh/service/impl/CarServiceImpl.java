@@ -1,7 +1,9 @@
 package by.itacademy.boldysh.service.impl;
 
 import by.itacademy.boldysh.database.dto.FilterDto;
-import by.itacademy.boldysh.database.entity.*;
+import by.itacademy.boldysh.database.entity.BrandCar_;
+import by.itacademy.boldysh.database.entity.Car;
+import by.itacademy.boldysh.database.entity.Car_;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
