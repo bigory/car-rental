@@ -12,7 +12,7 @@ CREATE TABLE user_service
     telephone       VARCHAR(64)                  NOT NULL,
     email           VARCHAR(256)                 NOT NULL,
     password        VARCHAR(128)                 NOT NULL,
-    isAdmin         BOOLEAN DEFAULT FALSE,
+    isAdmin         VARCHAR(64) DEFAULT  'USER',
     version         INTEGER
 );
 
@@ -22,7 +22,6 @@ CREATE TABLE black_list
     user_id BIGINT UNIQUE NOT NULL REFERENCES user_service (id),
     cause   TEXT,
     version INTEGER
-
 );
 
 
@@ -89,13 +88,10 @@ INSERT INTO car
 VALUES (3, 3, 'Rav4', 'XER12312143', 2017, 'MACHINE', 'COMFORT', 20);
 
 INSERT INTO user_service
-VALUES ("Ivanov", "Ivan", "MC123123213", "+375255467654", "ivan.ivanov@gmail.com", "QWE12345678", false);
+VALUES (1,'Ivanov', 'Ivan', 'MC123123213', '+375255467654', 'ivan.ivanov@gmail.com', 'QWE12345678', 'ADMIN');
 
 INSERT INTO user_service
-VALUES ("Petrov", "Petr", "MC232323232", "+375295467654", "petr.petrov@gmail.com", "QQE12345678", false);
+VALUES (2,'Petrov', 'Petr', 'MC232323232', '+375295467654', 'petr.petrov@gmail.com', 'QQE12345678', 'USER');
 
 INSERT INTO user_service
-VALUES ("Sidorova", "Vera", "MP332323232", "+375335463241", "vera.sidorova@gmail.com", "ASE12345678", false);
-
-
-
+VALUES (3,'Sidorova', 'Vera', 'MP332323232', '+375335463241', 'vera.sidorova@gmail.com', 'ASE12345678', 'USER');

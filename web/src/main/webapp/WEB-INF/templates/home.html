@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link href="/sources/css/home.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" >
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
-
-
 </head>
 <body>
 <div class="container">
     <div th:insert="~{fragments::language}">
     </div>
     <br>
-    <a th:href="@{admin-page}" th:text="#{home.page}"></a>
+
+    <a th:class="name123" th:href="@{admin-page}" th:text="#{home.page}"  ></a>
     <br>
     <a th:href="@{cars}" th:text="#{list.car}"></a>
     <br>
     <a th:href="@{login}" th:text="#{sign.out}" class="text-danger"></a>
     <br>
-    <h1> wergjrl;ewkjg;lrejw;lgrj;wlekgjr;lkwj;lkrjelkgj;re</h1>
+
+    <h1 th:class="name123"> wergjrl;ewkjg;lrejw;lgrj;wlekgjr;lkwj;lkrjelkgj;re</h1>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
