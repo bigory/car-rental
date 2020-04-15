@@ -51,13 +51,13 @@ public class UserServiceController {
         return "users";
     }
 
-    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
+    @RequestMapping(value = "/registry", method = RequestMethod.GET)
     public void getAddUserServices(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userDto", userDto);
     }
 
-    @RequestMapping(value = "/add-user", method = RequestMethod.POST)
+    @RequestMapping(value = "/registry", method = RequestMethod.POST)
     public String createCar(UserDto userDto) {
 
         UserService userServiceRentalCar = new UserService(userDto.getFirstName(), userDto.getSecondName(), userDto.getPassportNumber(),

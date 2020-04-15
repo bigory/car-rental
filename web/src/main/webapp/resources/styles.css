@@ -1,10 +1,97 @@
-.name123 {
-    color: red;
-    font-size: 14px;
-    font-style: italic;
+body {
+    color: aliceblue;
 }
 
-.name1{
-    font-size: 50px;
-    color: blue;
+#wrapper {
+    max-width: 1080px;
+    margin: auto;
+}
+
+#header {
+    padding-top: 8px;
+    background-color: #515152;
+    height: 160px;
+    padding-right: 0;
+}
+
+#line-horizon {
+    margin-top: 35px;
+    height: 15px;
+    background-color: #FF1D25;
+}
+
+#line-vertical {
+    position: absolute;
+    width: 10px;
+    height: 1160px;
+    background-color: #FF1D25;
+    left: 440px;
+}
+
+#language {
+    float: right;
+}
+
+nav a {
+    color: azure;
+}
+
+nav a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    list-style-position: inside;
+    font: 20px 'Marion', sans-serif;
+    padding: 5px;
+}
+
+.top-menu li {
+    display: inline-block;
+    margin: 0;
+    padding: 7px 75px;
+}
+
+aside {
+    float: left;
+    background-color: #515152;
+    height: 1000px;
+    width: 350px;
+    border-top: 1px solid slategray;
+}
+
+.aside-menu li {
+    padding-top: 25px;
+    list-style-type: none;
+    font-weight: 300;
+    margin-left: 25px;
+    padding-left: 25px;
+    padding-bottom: 20px;
+}
+
+.aside-menu li.sign-in-registry {
+    padding-top: 100px;
+}
+
+.aside-menu li:first-child {
+    border: none
+}
+
+.aside-menu a:hover {
+    color: #FF1D25;
+    text-decoration: none;
+}
+
+.aside-menu a {
+    color: azure;
+}
+
+section {
+    margin-left: 370px;
 }

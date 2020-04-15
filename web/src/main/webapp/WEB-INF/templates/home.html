@@ -4,26 +4,54 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div th:insert="~{fragments::language}">
-    </div>
-    <br>
+<div th:id="wrapper">
+    <div th:id="line-vertical"></div>
+    <header th:id="header">
 
-    <a  th:href="@{admin-page}" th:text="#{home.page}"  th:class="name1"></a>
-    <br>
-    <a th:href="@{cars}" th:text="#{list.car}"></a>
-    <br>
-    <a th:href="@{login}" th:text="#{sign.out}" class="text-danger"></a>
-    <br>
+        <div class="container">
+            <div th:insert="~{fragments::language}" th:name="language" th:id="language">
+            </div>
+        </div>
+        <div id="line-horizon"></div>
+        <nav>
 
-    <h1 th:class="name123"> wergjrl;ewkjg;lrejw;lgrj;wlekgjr;lkwj;lkrjelkgj;re</h1>
+            <ul th:class="top-menu">
+                <li><a th:href="@{/home}" th:text="#{home.page}"></a></li>
+                <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
+                <li><a th:href="@{contact}" th:text="#{contact}"></a></li>
+                <li><a th:href="@{aboutus}" th:text="#{about.us}"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <aside>
+        <nav>
+            <ul th:class="aside-menu">
+                <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
+                <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
+                <li><a th:href="@{additional-equipment}" th:text="#{additional.equipment}"></a></li>
+                <br>
+                <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>
+                <li><a th:href="@{registry}" th:text="#{registry.user}"></a></li>
+            </ul>
+        </nav>
+
+    </aside>
+    <section>
+
+
+    </section>
 
 </div>
 
+<footer>
+
+
+</footer>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -33,5 +61,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
