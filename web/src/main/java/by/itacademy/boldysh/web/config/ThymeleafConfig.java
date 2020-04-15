@@ -11,7 +11,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Configuration
-public class ThymeleafConfig implements WebMvcConfigurer {
+public class ThymeleafConfig  implements WebMvcConfigurer {
 
     @Bean
     public ThymeleafViewResolver viewResolver() {
@@ -41,7 +41,7 @@ public class ThymeleafConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler( "/css/** **")
-                .addResourceLocations("/WEB-INF/css/");
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 }

@@ -25,7 +25,6 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@SessionAttributes({"filterDto"})
 public class CarController {
 
     @ModelAttribute("filterDto")
@@ -131,7 +130,7 @@ public class CarController {
         model.addAttribute("costRentalOfDay", filterDto.getCostRentalOfDay());
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "filter-car-result", method = RequestMethod.GET)
     public void getPagesFilterCar(Model model, @ModelAttribute("filterDto") FilterDto filterDto,
                                   @RequestParam(value = "page", required = false) Optional<Integer> page,
                                   @RequestParam(value = "size", required = false) Optional<Integer> size) {
