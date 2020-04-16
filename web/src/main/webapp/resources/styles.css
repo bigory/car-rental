@@ -14,7 +14,7 @@ body {
     padding-right: 0;
 }
 
-#line-horizon {
+#line-horizon-header {
     margin-top: 35px;
     height: 15px;
     background-color: #FF1D25;
@@ -25,7 +25,8 @@ body {
     width: 10px;
     height: 1160px;
     background-color: #FF1D25;
-    left: 440px;
+    left: 100px;
+    z-index: 1;
 }
 
 #language {
@@ -55,7 +56,7 @@ nav li {
 .top-menu li {
     display: inline-block;
     margin: 0;
-    padding: 7px 75px;
+    padding: 7px 60px;
 }
 
 aside {
@@ -92,6 +93,21 @@ aside {
     color: azure;
 }
 
-section {
-    margin-left: 370px;
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+
+#footer {
+    background: #515152;
+    height: 80px;
+    width: 1080px;
+
+
+}
+
+#line-horizon-footer {
+    height: 30px;
+    background-color: #FF1D25;
 }
