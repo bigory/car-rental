@@ -1,69 +1,77 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <meta charset="UTF-8">
-    <title>Registration user</title>
 </head>
+
 <body>
+<div th:id="wrapper">
+    <div th:id="line-vertical"></div>
+    <div th:id="line-vertiacal-wrapper"></div>
 
-<div class="container">
-    <div th:insert="~{home::home}"></div>
+    <div th:insert="~{fragments::header}"></div>
+    <div th:insert="~{fragments::aside}"></div>
 
-<form th:action="@{/registry}" th:object="${userDto}" method="post">
-    <span>Registration</span>
-    <br>
 
-    <br>
-    <div>
-        <span>First Name</span>
-        <br>
-        <input type="text" th:field="*{firstName}">
-    </div>
+    <form th:action="@{/registry}" th:object="${userDto}" method="post">
+        <section th:id="section">
+            <div th:id="section-block">
+                <div th:id="form-add">
+                    <span th:text="#{registry.user}" th:class="registry">Registration</span>
+                    <br>
+                    <br>
+                    <div>
+                        <span th:text="#{first.name}">First Name</span>
+                        <br>
+                        <input type="text" th:field="*{firstName}" required="required">
+                    </div>
+                    <br>
+                    <div>
+                        <span th:text="#{second.name}">Second Name</span>
+                        <br>
+                        <input type="text" th:field="*{secondName}" required="required">
+                    </div>
+                    <br>
+                    <div>
+                        <span th:text="#{passport.number}">Passport Number</span>
+                        <br>
+                        <input type="text" th:field="*{passportNumber}" required="required">
+                    </div>
+                    <br>
+                    <div>
+                        <span th:text="#{telephone}">Telephone</span>
+                        <br>
+                        <input type="text" th:field="*{telephone}" required="required">
+                    </div>
+                    <br>
+                    <div>
+                        <span th:text="#{email}">Email</span>
+                        <br>
+                        <input type="email" th:field="*{email}" required="required">
+                    </div>
+                    <br>
+                    <div>
+                        <span th:text="#{password}">Password</span>
+                        <br>
+                        <input type="password" th:field="*{password}" required="required">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="submit" th:value="#{registry.user}">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
 
-    <br>
-    <div>
-        <span>Second Name</span>
-        <br>
-        <input type="text" th:field="*{secondName}">
-    </div>
 
-    <br>
-    <div>
-        <span>Passport Number</span>
-        <br>
-        <input type="text" th:field="*{passportNumber}">
-    </div>
-
-    <br>
-    <div>
-        <span>Telephone</span>
-        <br>
-        <input type="text" th:field="*{telephone}">
-    </div>
-
-    <br>
-    <div>
-        <span>Email</span>
-        <br>
-        <input type="text" th:field="*{email}">
-    </div>
-
-    <br>
-    <div>
-        <span>Password</span>
-        <br>
-        <input type="text" th:field="*{password}">
-    </div>
-
-    <br>
-    <div>
-        <input type="submit" value="Registration">
-    </div>
-</form>
+    <div th:insert="~{fragments::footer}"></div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

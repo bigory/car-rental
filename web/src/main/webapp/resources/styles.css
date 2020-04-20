@@ -113,6 +113,20 @@ aside {
     padding: 10px 10px 10px 10px;
 }
 
+#section-block span {
+    padding: 10px 10px 10px 10px;
+}
+
+#section-block input {
+    margin-left: 10px;
+}
+
+#form-add {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 #info {
     font: 12px 'Marion', sans-serif;
     white-space: pre;
