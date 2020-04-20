@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -9,40 +10,12 @@
 </head>
 <body>
 <div th:fragment="home">
-
     <div th:id="wrapper">
+
         <div th:id="line-vertical"></div>
         <div th:id="line-vertiacal-wrapper"></div>
-
-        <header th:id="header">
-            <div class="container">
-                <div th:insert="~{fragments::language}" th:name="language" th:id="language">
-                </div>
-            </div>
-            <div id="line-horizon-header"></div>
-            <nav>
-
-                <ul th:class="top-menu">
-                    <li><a th:href="@{/home}" th:text="#{home.page}"></a></li>
-                    <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
-                    <li><a th:href="@{contact}" th:text="#{contact}"></a></li>
-                    <li><a th:href="@{aboutus}" th:text="#{about.us}"></a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <aside>
-            <nav>
-                <ul th:class="aside-menu">
-                    <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
-                    <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
-                    <li><a th:href="@{additional-equipment}" th:text="#{additional.equipment}"></a></li>
-                    <br>
-                    <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>
-                    <li><a th:href="@{registry}" th:text="#{registry.user}"></a></li>
-                </ul>
-            </nav>
-        </aside>
+        <div th:insert="~{fragments::header}"></div>
+        <div th:insert="~{fragments::aside}"></div>
 
         <section th:id="section">
             <div th:id="section-block">
@@ -74,23 +47,9 @@
             </div>
         </section>
 
-        <footer>
-            <div th:id="footer">
-                <div th:id="line-horizon-footer"></div>
-                <div th:id="info">
-                    Аренда авто на сутки
-                    ООО «DESTcar»
-                    Юридический адрес:г.Минск,улица Берута,13
-                    УНП:412342142134
-                    р\с:31BDF1232321321213
-                    тел:+375(29)100-00-00
-                    Email:dectcar@rental.by
-                    Support:support@rental.by
-                </div>
-            </div>
-        </footer>
-
+        <div th:insert="~{fragments::footer}"></div>
     </div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

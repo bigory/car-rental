@@ -3,33 +3,80 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 <body>
-    <div th:fragment="language">
-        <a href="?language=ru_RU" class="d-inline p-2 bg-dark text-white border rounded-pill">РУС</a>
-        <a href="?language=en_US" class="d-inline p-2 bg-dark text-white border rounded-pill">ENG</a>
-    </div>
+<div th:fragment="language">
+    <a href="?language=ru_RU" class="d-inline p-2 bg-dark text-white border rounded-pill">РУС</a>
+    <a href="?language=en_US" class="d-inline p-2 bg-dark text-white border rounded-pill">ENG</a>
+</div>
 
-    <div th:fragment="header">
+<div th:fragment="header">
+    <header th:id="header">
+        <div class="container">
+            <div th:insert="~{fragments::language}" th:name="language" th:id="language">
+            </div>
+        </div>
+        <div id="line-horizon-header"></div>
+        <nav>
+
+            <ul th:class="top-menu">
+                <li><a th:href="@{home}" th:text="#{home.page}"></a></li>
+                <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
+                <li><a th:href="@{contact}" th:text="#{contact}"></a></li>
+                <li><a th:href="@{about-us}" th:text="#{about.us}"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+</div>
 
 
-    </div>
+<div th:fragment="aside">
+    <aside>
+        <nav>
+            <ul th:class="aside-menu">
+                <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
+                <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
+                <li><a th:href="@{additional-equipment}" th:text="#{additional.equipment}"></a></li>
+                <br>
+                <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>
+                <li><a th:href="@{registry}" th:text="#{registry.user}"></a></li>
+            </ul>
+        </nav>
+    </aside>
+</div>
+
+<div th:fragment="footer">
+    <footer>
+        <div th:id="footer">
+            <div th:id="line-horizon-footer"></div>
+            <div th:id="info">
+                Аренда авто на сутки
+                ООО «DESTcar»
+                Юридический адрес:г.Минск,улица Берута,13
+                УНП:412342142134
+                р\с:31BDF1232321321213
+                тел:+375(29)100-00-00
+                Email:dectcar@rental.by
+                Support:support@rental.by
+            </div>
+        </div>
+    </footer>
+</div>
 
 
-
-
-
-    <div th:fragment="aside">
-
-
-    </div>
-
-    <div th:fragment="footer">
-
-
-    </div>
-
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 </html>

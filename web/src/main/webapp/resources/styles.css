@@ -2,13 +2,15 @@ body {
     color: aliceblue;
 }
 
-#wrapper {
-    position: fixed;
-    max-width: 1080px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+@media (min-width: 1220px) {
+    #wrapper {
+        position: fixed;
+        max-width: 1080px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 #line-vertical {
@@ -130,7 +132,6 @@ footer {
     background: #515152;
     height: 165px;
     width: 1080px;
-
 
 }
 
