@@ -11,9 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +21,12 @@ import java.util.stream.IntStream;
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceController {
+
+
+    @ModelAttribute("userDto")
+    public UserDto getUserDto() {
+        return new UserDto();
+    }
 
     @Autowired
     private UserServiceService userServiceService;
@@ -52,14 +56,12 @@ public class UserServiceController {
     }
 
     @RequestMapping(value = "/registry", method = RequestMethod.GET)
-    public void getAddUserServices(Model model) {
-        UserDto userDto = new UserDto();
-        model.addAttribute("userDto", userDto);
+    public void registration(Model model) {
+        model.addAttribute("userDto", new UserDto());
     }
 
     @RequestMapping(value = "/registry", method = RequestMethod.POST)
-    public String createCar(UserDto userDto) {
-
+    public String showUser(@ModelAttribute("userDto") UserDto userDto) {
         UserService userServiceRentalCar = new UserService(userDto.getFirstName(), userDto.getSecondName(), userDto.getPassportNumber(),
                 userDto.getTelephone(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
         userServiceService.save(userServiceRentalCar);

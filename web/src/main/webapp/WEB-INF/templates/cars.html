@@ -8,10 +8,15 @@
 </head>
 <body>
 <div class="container">
-    <div th:insert="~{fragments::language}">
-    </div>
-    <br>
-    <br>
+    <div th:id="wrapper">
+        <div th:id="line-vertical"></div>
+        <div th:id="line-vertiacal-wrapper"></div>
+
+        <div th:insert="~{fragments::header}"></div>
+        <div th:insert="~{fragments::aside}"></div>
+
+        <section th:id="section">
+            <div th:id="section-block">
     <span th:text="#{list.car}"></span><br>
     <table class="table table-dark table-striped">
         <thead>
@@ -42,6 +47,9 @@
            th:text="${pageNumber}"
            th:class="${pageNumber==pageCars.number+1}?active"></a>
     </div>
+
+    <div th:insert="~{fragments::footer}"></div>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
