@@ -48,9 +48,14 @@ public class DatabaseHelper {
         UserService userOne = new UserService("Ivanov", "Ivan", "MC123123213", "+375255467654", "ivan.ivanov@gmail.com", "QWE12345678", "USER");
         UserService userTwo = new UserService("Petrov", "Petr", "MC232323232", "+375295467654", "petr.petrov@gmail.com", "QQE12345678", "USER");
         UserService userThree = new UserService("Sidorova", "Vera", "MP332323232", "+375335463241", "vera.sidorova@gmail.com", "ASE12345678", "ADMIN");
+        UserService userFour = new UserService("Svetikova", "Sveta", "MP332321233232", "+375335463241", "sveta@gmail.com", "123", "ADMIN");
+
+
         entityManager.persist(userOne);
         entityManager.persist(userTwo);
         entityManager.persist(userThree);
+        entityManager.persist(userFour);
+
 
         BlackListUserService blackListUserServiceThree = new BlackListUserService("Max speed", userThree);
         entityManager.persist(blackListUserServiceThree);

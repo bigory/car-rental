@@ -29,9 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
+                .loginPage("/login")
+                .failureUrl("/login-error")
                 .defaultSuccessUrl("/admin-page")
+                .permitAll()
                 .and()
-                .logout();
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .permitAll();
     }
 
     @Bean
@@ -50,6 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
+    }
+
+    @Override
+    protected UserDetailsService userDetailsService() {
+        return super.userDetailsService();
     }
 
     @Override

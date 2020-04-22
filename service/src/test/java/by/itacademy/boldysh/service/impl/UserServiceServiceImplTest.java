@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +75,13 @@ public class UserServiceServiceImplTest {
     public void delete() {
         userServiceService.delete(userServiceRepository.findByPassportNumber("MP332323232"));
         assertNull(userServiceRepository.findByPassportNumber("MP332323232"));
+    }
+
+    @Test
+    public void loadUserByUsername() {
+        String email = "sveta@gmail.com";
+        UserDetails userDetails = userServiceService.loadUserByUsername(email);
+        System.out.println(userDetails);
+        assertNotNull(userDetails);
     }
 }

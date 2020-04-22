@@ -16,60 +16,37 @@
     <div th:insert="~{fragments::header}"></div>
     <div th:insert="~{fragments::aside}"></div>
 
-    <form th:action="@{/registry}" th:object="${userDto}" method="post">
+    <form th:action="@{/login}"  method="post">
         <section th:id="section">
             <div th:id="section-block">
-                <div th:id="form-add">
-                    <span th:text="#{registry.user}" th:class="registry">Registration</span>
-                    <br>
-                    <br>
-                    <div>
-                        <span th:text="#{first.name}">First Name</span>
-                        <br>
-                        <input type="text" th:field="*{firstName}" required="required" class="rounded-lg">
-                    </div>
-                    <br>
-                    <div>
-                        <span th:text="#{second.name}">Second Name</span>
-                        <br>
-                        <input type="text" th:field="*{secondName}" required="required" class="rounded-lg">
-                    </div>
-                    <br>
-                    <div>
-                        <span th:text="#{passport.number}">Passport Number</span>
-                        <br>
-                        <input type="text" th:field="*{passportNumber}" required="required" class="rounded-lg">
-                    </div>
-                    <br>
-                    <div>
-                        <span th:text="#{telephone}">Telephone</span>
-                        <br>
-                        <input type="text" th:field="*{telephone}" required="required" class="rounded-lg">
-                    </div>
-                    <br>
+                <div th:id="form-login">
+
                     <div>
                         <span th:text="#{email}">Email</span>
                         <br>
-                        <input type="email" th:field="*{email}" required="required" class="rounded-lg">
+                        <label>
+                            <input type="email"  th:name="username" required="required"
+                                   class="rounded-lg">
+                        </label>
                     </div>
+
                     <br>
                     <div>
                         <span th:text="#{password}">Password</span>
                         <br>
-                        <input type="password" th:field="*{password}" required="required" class="rounded-lg">
+                        <label>
+                            <input type="password"  th:name="password" required="required"
+                                   class="rounded-lg">
+                        </label>
                     </div>
                     <br>
                     <div>
-                        <input type="submit" th:value="#{registration.user}" class="rounded-lg">
-                    </div>
-                    <div>
-                        <input type="reset" th:value="#{reset.form}" class="rounded-lg">
+                        <input type="submit" th:value="#{sign.in}" class="rounded-lg">
                     </div>
                 </div>
             </div>
         </section>
     </form>
-
 
     <div th:insert="~{fragments::footer}"></div>
 </div>

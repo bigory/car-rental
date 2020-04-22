@@ -21,16 +21,13 @@ public class BrandController {
 
     @RequestMapping(value = "/add-brand", method = RequestMethod.GET)
     public String addBrand(Model model) {
-        BrandDto brandDto = new BrandDto();
-        model.addAttribute("brandDto", brandDto);
+        model.addAttribute("brandDto", new BrandDto());
         return "add-brand";
     }
 
     @RequestMapping(value = "/brand", method = RequestMethod.POST)
     public String addBrands(BrandDto brandDto) {
-        String brand = brandDto.getBrand();
-        BrandCar brandCar = new BrandCar(brand);
-        brandCarService.save(brandCar);
+        brandCarService.save(new BrandCar(brandDto.getBrand()));
         return "brand";
     }
 

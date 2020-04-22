@@ -70,8 +70,8 @@ public class UserServiceServiceImpl implements UserServiceService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return Optional.of(email)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return  Optional.of(username)
                 .map(userServiceRepository::findByEmail)
                 .map(user -> User.builder()
                         .username(user.getEmail())

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ListCars</title>
+    <title>AdditionalServices</title>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,38 +18,32 @@
 
         <section th:id="section">
             <div th:id="section-block">
-                <span th:text="#{list.car}"></span><br>
+                <span th:text="#{list.additional.service}"></span><br>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">№</th>
-                        <th scope="col" th:text="#{car.brand}"></th>
-                        <th scope="col" th:text="#{car.model}"></th>
-                        <th scope="col" th:text="#{car.yearOfIssue}"></th>
-                        <th scope="col" th:text="#{car.transmissions}"></th>
-                        <th scope="col" th:text="#{car.costRentalOfDay}"></th>
+                        <th scope="col" th:text="#{additional.service.service}"></th>
+                        <th scope="col" th:text="#{additional.service.cost}"></th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:each="car,iterStat:${pageCars}">
+                    <tr th:each="service,iterStat:${additionalServicesPage}">
                         <th scope="row" th:text="${iterStat.count}"></th>
-                        <td th:text="${car.brandCar.brand}"></td>
-                        <td th:text="${car.model}"></td>
-                        <td th:text="${car.yearOfIssue}"></td>
-                        <td th:text="${car.transmission}"></td>
-                        <td th:text="${car.costRentalOfDay}"></td>
+                        <td th:text="${service.services}"></td>
+                        <td th:text="${service.cost}"></td>
                     </tr>
                     </tbody>
                 </table>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item d-flex justify-content-center">
-                            <div th:if="${pageCars.totalPages > 0}"
+                            <div th:if="${additionalServicesPage.totalPages > 0}"
                                  th:each="pageNumber:${pageNumbers}">
-                                <a class="page-link" th:href="@{/cars(size=${pageCars.size}, page=${pageNumber})}"
+                                <a class="page-link" th:href="@{/additional-services(size=${additionalServicesPage.size}, page=${pageNumber})}"
                                    th:text="${pageNumber}"
-                                   th:class="${pageNumber==pageCars.number+1}?active"></a>
+                                   th:class="${pageNumber==additionalServicesPage.number+1}?active"></a>
                             </div>
                         </li>
                     </ul>
