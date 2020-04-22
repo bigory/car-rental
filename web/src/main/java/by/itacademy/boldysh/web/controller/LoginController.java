@@ -4,17 +4,14 @@ import by.itacademy.boldysh.service.interfaces.UserServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@Secured({"ROLE_ADMIN", "ROLE_USER"})
 public class LoginController {
-
-    @Autowired
-    private UserServiceService userServiceService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public void showLoginPage() {
@@ -25,7 +22,7 @@ public class LoginController {
         return "admin-page";
     }
 
-    @GetMapping("/login-error")
+    @RequestMapping(value = "/login-error", method = RequestMethod.GET)
     public String showLoginErrorPage() {
         return "login-error";
     }

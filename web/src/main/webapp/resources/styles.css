@@ -160,4 +160,9 @@ footer {
     text-align: center;
 }
 
+#credentials {
+    color: red;
+    size: 20px;
+}
+
 

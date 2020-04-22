@@ -61,7 +61,7 @@ public class UserServiceServiceImplTest {
     public void findAll() {
         List<UserService> userServices = userServiceService.findAll();
         userServices.forEach(System.out::println);
-        assertEquals(3, userServices.size());
+        assertEquals(4, userServices.size());
     }
 
     @Test

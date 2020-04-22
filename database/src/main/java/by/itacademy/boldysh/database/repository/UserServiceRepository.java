@@ -4,6 +4,7 @@ import by.itacademy.boldysh.database.entity.UserService;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public interface UserServiceRepository extends PagingAndSortingRepository<UserService, Long> {
 
