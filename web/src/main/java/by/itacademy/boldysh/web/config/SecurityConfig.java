@@ -24,13 +24,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin-page").hasAuthority("ADMIN")
-                .antMatchers("/home","/registry").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers().hasAuthority("ADMIN")
+                .antMatchers("/home","/admin-page").hasAnyAuthority("USER", "ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login-error")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/admin-page")
                 .permitAll()
                 .and()
                 .logout()
