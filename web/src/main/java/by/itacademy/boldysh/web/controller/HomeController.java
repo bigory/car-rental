@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.web.controller;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -30,6 +29,11 @@ public class HomeController {
     @GetMapping("/rent-terms")
     public String showRentTerms() {
         return "rent-terms";
+    }
+
+    @GetMapping("/sign-out")
+    public String showLogOut() {
+        return "forward:home";
     }
 }
 

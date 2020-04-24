@@ -25,12 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers().hasAuthority("ADMIN")
-                .antMatchers("/home","/admin-page").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/home").hasAnyAuthority("USER", "ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login-error")
-                .defaultSuccessUrl("/admin-page")
                 .permitAll()
                 .and()
                 .logout()
