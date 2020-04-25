@@ -1,4 +1,4 @@
-<!DOCTYPE html>>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -18,38 +18,34 @@
 
         <section th:id="section">
             <div th:id="section-block">
-                <span th:text="#{list.user}"></span><br>
+                <span th:text="#{list.black.user}"></span><br>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">№</th>
                         <th scope="col" th:text="#{first.name}"></th>
                         <th scope="col" th:text="#{second.name}"></th>
-                        <th scope="col" th:text="#{passport.number}"></th>
-                        <th scope="col" th:text="#{telephone}"></th>
-                        <th scope="col" th:text="#{email}"></th>
+                        <th scope="col" th:text="#{black.list.cause}"></th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:each="user,iterStat:${pagesUsers}">
+                    <tr th:each="blackList,iterStat:${pageBlackListUser}">
                         <th scope="row" th:text="${iterStat.count}"></th>
-                        <td th:text="${user.firstName}"></td>
-                        <td th:text="${user.secondName}"></td>
-                        <td th:text="${user.passportNumber}"></td>
-                        <td th:text="${user.telephone}"></td>
-                        <td th:text="${user.email}"></td>
+                        <td th:text="${blackList.userService.firstName}"></td>
+                        <td th:text="${blackList.userService.secondName}"></td>
+                        <td th:text="${blackList.cause}"></td>
                     </tr>
                     </tbody>
                 </table>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item d-flex justify-content-center">
-                            <div th:if="${pagesUsers.totalPages > 0}"
+                            <div th:if="${pageBlackListUser.totalPages > 0}"
                                  th:each="pageNumber:${pageNumbers}">
-                                <a class="page-link" th:href="@{/users(size=${pagesUsers.size}, page=${pageNumber})}"
+                                <a class="page-link" th:href="@{/black-list-user(size=${pageBlackListUser.size}, page=${pageNumber})}"
                                    th:text="${pageNumber}"
-                                   th:class="${pageNumber==pagesUsers.number+1}?active"></a>
+                                   th:class="${pageNumber==pageBlackListUser.number+1}?active"></a>
                             </div>
                         </li>
                     </ul>
@@ -70,4 +66,4 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
-</html>l>
+</html>
