@@ -43,15 +43,16 @@
                 <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
                 <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
                 <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
+
                 <div sec:autorize="hasAnyRole('ROLE_ADMIN')">
-                    <li><a th:href="@{update-car}" th:text="#{update.car}"></a></li>
+                    <li><a th:href="@{add-cars}" th:text="#{add.car}"></a></li>
+                    <li><a th:href="@{list-car-update}" th:text="#{update.car}"></a></li>
                     <li><a th:href="@{delete-car}" th:text="#{delete.car}"></a></li>
                     <li><a th:href="@{users}" th:text="#{users.service}"></a></li>
                     <li><a th:href="@{black-list-user}" th:text="#{user.black.list}"></a></li>
                     <li><a th:href="@{orders}" th:text="#{orders.user}"></a></li>
                     <li><a th:href="@{update-orders}" th:text="#{update.orders}"></a></li>
                     <li><a th:href="@{delete-order}" th:text="#{delete.order}"></a></li>
-                    <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
                 </div>
 
                 <div sec:autorize="hasAnyRole('ROLE_USER')">
@@ -61,7 +62,6 @@
                     <li><a th:href="@{orders}" th:text="#{orders.user}"></a></li>
                     <li><a th:href="@{update-orders}" th:text="#{update.orders}"></a></li>
                     <li><a th:href="@{delete-order}" th:text="#{delete.order}"></a></li>
-                    <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
                 </div>
                 <br>
                 <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>

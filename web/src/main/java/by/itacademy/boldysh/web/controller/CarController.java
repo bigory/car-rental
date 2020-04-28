@@ -12,6 +12,7 @@ import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -94,8 +95,7 @@ public class CarController {
         CarClass carClass = carDto.getClassCar();
         Integer costRentalOfDay = carDto.getCostRentalOfDay();
 
-        BrandCar brandCar = brandCarRepository.findByBrand(brand);
-        Car car = new Car(brandCar, modelCar, yearOfIssue, vinNumber, transmission, carClass, costRentalOfDay);
+        Car car = new Car(brandCarRepository.findByBrand(brand), modelCar, yearOfIssue, vinNumber, transmission, carClass, costRentalOfDay);
         carService.save(car);
         return "car";
     }
@@ -146,5 +146,18 @@ public class CarController {
             pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+    }
+
+    @RequestMapping(value = "/list-car-update", method = RequestMethod.GET)
+    public void getUpdateCar(Model model, Car car) {
+
+        model.addAttribute("car", car);
+        model.addAttribute("cars", carRepository.findAll());
+    }
+
+    @RequestMapping(value = "/list-car-update", method = RequestMethod.POST)
+    public String getCarUpdateCar(Model model) {
+
+        return "update-car";
     }
 }

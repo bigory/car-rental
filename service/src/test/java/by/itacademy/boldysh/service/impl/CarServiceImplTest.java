@@ -5,6 +5,7 @@ import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
+import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
@@ -38,6 +39,9 @@ public class CarServiceImplTest {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private BrandCarRepository brandCarRepository;
+
 
     @Before
     public void init() {
@@ -65,8 +69,12 @@ public class CarServiceImplTest {
                 .vinNumber("WADASDQQ123123".toUpperCase())
                 .yearOfIssue(2019)
                 .build();
+
+
         carService.save(car);
+        Car car1 = carRepository.findByVinNumber("WADASDQQ123123");
         System.out.println(car);
+        System.out.println(car1);
     }
 
     @Test

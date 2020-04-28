@@ -20,16 +20,16 @@ CREATE TABLE black_list
 (
     id      BIGSERIAL PRIMARY KEY,
     user_id BIGINT UNIQUE NOT NULL REFERENCES user_service (id),
-    cause   TEXT,
-    version INTEGER
+    cause   TEXT
+
 );
 
 
 CREATE TABLE brand_car
 (
     id      BIGSERIAL PRIMARY KEY,
-    brand   VARCHAR(256) UNIQUE NOT NULL,
-    version INTEGER
+    brand   VARCHAR(256) UNIQUE NOT NULL
+
 );
 
 CREATE TABLE car
@@ -63,7 +63,7 @@ CREATE TABLE order_rental_car
     date_finish_rental     DATE         NOT NULL,
     cost                   INTEGER      NOT NULL,
     status_order           VARCHAR(128) NOT NULL,
-    version                INTEGER
+
 );
 
 DROP TABLE user_service;

@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Component
 @Entity
@@ -26,9 +25,6 @@ public class BlackListUserService extends BaseEntity<Long> {
     @JoinColumn(name = "user_id")
     private UserService userService;
 
-    @Version
-    @Column(name = "version")
-    private Long version;
 
     public BlackListUserService(String cause, UserService userService) {
         this.cause = cause;

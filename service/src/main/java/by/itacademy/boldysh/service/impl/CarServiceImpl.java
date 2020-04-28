@@ -29,6 +29,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
+@Cacheable("cars")
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
@@ -44,7 +45,6 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    @Cacheable("allBrandCar")
     public List<Car> findAll() {
         return StreamSupport.stream(carRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }

@@ -40,10 +40,6 @@ public class OrderRentalCar extends BaseEntity<Long> {
     @JoinColumn(name = "additional_services_id")
     private AdditionalService additionalService;
 
-    @Version
-    @Column(name = "version")
-    private Long version;
-
     public OrderRentalCar(Long userServiceId, Long carId, LocalDate dateStartRental, LocalDate dateFinishRental, Integer cost, StatusOrder statusOrder, AdditionalService additionalService) {
         this.userServiceId = userServiceId;
         this.carId = carId;

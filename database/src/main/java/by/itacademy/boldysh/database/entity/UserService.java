@@ -53,10 +53,6 @@ public class UserService extends BaseEntity<Long> {
             inverseJoinColumns = @JoinColumn(name = "car_id"))
     private List<Car> cars = new ArrayList<>();
 
-    @Version
-    @Column(name = "version")
-    private Long version;
-
     public UserService(String firstName, String secondName, String passportNumber,
                        String telephone, String email, String password, String role) {
         this.firstName = firstName;
