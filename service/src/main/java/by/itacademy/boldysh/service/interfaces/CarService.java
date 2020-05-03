@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface CarService extends BaseMethod<Long, Car> {
 
-    void updateCar(String vinNumber, Integer costRentalOfDay);
+    void updateCar(Car car, Integer costRentalOfDay);
 
     Page<Car> findByFilterAndPaginationCars(FilterDto filterDto, Pageable page);
 }

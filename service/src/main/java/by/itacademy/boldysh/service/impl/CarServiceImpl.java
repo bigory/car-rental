@@ -50,8 +50,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(String vinNumber, Integer costRentalOfDay) {
-        Car car = carRepository.findByVinNumber(vinNumber);
+    public void updateCar(Car car, Integer costRentalOfDay) {
         car.setCostRentalOfDay(costRentalOfDay);
         carRepository.save(car);
     }

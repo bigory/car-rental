@@ -30,4 +30,9 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     @Transactional
     @Query("delete from Car c where c.vinNumber=?1")
     void deleteByVinNumber(String vinNumber);
+
+    @Modifying
+    @Transactional
+    @Query("update Car c set c.costRentalOfDay=?1 where c.id=?2")
+    void update(Integer costRentalOfDay, Long id);
 }

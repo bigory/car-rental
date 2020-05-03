@@ -15,29 +15,37 @@
         <div th:id="line-vertical"></div>
         <div th:id="line-vertiacal-wrapper"></div>
         <div th:insert="~{fragments::header}"></div>
-        <div th:insert="~{fragments::aside}">
-        </div>
+        <div th:insert="~{fragments::aside}"></div>
 
-        <section th:id="section">
-            <div th:id="section-block">
-                <div th:id="form-add">
-                    <span th:text="#{car}"></span><br>
-                    <span th:text="#{car.brand}"></span> <span th:text="${carDto.brandCar}"></span><br>
-                    <span th:text="#{car.model}"> </span> <span th:text="${carDto.modelCar}"></span><br>
-                    <span th:text="#{car.vinNumber}"></span> <span th:text="${carDto.vinNumber}"></span><br>
-                    <span th:text="#{car.class}"></span> <span th:text="${carDto.classCar}"></span><br>
-                    <span th:text="#{car.yearOfIssue}">Year of issue</span> <span
-                        th:text="${carDto.yearOfIssue}"></span><br>
-                    <span th:text="#{car.costRentalOfDay}">Cost Rental Of Day</span> <span
-                        th:text="${carDto.costRentalOfDay}"></span>
+        <form th:action="@{/update-car(vinNumber=${carDto.getVinNumber()})}" th:object="${carDto}" method="post">
+            <section th:id="section">
+                <div th:id="section-block">
+                    <div th:id="form-add">
+                        <span th:text="#{car}"></span><br>
+                        <span th:text="#{car.brand}"></span> <span th:text="${carDto.getBrandCar()}"></span><br>
+                        <span th:text="#{car.model}"> </span> <span th:text="${carDto.getModelCar()}"></span><br>
+                        <span th:text="#{car.vinNumber}"></span> <span th:text="${carDto.getVinNumber()}"></span><br>
+                        <span th:text="#{car.yearOfIssue}"></span> <span
+                            th:text="${carDto.getYearOfIssue()}"></span><br>
+                        <span th:text="#{car.costRentalOfDay}"></span><span
+                            th:text="${carDto.getCostRentalOfDay()}"></span>
+                        <div>
+                            <span th:text="#{new.cost}"></span>
+                            <input type="text" th:field="*{costRentalOfDay}">
+                        </div>
+
+                        <div>
+                            <input type="submit" th:value="#{car.update}">
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </section>
+            </section>
+        </form>
 
         <div th:insert="~{fragments::footer}"></div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

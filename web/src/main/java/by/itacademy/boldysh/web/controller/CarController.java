@@ -2,7 +2,6 @@ package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.CarDto;
 import by.itacademy.boldysh.database.dto.FilterDto;
-import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
@@ -12,12 +11,12 @@ import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -150,14 +149,32 @@ public class CarController {
 
     @RequestMapping(value = "/list-car-update", method = RequestMethod.GET)
     public void getUpdateCar(Model model, Car car) {
-
         model.addAttribute("car", car);
         model.addAttribute("cars", carRepository.findAll());
     }
 
-    @RequestMapping(value = "/list-car-update", method = RequestMethod.POST)
-    public String getCarUpdateCar(Model model) {
+    @RequestMapping(value = "/update-car", method = RequestMethod.GET)
+    public void getPageParametrUpdateCar(Model model, CarDto carDto, @RequestParam(value = "id") Long id) {
+        Optional<Car> car = carRepository.findById(id);
+        carDto.setBrandCar(car.get().getBrandCar().getBrand());
+        carDto.setModelCar(car.get().getModel());
+        carDto.setVinNumber(car.get().getVinNumber());
+        carDto.setYearOfIssue(car.get().getYearOfIssue());
+        carDto.setCostRentalOfDay(car.get().getCostRentalOfDay());
+        model.addAttribute("carDto", carDto);
+    }
 
-        return "update-car";
+    @RequestMapping(value = "/update-car", method = RequestMethod.POST)
+    public String getCarUpdateCar(Model model, CarDto carDto, Integer costRentalOfDay, @RequestParam(value = "vinNumber") String vinNumber) {
+        Car car = carRepository.findByVinNumber(vinNumber);
+        carRepository.update(costRentalOfDay, car.getId());
+        carDto.setBrandCar(car.getBrandCar().getBrand());
+        carDto.setModelCar(car.getModel());
+        carDto.setVinNumber(car.getVinNumber());
+        carDto.setYearOfIssue(car.getYearOfIssue());
+        Car carUpdate = carRepository.findByVinNumber(vinNumber);
+        carDto.setCostRentalOfDay(carUpdate.getCostRentalOfDay());
+        model.addAttribute("carDto", carDto);
+        return "car";
     }
 }

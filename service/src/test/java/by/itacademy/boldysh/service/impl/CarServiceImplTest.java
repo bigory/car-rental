@@ -80,7 +80,7 @@ public class CarServiceImplTest {
     @Test
     public void updateCar() {
         Integer startCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
-        carService.updateCar("DSDS233232", 60);
+        carService.updateCar(carRepository.findByVinNumber("DSDS233232"), 60);
         Integer finishCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
         assertTrue(startCost < finishCost);
     }
