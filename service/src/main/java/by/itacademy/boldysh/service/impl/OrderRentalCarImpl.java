@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.service.impl;
 
-import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
 import by.itacademy.boldysh.service.interfaces.OrderRentalCarService;

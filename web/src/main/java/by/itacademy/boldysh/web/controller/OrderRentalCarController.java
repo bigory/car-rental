@@ -1,8 +1,6 @@
 package by.itacademy.boldysh.web.controller;
 
-import by.itacademy.boldysh.database.dto.CarDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
-import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
@@ -16,10 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -75,6 +70,7 @@ public class OrderRentalCarController {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
         orderRentalCarDto.setFirstName(String.valueOf(userServiceRepository.findById(orderRentalCar.get().getUserServiceId()).get().getFirstName()));
         orderRentalCarDto.setSecondName(String.valueOf(userServiceRepository.findById(orderRentalCar.get().getUserServiceId()).get().getSecondName()));
+        orderRentalCarDto.setPassportNumber(String.valueOf(userServiceRepository.findById(orderRentalCar.get().getUserServiceId()).get().getPassportNumber()));
         orderRentalCarDto.setBrandCar(carRepository.findById(orderRentalCar.get().getCarId()).get().getBrandCar().getBrand());
         orderRentalCarDto.setModelCar(carRepository.findById(orderRentalCar.get().getCarId()).get().getModel());
         orderRentalCarDto.setVinNumber(carRepository.findById(orderRentalCar.get().getCarId()).get().getVinNumber());
