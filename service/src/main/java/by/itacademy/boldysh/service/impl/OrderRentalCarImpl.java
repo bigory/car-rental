@@ -1,7 +1,12 @@
 package by.itacademy.boldysh.service.impl;
 
+import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
+import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
+import by.itacademy.boldysh.database.entity.UserService;
+import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
+import by.itacademy.boldysh.database.repository.UserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.OrderRentalCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,8 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -22,6 +29,12 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
 
     @Autowired
     OrderCarRentalCarRepository orderCarRentalCarRepository;
+
+    @Autowired
+    CarRepository carRepository;
+
+    @Autowired
+    UserServiceRepository userServiceRepository;
 
     @Override
     public void save(OrderRentalCar orderRentalCar) {
@@ -38,19 +51,51 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
     }
 
     @Override
-    public Page<OrderRentalCar> findByPaginated(Pageable pageable, List<OrderRentalCar> orderRentalCars) {
+    public Page<OrderRentalCar> findByPaginated(Pageable pageable, List<OrderRentalCar> entities) {
+        return null;
+    }
+
+    @Override
+    public Page<OrderRentalCarDto> paginationOrdersRentalCar(Pageable pageable, List<OrderRentalCar> orderRentalCars) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<OrderRentalCar> orderRentalCarsList;
 
-        if (orderRentalCars.size() < startItem) {
-            orderRentalCarsList = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, orderRentalCars.size());
-            orderRentalCarsList = orderRentalCars.subList(startItem, toIndex);
+        List<OrderRentalCarDto> orderRentalCarDtos = new ArrayList<OrderRentalCarDto>();
+
+        for (int i = 0; i < orderRentalCars.size(); i++) {
+            Optional<Car> car = carRepository.findById(orderRentalCars.get(i).getCarId());
+            Optional<UserService> userService = userServiceRepository.findById(orderRentalCars.get(i).getUserServiceId());
+
+            OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
+                    .id(orderRentalCars.get(i).getId())
+                    .brandCar(car.get().getBrandCar().getBrand())
+                    .modelCar(car.get().getModel())
+                    .vinNumber(car.get().getVinNumber())
+                    .costCar(car.get().getCostRentalOfDay())
+                    .firstName(userService.get().getFirstName())
+                    .secondName(userService.get().getSecondName())
+                    .passportNumber(userService.get().getPassportNumber())
+                    .additionalService(orderRentalCars.get(i).getAdditionalService())
+                    .costAdditionalService(orderRentalCars.get(i).getAdditionalService().getCost())
+                    .startRentalCar(orderRentalCars.get(i).getDateStartRental())
+                    .finishRentalCar(orderRentalCars.get(i).getDateFinishRental())
+                    .costOrder(car.get().getCostRentalOfDay() + orderRentalCars.get(i).getAdditionalService().getCost())
+                    .statusOrder(orderRentalCars.get(i).getStatusOrder())
+                    .build();
+            orderRentalCarDtos.add(orderRentalCarDto);
         }
-        Page<OrderRentalCar> orderRentalCarPage = new PageImpl<OrderRentalCar>(orderRentalCarsList, PageRequest.of(currentPage, pageSize), orderRentalCars.size());
+
+        List<OrderRentalCarDto> orderRentalCarDtoList;
+
+        if (orderRentalCarDtos.size() < startItem) {
+            orderRentalCarDtoList = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, orderRentalCarDtos.size());
+            orderRentalCarDtoList = orderRentalCarDtos.subList(startItem, toIndex);
+        }
+        Page<OrderRentalCarDto> orderRentalCarPage = new PageImpl<OrderRentalCarDto>(orderRentalCarDtoList, PageRequest.of(currentPage, pageSize), orderRentalCarDtos.size());
+
         return orderRentalCarPage;
     }
 }

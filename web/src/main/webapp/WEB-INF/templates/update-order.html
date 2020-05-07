@@ -17,28 +17,46 @@
         <div th:insert="~{fragments::header}"></div>
         <div th:insert="~{fragments::aside}"></div>
 
-        <form th:action="@{/update-order}" th:object="${orderRentalCar}" method="post">
+        <form th:action="@{/update-order(id=${orderRentalCarDto.getId()})}" th:object="${orderRentalCarDto}"
+              method="post">
             <section th:id="section">
                 <div th:id="section-block">
                     <div th:id="form-add">
                         <span th:text="#{order}"></span><br>
-                        <span th:text="#{first.name}"></span> <span th:text="${orderRentalCarDto.getFirstName()}"></span><br>
-                        <span th:text="#{second.name}"></span> <span th:text="${orderRentalCarDto.getSecondName()}"></span><br>
-                        <span th:text="#{passport.number}"></span> <span th:text="${orderRentalCarDto.getPassportNumber()}"></span><br>
-                        <span th:text="#{car.brand}"></span> <span th:text="${orderRentalCarDto.getBrandCar()}"></span><br>
-                        <span th:text="#{car.model}"></span> <span th:text="${orderRentalCarDto.getModelCar()}"></span><br>
-                        <span th:text="#{car.vinNumber}"></span> <span th:text="${orderRentalCarDto.getVinNumber()}"></span><br>
-                        <span th:text="#{car.costRentalOfDay}"></span> <span th:text="${orderRentalCarDto.getCostCar()}"></span><br>
-                        <span th:text="#{additional.service.service}"></span> <span th:text="${orderRentalCarDto.getAdditionalService().getServices()}"></span><br>
-                        <span th:text="#{additional.service.cost}"></span> <span th:text="${orderRentalCarDto.getAdditionalService().getCost()}"></span><br>
-                        <span th:text="#{order.dateStartRental}"></span> <span th:text="${orderRentalCarDto.getStartRentalCar()}"></span><br>
-                        <span th:text="#{order.dateFinishRental}"></span> <span th:text="${orderRentalCarDto.getFinishRentalCar()}"></span><br>
-                        <span th:text="#{order.cost}"></span> <span th:text="${orderRentalCarDto.getCostCar()+orderRentalCarDto.getCostAdditionalService()}"></span><br>
-                        <span th:text="#{order.status}"></span> <span th:text="${orderRentalCarDto.getStatusOrder()}"></span><br>
+                        <span th:text="#{first.name}"></span> <span
+                            th:text="${orderRentalCarDto.getFirstName()}"></span><br>
+                        <span th:text="#{second.name}"></span> <span
+                            th:text="${orderRentalCarDto.getSecondName()}"></span><br>
+                        <span th:text="#{passport.number}"></span> <span
+                            th:text="${orderRentalCarDto.getPassportNumber()}"></span><br>
+                        <span th:text="#{car.brand}"></span> <span
+                            th:text="${orderRentalCarDto.getBrandCar()}"></span><br>
+                        <span th:text="#{car.model}"></span> <span
+                            th:text="${orderRentalCarDto.getModelCar()}"></span><br>
+                        <span th:text="#{car.vinNumber}"></span> <span
+                            th:text="${orderRentalCarDto.getVinNumber()}"></span><br>
+                        <span th:text="#{car.costRentalOfDay}"></span> <span
+                            th:text="${orderRentalCarDto.getCostCar()}"></span><br>
+                        <span th:text="#{additional.service.service}"></span> <span
+                            th:text="${orderRentalCarDto.getAdditionalService().getServices()}"></span><br>
+                        <span th:text="#{additional.service.cost}"></span> <span
+                            th:text="${orderRentalCarDto.getAdditionalService().getCost()}"></span><br>
+                        <span th:text="#{order.dateStartRental}"></span> <span
+                            th:text="${orderRentalCarDto.getStartRentalCar()}"></span><br>
+                        <span th:text="#{order.dateFinishRental}"></span> <span
+                            th:text="${orderRentalCarDto.getFinishRentalCar()}"></span><br>
+                        <span th:text="#{order.cost}"></span> <span
+                            th:text="${orderRentalCarDto.getCostCar()+orderRentalCarDto.getCostAdditionalService()}"></span><br>
+                        <span th:text="#{order.status}"></span> <span
+                            th:text="${orderRentalCarDto.getStatusOrder()}"></span><br>
 
                         <div>
                             <span th:text="#{order.new.status}"></span>
-                            <input type="text" th:field="*{statusOrder}">
+                            <select th:field="*{statusOrder}">
+                                <option th:each="status: ${statusOrder}"
+                                        th:value="${status}"
+                                        th:text="${status}"></option>
+                            </select>
                         </div>
 
                         <div>

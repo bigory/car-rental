@@ -1,8 +1,10 @@
 package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
+import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
+import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
@@ -14,7 +16,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +45,6 @@ public class OrderRentalCarController {
     @Autowired
     AdditionalServiceRepository additionalServiceRepository;
 
-
     @ModelAttribute
     public StatusOrder[] getStatusOrder() {
         return StatusOrder.values();
@@ -52,12 +56,12 @@ public class OrderRentalCarController {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(3);
 
-        Page<OrderRentalCar> pageOrdersRentalCar = orderRentalCarService.findByPaginated(PageRequest.of(currentPage - 1, pageSize),
+        Page<OrderRentalCarDto> pageOrdersRentalCarDto = orderRentalCarService.paginationOrdersRentalCar(PageRequest.of(currentPage - 1, pageSize),
                 orderRentalCarService.findAll());
 
-        model.addAttribute("pageOrdersRentalCar", pageOrdersRentalCar);
+        model.addAttribute("pageOrdersRentalCarDto", pageOrdersRentalCarDto);
 
-        int totalPages = pageOrdersRentalCar.getTotalPages();
+        int totalPages = pageOrdersRentalCarDto.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
@@ -66,22 +70,37 @@ public class OrderRentalCarController {
     }
 
     @RequestMapping(value = "/update-order", method = RequestMethod.GET)
-    public void getPageParametrUpdateCar(Model model, OrderRentalCarDto orderRentalCarDto, @RequestParam(value = "id") Long id) {
+    public void getPageParametrUpdateCar(Model model, @RequestParam(value = "id") Long id) {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
-        orderRentalCarDto.setFirstName(String.valueOf(userServiceRepository.findById(orderRentalCar.get().getUserServiceId()).get().getFirstName()));
-        orderRentalCarDto.setSecondName(String.valueOf(userServiceRepository.findById(orderRentalCar.get().getUserServiceId()).get().getSecondName()));
-        orderRentalCarDto.setPassportNumber(String.valueOf(userServiceRepository.findById(orderRentalCar.get().getUserServiceId()).get().getPassportNumber()));
-        orderRentalCarDto.setBrandCar(carRepository.findById(orderRentalCar.get().getCarId()).get().getBrandCar().getBrand());
-        orderRentalCarDto.setModelCar(carRepository.findById(orderRentalCar.get().getCarId()).get().getModel());
-        orderRentalCarDto.setVinNumber(carRepository.findById(orderRentalCar.get().getCarId()).get().getVinNumber());
-        orderRentalCarDto.setCostCar(carRepository.findById(orderRentalCar.get().getCarId()).get().getCostRentalOfDay());
-        orderRentalCarDto.setAdditionalService(additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()));
-        orderRentalCarDto.setCostAdditionalService(additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()).getCost());
-        orderRentalCarDto.setStartRentalCar(orderRentalCar.get().getDateStartRental());
-        orderRentalCarDto.setFinishRentalCar(orderRentalCar.get().getDateFinishRental());
-        orderRentalCarDto.setCostOrder(orderRentalCar.get().getCost());
-        orderRentalCarDto.setStatusOrder(orderRentalCar.get().getStatusOrder());
+        Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.get().getUserServiceId());
+        Optional<Car> car = carRepository.findById(orderRentalCar.get().getCarId());
+        OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
+                .id(orderRentalCar.get().getId())
+                .firstName(String.valueOf(userService.get().getFirstName()))
+                .secondName(String.valueOf(userService.get().getSecondName()))
+                .passportNumber(String.valueOf(userService.get().getPassportNumber()))
+                .brandCar(car.get().getBrandCar().getBrand())
+                .modelCar(car.get().getModel())
+                .vinNumber(car.get().getVinNumber())
+                .costCar(car.get().getCostRentalOfDay())
+                .additionalService(additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()))
+                .costAdditionalService(additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()).getCost())
+                .startRentalCar(orderRentalCar.get().getDateStartRental())
+                .finishRentalCar(orderRentalCar.get().getDateFinishRental())
+                .costOrder(car.get().getCostRentalOfDay() +
+                        additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()).getCost())
+                .statusOrder(orderRentalCar.get().getStatusOrder())
+                .build();
 
-        model.addAttribute("orderRentalCar", orderRentalCar);
+        model.addAttribute("statusOrder", StatusOrder.values());
+        model.addAttribute("orderRentalCarDto", orderRentalCarDto);
+    }
+
+    @RequestMapping(value = "/update-order", method = RequestMethod.POST)
+    public String getUpdateOrderRentalCar(Model model, @RequestParam(value = "id") Long id, StatusOrder
+            statusOrder, OrderRentalCarDto orderRentalCarDto) {
+        orderCarRentalCarRepository.update(statusOrder, id);
+        model.addAttribute("orderRentalCarDto", orderRentalCarDto);
+        return "order";
     }
 }

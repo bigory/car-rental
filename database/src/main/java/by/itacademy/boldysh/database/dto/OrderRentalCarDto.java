@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 @Data
@@ -17,6 +16,7 @@ import java.time.LocalDate;
 @Builder
 public class OrderRentalCarDto {
 
+    Long id;
     String firstName;
     String secondName;
     String passportNumber;
