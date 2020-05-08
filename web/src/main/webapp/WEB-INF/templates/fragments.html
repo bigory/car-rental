@@ -54,13 +54,13 @@
                     <li><a th:href="@{delete-order}" th:text="#{delete.order}"></a></li>
                 </div>
 
-                <div sec:autorize="hasAnyRole('ROLE_USER')">
+                <!--<div sec:autorize="hasAnyRole('ROLE_USER')">
                     <li><a th:href="@{new-oreder}" th:text="#{new.order}"></a></li>
                     <li><a th:href="@{users}" th:text="#{users.service}"></a></li>
                     <li><a th:href="@{black-list}" th:text="#{user.black.list}"></a></li>
                     <li><a th:href="@{orders}" th:text="#{orders.user}"></a></li>
                     <li><a th:href="@{delete-order}" th:text="#{delete.order}"></a></li>
-                </div>
+                </div>-->
                 <br>
                 <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>
                 <li><a th:href="@{registry}" th:text="#{registry.user}"></a></li>

@@ -4,7 +4,6 @@ import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
-import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
@@ -72,35 +71,31 @@ public class OrderRentalCarController {
     @RequestMapping(value = "/update-order", method = RequestMethod.GET)
     public void getPageParametrUpdateCar(Model model, @RequestParam(value = "id") Long id) {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
-        Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.get().getUserServiceId());
-        Optional<Car> car = carRepository.findById(orderRentalCar.get().getCarId());
-        OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
-                .id(orderRentalCar.get().getId())
-                .firstName(String.valueOf(userService.get().getFirstName()))
-                .secondName(String.valueOf(userService.get().getSecondName()))
-                .passportNumber(String.valueOf(userService.get().getPassportNumber()))
-                .brandCar(car.get().getBrandCar().getBrand())
-                .modelCar(car.get().getModel())
-                .vinNumber(car.get().getVinNumber())
-                .costCar(car.get().getCostRentalOfDay())
-                .additionalService(additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()))
-                .costAdditionalService(additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()).getCost())
-                .startRentalCar(orderRentalCar.get().getDateStartRental())
-                .finishRentalCar(orderRentalCar.get().getDateFinishRental())
-                .costOrder(car.get().getCostRentalOfDay() +
-                        additionalServiceRepository.findByServices(orderRentalCar.get().getAdditionalService().getServices()).getCost())
-                .statusOrder(orderRentalCar.get().getStatusOrder())
-                .build();
-
+        OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderRentalCar, id);
         model.addAttribute("statusOrder", StatusOrder.values());
         model.addAttribute("orderRentalCarDto", orderRentalCarDto);
     }
 
     @RequestMapping(value = "/update-order", method = RequestMethod.POST)
     public String getUpdateOrderRentalCar(Model model, @RequestParam(value = "id") Long id, StatusOrder
-            statusOrder, OrderRentalCarDto orderRentalCarDto) {
+            statusOrder) {
         orderCarRentalCarRepository.update(statusOrder, id);
+        OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderCarRentalCarRepository.findById(id), id);
         model.addAttribute("orderRentalCarDto", orderRentalCarDto);
+        return "order";
+    }
+
+    @RequestMapping(value = "/delete-order", method = RequestMethod.GET)
+    public String getPageDeleteCar(Model model) {
+        OrderRentalCarDto orderRentalCarDto = new OrderRentalCarDto();
+        model.addAttribute("orderRentalCarDto", orderRentalCarDto);
+        return "delete-car";
+    }
+
+    @RequestMapping(value = "/delete-order", method = RequestMethod.POST)
+    public String deleteCar(OrderRentalCarDto  orderRentalCarDto) {
+        Car car = carRepository.findByVinNumber(orderRentalCarDto.getVinNumber());
+        orderRentalCarDto.setBrandCar(car.getBrandCar().getBrand());
         return "order";
     }
 }

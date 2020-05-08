@@ -1,6 +1,7 @@
 package by.itacademy.boldysh.service.impl;
 
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
+import by.itacademy.boldysh.database.entity.AdditionalService;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.UserService;
@@ -97,5 +98,32 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
         Page<OrderRentalCarDto> orderRentalCarPage = new PageImpl<OrderRentalCarDto>(orderRentalCarDtoList, PageRequest.of(currentPage, pageSize), orderRentalCarDtos.size());
 
         return orderRentalCarPage;
+    }
+
+    @Override
+    public OrderRentalCarDto conversionOrderRentalCar(Optional<OrderRentalCar> orderRentalCar, Long id) {
+        Optional<Car> car = carRepository.findById(orderRentalCar.get().getCarId());
+        Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.get().getUserServiceId());
+
+        OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
+                .id(orderRentalCar.get().getId())
+                .firstName(userService.get().getFirstName())
+                .secondName(userService.get().getSecondName())
+                .passportNumber(userService.get().getPassportNumber())
+                .brandCar(car.get().getBrandCar().getBrand())
+                .modelCar(car.get().getModel())
+                .vinNumber(car.get().getVinNumber())
+                .costCar(car.get().getCostRentalOfDay())
+                .additionalService(AdditionalService.builder()
+                        .services(orderRentalCar.get().getAdditionalService().getServices())
+                        .build())
+                .costAdditionalService(orderRentalCar.get().getAdditionalService().getCost())
+                .startRentalCar(orderRentalCar.get().getDateStartRental())
+                .finishRentalCar(orderRentalCar.get().getDateFinishRental())
+                .costOrder(orderRentalCar.get().getCost())
+                .statusOrder(orderRentalCar.get().getStatusOrder())
+                .build();
+
+        return orderRentalCarDto;
     }
 }
