@@ -81,7 +81,7 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
                     .costAdditionalService(orderRentalCars.get(i).getAdditionalService().getCost())
                     .startRentalCar(orderRentalCars.get(i).getDateStartRental())
                     .finishRentalCar(orderRentalCars.get(i).getDateFinishRental())
-                    .costOrder(car.get().getCostRentalOfDay() + orderRentalCars.get(i).getAdditionalService().getCost())
+                    .costOrder(car.get().getCostRentalOfDay().add(orderRentalCars.get(i).getAdditionalService().getCost()))
                     .statusOrder(orderRentalCars.get(i).getStatusOrder())
                     .build();
             orderRentalCarDtos.add(orderRentalCarDto);

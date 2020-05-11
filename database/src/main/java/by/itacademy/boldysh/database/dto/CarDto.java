@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 
 @Data
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class CarDto {
     private String brandCar;
     private String vinNumber;
     private Integer yearOfIssue;
-    private Integer costRentalOfDay;
+    private BigDecimal costRentalOfDay;
     private Transmission transmission;
     private CarClass classCar;
 

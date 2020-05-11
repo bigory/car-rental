@@ -7,16 +7,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class FilterDto {
 
-    String brandCar;
-    String modelCar;
-    CarClass classCar;
-    Transmission transmission;
-    Integer yearOfIssue;
-    Integer costRentalOfDay;
+    private String brandCar;
+    private String modelCar;
+    private CarClass classCar;
+    private Transmission transmission;
+    private Integer yearOfIssue;
+    private BigDecimal costRentalOfDay;
 }

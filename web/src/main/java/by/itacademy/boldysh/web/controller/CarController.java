@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -92,7 +93,7 @@ public class CarController {
         String vinNumber = carDto.getVinNumber();
         Transmission transmission = carDto.getTransmission();
         CarClass carClass = carDto.getClassCar();
-        Integer costRentalOfDay = carDto.getCostRentalOfDay();
+        BigDecimal costRentalOfDay = carDto.getCostRentalOfDay();
 
         Car car = new Car(brandCarRepository.findByBrand(brand), modelCar, yearOfIssue, vinNumber, transmission, carClass, costRentalOfDay);
         carService.save(car);
@@ -165,7 +166,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/update-car", method = RequestMethod.POST)
-    public String getCarUpdateCar(Model model, CarDto carDto, Integer costRentalOfDay, @RequestParam(value = "vinNumber") String vinNumber) {
+    public String getCarUpdateCar(Model model, CarDto carDto, BigDecimal costRentalOfDay, @RequestParam(value = "vinNumber") String vinNumber) {
         Car car = carRepository.findByVinNumber(vinNumber);
         carRepository.update(costRentalOfDay, car.getId());
         carDto.setBrandCar(car.getBrandCar().getBrand());

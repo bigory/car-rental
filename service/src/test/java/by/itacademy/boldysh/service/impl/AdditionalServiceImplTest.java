@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -46,7 +47,7 @@ public class AdditionalServiceImplTest {
     public void save() {
         additionalServiceService.save(AdditionalService.builder()
                 .services(Services.CHARGER)
-                .cost(20)
+                .cost(BigDecimal.valueOf(20))
                 .build());
         AdditionalService additionalServiceSaves = additionalServiceRepository.findByServices(Services.CHARGER);
         System.out.println(additionalServiceSaves);
@@ -69,10 +70,10 @@ public class AdditionalServiceImplTest {
 
     @Test
     public void updateAdditionalService() {
-        Integer oldCost = additionalServiceRepository.findByServices(Services.NAVIGATOR).getCost();
-        additionalServiceService.updateAdditionalService(Services.NAVIGATOR, 50);
-        Integer newCost = additionalServiceRepository.findByServices(Services.NAVIGATOR).getCost();
-        assertTrue(oldCost < newCost);
+        BigDecimal oldCost = additionalServiceRepository.findByServices(Services.NAVIGATOR).getCost();
+        additionalServiceService.updateAdditionalService(Services.NAVIGATOR, BigDecimal.valueOf(50));
+        BigDecimal newCost = additionalServiceRepository.findByServices(Services.NAVIGATOR).getCost();
+        assertTrue(oldCost.equals(newCost));
 
     }
 }

@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -23,12 +24,11 @@ public class OrderRentalCarDto {
     String brandCar;
     String modelCar;
     String vinNumber;
-    Integer costCar;
+    BigDecimal costCar;
     AdditionalService additionalService;
-    Integer costAdditionalService;
+    BigDecimal costAdditionalService;
     LocalDate startRentalCar;
     LocalDate finishRentalCar;
-    Integer costOrder;
+    BigDecimal costOrder;
     StatusOrder statusOrder;
-
 }

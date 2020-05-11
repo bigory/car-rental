@@ -1,7 +1,6 @@
 package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
-import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
@@ -86,16 +85,17 @@ public class OrderRentalCarController {
     }
 
     @RequestMapping(value = "/delete-order", method = RequestMethod.GET)
-    public String getPageDeleteCar(Model model) {
-        OrderRentalCarDto orderRentalCarDto = new OrderRentalCarDto();
+    public String getPageDeleteCar(Model model, @RequestParam(value = "id") Long id) {
+        Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
+        OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderRentalCar, id);
         model.addAttribute("orderRentalCarDto", orderRentalCarDto);
-        return "delete-car";
+
+        return "delete-order";
     }
 
     @RequestMapping(value = "/delete-order", method = RequestMethod.POST)
-    public String deleteCar(OrderRentalCarDto  orderRentalCarDto) {
-        Car car = carRepository.findByVinNumber(orderRentalCarDto.getVinNumber());
-        orderRentalCarDto.setBrandCar(car.getBrandCar().getBrand());
-        return "order";
+    public String deleteCar(@RequestParam(value = "id") Long id) {
+        orderCarRentalCarRepository.delete(orderCarRentalCarRepository.findById(id).get());
+        return "info-delete";
     }
 }

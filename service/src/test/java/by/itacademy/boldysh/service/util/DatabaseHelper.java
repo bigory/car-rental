@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Component
@@ -67,22 +68,22 @@ public class DatabaseHelper {
         entityManager.persist(brandCarVW);
         entityManager.persist(brandCarVolvo);
 
-        Car bmw = new Car(brandCarBMW, "750", 2019, "DSDS233232", Transmission.MACHINE, CarClass.STANDART, 30);
-        Car vw = new Car(brandCarVW, "Polo", 2019, "VFS211312213", Transmission.MECHANIC, CarClass.COMFORT, 20);
-        Car volvo = new Car(brandCarVolvo, "S80", 2017, "ZXS2312121", Transmission.MACHINE, CarClass.BUSINESS, 45);
+        Car bmw = new Car(brandCarBMW, "750", 2019, "DSDS233232", Transmission.MACHINE, CarClass.STANDART, BigDecimal.valueOf(30));
+        Car vw = new Car(brandCarVW, "Polo", 2019, "VFS211312213", Transmission.MECHANIC, CarClass.COMFORT, BigDecimal.valueOf(30));
+        Car volvo = new Car(brandCarVolvo, "S80", 2017, "ZXS2312121", Transmission.MACHINE, CarClass.BUSINESS, BigDecimal.valueOf(30));
         entityManager.persist(bmw);
         entityManager.persist(vw);
         entityManager.persist(volvo);
 
-        AdditionalService additionalServiceOne = new AdditionalService(Services.BABYCHAIR, 10);
-        AdditionalService additionalServiceTwo = new AdditionalService(Services.NAVIGATOR, 20);
+        AdditionalService additionalServiceOne = new AdditionalService(Services.BABYCHAIR, BigDecimal.valueOf(10));
+        AdditionalService additionalServiceTwo = new AdditionalService(Services.NAVIGATOR, BigDecimal.valueOf(20));
         entityManager.persist(additionalServiceOne);
         entityManager.persist(additionalServiceTwo);
 
         OrderRentalCar orderRentalCarOne = new OrderRentalCar(userOne.getId(), bmw.getId(), LocalDate.of(2019, 10, 10),
-                LocalDate.of(2019, 10, 20), 75, StatusOrder.ACCEPTED, additionalServiceOne);
+                LocalDate.of(2019, 10, 20), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
         OrderRentalCar orderRentalCarTwo = new OrderRentalCar(userTwo.getId(), volvo.getId(), LocalDate.of(2019, 10, 20),
-                LocalDate.of(2019, 10, 23), 75, StatusOrder.ACCEPTED, additionalServiceOne);
+                LocalDate.of(2019, 10, 23), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
         entityManager.persist(orderRentalCarOne);
         entityManager.persist(orderRentalCarTwo);
 

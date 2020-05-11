@@ -5,6 +5,7 @@ import by.itacademy.boldysh.database.entity.Services;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -12,6 +13,6 @@ public interface AdditionalServiceRepository extends PagingAndSortingRepository<
 
     AdditionalService findByServices(Services services);
 
-    List<AdditionalService> findByCost(Integer cost);
+    List<AdditionalService> findByCost(BigDecimal cost);
 
 }

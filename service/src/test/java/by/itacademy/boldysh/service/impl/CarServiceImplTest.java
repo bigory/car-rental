@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -65,7 +66,7 @@ public class CarServiceImplTest {
                 .carClass(CarClass.BUSINESS)
                 .model("540")
                 .transmission(Transmission.MACHINE)
-                .costRentalOfDay(50)
+                .costRentalOfDay(BigDecimal.valueOf(50))
                 .vinNumber("WADASDQQ123123".toUpperCase())
                 .yearOfIssue(2019)
                 .build();
@@ -79,10 +80,10 @@ public class CarServiceImplTest {
 
     @Test
     public void updateCar() {
-        Integer startCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
-        carService.updateCar(carRepository.findByVinNumber("DSDS233232"), 60);
-        Integer finishCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
-        assertTrue(startCost < finishCost);
+        BigDecimal startCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
+        carService.updateCar(carRepository.findByVinNumber("DSDS233232"), BigDecimal.valueOf(60));
+        BigDecimal finishCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
+        assertTrue(startCost.equals(finishCost));
     }
 
 

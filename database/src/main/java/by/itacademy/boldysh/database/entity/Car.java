@@ -11,6 +11,7 @@ import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Car extends BaseEntity<Long> {
     private CarClass carClass;
 
     @Column(name = "cost_rental_of_day")
-    private Integer costRentalOfDay;
+    private BigDecimal costRentalOfDay;
 
     @ManyToOne
     @JoinColumn(name = "brand_car_id")
@@ -60,7 +61,7 @@ public class Car extends BaseEntity<Long> {
     @Column(name = "version")
     private Long version;
 
-    public Car(BrandCar brandCar, String model, Integer yearOfIssue, String vinNumber, Transmission transmission, CarClass carClass, Integer costRentalOfDay) {
+    public Car(BrandCar brandCar, String model, Integer yearOfIssue, String vinNumber, Transmission transmission, CarClass carClass, BigDecimal costRentalOfDay) {
         this.model = model;
         this.yearOfIssue = yearOfIssue;
         this.vinNumber = vinNumber;

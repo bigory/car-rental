@@ -22,6 +22,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(Car car, Integer costRentalOfDay) {
+    public void updateCar(Car car, BigDecimal costRentalOfDay) {
         car.setCostRentalOfDay(costRentalOfDay);
         carRepository.save(car);
     }

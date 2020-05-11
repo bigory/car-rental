@@ -17,7 +17,7 @@
         <div th:insert="~{fragments::header}"></div>
         <div th:insert="~{fragments::aside}"></div>
 
-        <form th:action="@{/update-order(id=${orderRentalCarDto.getId()})}" th:object="${orderRentalCarDto}"
+        <form th:action="@{/delete-order(id=${orderRentalCarDto.getId()})}" th:object="${orderRentalCarDto}"
               method="post">
             <section th:id="section">
                 <div th:id="section-block">
@@ -51,16 +51,7 @@
                             th:text="${orderRentalCarDto.getStatusOrder()}"></span><br>
 
                         <div>
-                            <span th:text="#{order.new.status}"></span>
-                            <select th:field="*{statusOrder}">
-                                <option th:each="status: ${statusOrder}"
-                                        th:value="${status}"
-                                        th:text="${status}"></option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <input type="submit" th:value="#{order.edit}">
+                            <input type="submit" th:value="#{delete.order}">
                         </div>
                     </div>
 

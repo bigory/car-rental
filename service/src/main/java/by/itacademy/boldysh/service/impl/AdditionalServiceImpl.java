@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +67,7 @@ public class AdditionalServiceImpl implements AdditionalServiceService {
     }
 
     @Override
-    public void updateAdditionalService(Services additionalService, Integer cost) {
+    public void updateAdditionalService(Services additionalService, BigDecimal cost) {
         AdditionalService additionalServices = additionalServiceRepository.findByServices(additionalService);
         additionalServices.setCost(cost);
         additionalServiceRepository.save(additionalServices);

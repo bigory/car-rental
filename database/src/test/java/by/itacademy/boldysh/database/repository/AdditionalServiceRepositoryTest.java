@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
@@ -42,7 +43,7 @@ public class AdditionalServiceRepositoryTest {
 
     @Test
     public void findByCost() {
-        List<AdditionalService> services = additionalServiceRepository.findByCost(10);
+        List<AdditionalService> services = additionalServiceRepository.findByCost(BigDecimal.valueOf(10));
         assertNotNull(services);
     }
 }

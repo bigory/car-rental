@@ -9,6 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -21,7 +22,7 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     List<Car> findAllByBrandCarBrand(String brandCar);
 
     List<Car> findAllByBrandCarBrandAndCostRentalOfDayAndCarClassAndTransmission(String brandCar,
-                                                                                 Integer costRentalOfDay,
+                                                                                BigDecimal costRentalOfDay,
                                                                                  CarClass carClass, Transmission transmission);
 
     List<Car> findByOrderByCostRentalOfDayAsc();
@@ -34,5 +35,5 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     @Modifying
     @Transactional
     @Query("update Car c set c.costRentalOfDay=?1 where c.id=?2")
-    void update(Integer costRentalOfDay, Long id);
+    void update(BigDecimal costRentalOfDay, Long id);
 }

@@ -47,6 +47,7 @@
                         <td th:text="${order.getCostOrder()}"></td>
                         <td th:text="${order.getStatusOrder()}"></td>
                         <td><a th:href="@{/update-order(id=${order.getId()})}" th:text="#{order.edit}"></a></td>
+                        <td><a th:href="@{/delete-order(id=${order.getId()})}" th:text="#{delete.order}"></a></td>
                     </tr>
                     </tbody>
                 </table>

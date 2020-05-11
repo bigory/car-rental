@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class AdditionalService extends BaseEntity<Long> {
     private Services services;
 
     @Column(name = "cost")
-    private Integer cost;
+    private BigDecimal cost;
 
     @OneToMany(mappedBy = "additionalService")
     private List<OrderRentalCar> orderRentalCars = new ArrayList<>();
@@ -39,7 +40,7 @@ public class AdditionalService extends BaseEntity<Long> {
     @Column(name = "version")
     private Long version;
 
-    public AdditionalService(Services services, Integer cost) {
+    public AdditionalService(Services services, BigDecimal cost) {
         this.services = services;
         this.cost = cost;
     }
