@@ -17,10 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -73,7 +70,7 @@ public class AdditionalServiceImplTest {
         BigDecimal oldCost = additionalServiceRepository.findByServices(Services.NAVIGATOR).getCost();
         additionalServiceService.updateAdditionalService(Services.NAVIGATOR, BigDecimal.valueOf(50));
         BigDecimal newCost = additionalServiceRepository.findByServices(Services.NAVIGATOR).getCost();
-        assertTrue(oldCost.equals(newCost));
+        assertFalse(oldCost.equals(newCost));
 
     }
 }

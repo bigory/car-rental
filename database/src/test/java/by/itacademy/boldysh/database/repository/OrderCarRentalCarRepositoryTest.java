@@ -2,8 +2,6 @@ package by.itacademy.boldysh.database.repository;
 
 import by.itacademy.boldysh.database.config.TestConfiguration;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
-import by.itacademy.boldysh.database.entity.StatusOrder;
-import by.itacademy.boldysh.database.entity.Transmission;
 import by.itacademy.boldysh.database.util.DatabaseHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
@@ -30,16 +28,12 @@ public class OrderCarRentalCarRepositoryTest {
     @Autowired
     private OrderCarRentalCarRepository orderCarRentalCarRepository;
 
-    public StatusOrder[] getStatusOrder() {
-        return StatusOrder.values();
-    }
 
     @Before
     public void init() {
         databaseHelper.cleanDatabase();
         databaseHelper.prepareData();
     }
-
 
     @Test
     public void findByDateStartRentalAndDateFinishRental() {
@@ -50,17 +44,11 @@ public class OrderCarRentalCarRepositoryTest {
     }
 
     @Test
-    public void updateOrderRentalCar() {
-        orderCarRentalCarRepository.update(StatusOrder.EXPECTATION, 1L);
-        OrderRentalCar orderRentalCar = orderCarRentalCarRepository.findByCarIdAndUserServiceId(1L, 1L);
-        assertEquals(orderRentalCar.getStatusOrder(), StatusOrder.EXPECTATION);
-    }
-
-    @Test
     public void findByCarIdAndUserServiceId() {
         OrderRentalCar orderRentalCar = orderCarRentalCarRepository.findByCarIdAndUserServiceId(1L, 1L);
-        assertNotNull(orderRentalCar);
+        assertNull(orderRentalCar);
     }
+
     @Test
     public void findById() {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(1L);

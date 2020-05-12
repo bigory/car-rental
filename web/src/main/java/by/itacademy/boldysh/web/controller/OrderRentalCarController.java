@@ -1,6 +1,9 @@
 package by.itacademy.boldysh.web.controller;
 
+import by.itacademy.boldysh.database.dto.AdditionalServiceDto;
+import by.itacademy.boldysh.database.dto.CarDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
+import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
@@ -97,5 +100,24 @@ public class OrderRentalCarController {
     public String deleteCar(@RequestParam(value = "id") Long id) {
         orderCarRentalCarRepository.delete(orderCarRentalCarRepository.findById(id).get());
         return "info-delete";
+    }
+
+
+    @RequestMapping(value = "/add-order", method = RequestMethod.GET)
+    public String getPageAddCars(Model model) {
+        model.addAttribute("orderRentalCarDto", new OrderRentalCarDto());
+        model.addAttribute("cars", carRepository.findAll());
+        model.addAttribute("additionalService", additionalServiceRepository.findAll());
+        model.addAttribute("userDto", new UserDto());
+        return "add-order";
+    }
+
+
+    @RequestMapping(value = "/add-order", method = RequestMethod.POST)
+    public String createCar(Model model, OrderRentalCarDto orderRentalCarDto, CarDto carDto, AdditionalServiceDto additionalServiceDto, UserDto userDto) {
+
+        OrderRentalCar orderRentalCar = new OrderRentalCar();
+        orderRentalCarService.save(orderRentalCar);
+        return "order";
     }
 }

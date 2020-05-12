@@ -17,8 +17,6 @@ public interface OrderCarRentalCarRepository extends PagingAndSortingRepository<
 
     OrderRentalCar findByCarIdAndUserServiceId(Long carId, Long userServiceId);
 
-    OrderRentalCar deleteOrderRentalCarByCarIdAndUserServiceIdAndDateStartRentalAndDateFinishRental(Long carId, Long userServiceId, LocalDate dateStartRentalCar, LocalDate dateFinishRentalCar);
-
     @Modifying
     @Transactional
     @Query("update OrderRentalCar o set o.statusOrder=?1 where o.id=?2")

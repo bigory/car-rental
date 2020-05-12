@@ -51,12 +51,6 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(Car car, BigDecimal costRentalOfDay) {
-        car.setCostRentalOfDay(costRentalOfDay);
-        carRepository.save(car);
-    }
-
-    @Override
     public void delete(Car car) {
     }
 
