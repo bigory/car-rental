@@ -8,59 +8,62 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div th:id="wrapper">
-        <div th:id="line-vertical"></div>
-        <div th:id="line-vertiacal-wrapper"></div>
+<div th:id="wrapper">
+    <div th:id="line-vertical"></div>
+    <div th:id="line-vertiacal-wrapper"></div>
 
-        <div th:insert="~{fragments::header}"></div>
-        <div th:insert="~{fragments::aside}"></div>
+    <div th:insert="~{fragments::header}"></div>
+    <div th:insert="~{fragments::aside}"></div>
 
-        <section th:id="section">
-            <div th:id="section-block">
-                <div th:id="form-add">
+    <section th:id="section">
+        <div th:id="section-block">
+            <div th:id="form-add">
 
-                    <span th:text="#{list.car}"></span><br>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">№</th>
-                            <th scope="col" th:text="#{car.brand}"></th>
-                            <th scope="col" th:text="#{car.model}"></th>
-                            <th scope="col" th:text="#{car.yearOfIssue}"></th>
-                            <th scope="col" th:text="#{car.transmissions}"></th>
-                            <th scope="col" th:text="#{car.costRentalOfDay}"></th>
-                        </tr>
-                        </thead>
+                <span th:text="#{list.car}"></span><br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col" th:text="#{car.brand}"></th>
+                        <th scope="col" th:text="#{car.model}"></th>
+                        <th scope="col" th:text="#{car.yearOfIssue}"></th>
+                        <th scope="col" th:text="#{car.transmissions}"></th>
+                        <th scope="col" th:text="#{car.costRentalOfDay}"></th>
+                    </tr>
+                    </thead>
 
-                        <tbody>
-                        <tr th:each="car,iterStat:${pageCars}">
-                            <th scope="row" th:text="${iterStat.count}"></th>
-                            <td th:text="${car.brandCar.brand}"></td>
-                            <td th:text="${car.model}"></td>
-                            <td th:text="${car.yearOfIssue}"></td>
-                            <td th:text="${car.transmission}"></td>
-                            <td th:text="${car.costRentalOfDay}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item d-flex justify-content-center">
-                                <div th:if="${pageCars.totalPages > 0}"
-                                     th:each="pageNumber:${pageNumbers}">
-                                    <a class="page-link" th:href="@{/cars(size=${pageCars.size}, page=${pageNumber})}"
-                                       th:text="${pageNumber}"
-                                       th:class="${pageNumber==pageCars.number+1}?active"></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                    <tbody>
+                    <tr th:each="car,iterStat:${pageCars}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${car.brandCar.brand}"></td>
+                        <td th:text="${car.model}"></td>
+                        <td th:text="${car.yearOfIssue}"></td>
+                        <td th:text="${car.transmission}"></td>
+                        <td th:text="${car.costRentalOfDay}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item d-flex justify-content-center">
+                            <div th:if="${pageCars.totalPages > 0}"
+                                 th:each="pageNumber:${pageNumbers}">
+                                <a class="page-link" th:href="@{/cars(size=${pageCars.size}, page=${pageNumber})}"
+                                   th:text="${pageNumber}"
+                                   th:class="${pageNumber==pageCars.number+1}?active"></a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <button type="button" class="btn btn-outline-secondary">
+                    <a th:href="@{filter-car}" th:text="#{filter.car}"></a>
+                </button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div th:insert="~{fragments::footer}"></div>
-    </div>
+    <div th:insert="~{fragments::footer}"></div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

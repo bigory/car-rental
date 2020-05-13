@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -22,7 +22,6 @@
         </div>
         <div id="line-horizon-header"></div>
         <nav>
-
             <ul th:class="top-menu">
                 <li><a th:href="@{home}" th:text="#{home.page}"></a></li>
                 <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
@@ -39,14 +38,13 @@
     <aside>
         <nav>
 
-            <ul th:class="aside-menu">
+            <ul th:class="aside-menu" >
 
-                    <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
-                    <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
-                    <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
+                <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
+                <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
+                <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
 
-
-                <div th:sec:autorize="hasRole('ADMIN')">
+                <div sec:autorize="hasRole('ADMIN')">
                     <li><a th:href="@{add-cars}" th:text="#{add.car}"></a></li>
                     <li><a th:href="@{list-car-update}" th:text="#{update.car}"></a></li>
                     <li><a th:href="@{delete-car}" th:text="#{delete.car}"></a></li>
@@ -56,7 +54,7 @@
                     <li><a th:href="@{add-order}" th:text="#{new.order}"></a></li>
                 </div>
 
-                <div th:sec:autorize="hasRole('USER')">
+                <div sec:autorize="hasRole('USER')">
                     <li><a th:href="@{users}" th:text="#{users.service}"></a></li>
                     <li><a th:href="@{orders}" th:text="#{orders.user}"></a></li>
                 </div>
