@@ -62,8 +62,9 @@ public class UserServiceController {
 
     @RequestMapping(value = "/registry", method = RequestMethod.POST)
     public String showUser(@ModelAttribute("userDto") UserDto userDto) {
+        userDto.setRole("USER");
         UserService userServiceRentalCar = new UserService(userDto.getFirstName(), userDto.getSecondName(), userDto.getPassportNumber(),
-                userDto.getTelephone(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
+                userDto.getTelephone(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()), userDto.getRole());
         userServiceService.save(userServiceRentalCar);
         return "user";
     }

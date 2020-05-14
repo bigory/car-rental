@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -14,37 +14,36 @@
     <a href="?language=en_US" class="d-inline p-2 bg-dark text-white border rounded-pill">ENG</a>
 </div>
 
-<div th:fragment="header">
-    <header th:id="header">
-        <div class="container">
-            <div th:insert="~{fragments::language}" th:name="language" th:id="language">
+    <div th:fragment="header">
+        <header th:id="header">
+            <div class="container">
+                <div th:insert="~{fragments::language}" th:name="language" th:id="language">
+                </div>
             </div>
-        </div>
-        <div id="line-horizon-header"></div>
-        <nav>
-            <ul th:class="top-menu">
-                <li><a th:href="@{home}" th:text="#{home.page}"></a></li>
-                <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
-                <li><a th:href="@{contact}" th:text="#{contact}"></a></li>
-                <li><a th:href="@{about-us}" th:text="#{about.us}"></a></li>
-            </ul>
-        </nav>
-    </header>
+            <div id="line-horizon-header"></div>
+            <nav>
+                <ul th:class="top-menu">
+                    <li><a th:href="@{home}" th:text="#{home.page}"></a></li>
+                    <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
+                    <li><a th:href="@{contact}" th:text="#{contact}"></a></li>
+                    <li><a th:href="@{about-us}" th:text="#{about.us}"></a></li>
+                </ul>
+            </nav>
+        </header>
 
-</div>
-
+    </div>
 
 <div th:fragment="aside">
     <aside>
         <nav>
 
-            <ul th:class="aside-menu" >
+            <ul th:class="aside-menu">
 
                 <li><a th:href="@{rent-terms}" th:text="#{rent.terms}"></a>
                 <li><a th:href="@{cars}" th:text="#{car.park}"></a></li>
                 <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
 
-                <div sec:autorize="hasRole('ADMIN')">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <li><a th:href="@{add-cars}" th:text="#{add.car}"></a></li>
                     <li><a th:href="@{list-car-update}" th:text="#{update.car}"></a></li>
                     <li><a th:href="@{delete-car}" th:text="#{delete.car}"></a></li>
@@ -54,16 +53,19 @@
                     <li><a th:href="@{add-order}" th:text="#{new.order}"></a></li>
                 </div>
 
-                <div sec:autorize="hasRole('USER')">
+                <div sec:authorize="hasRole('ROLE_USER')">
                     <li><a th:href="@{users}" th:text="#{users.service}"></a></li>
                     <li><a th:href="@{orders}" th:text="#{orders.user}"></a></li>
                 </div>
 
                 <br>
-                <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>
-                <li><a th:href="@{registry}" th:text="#{registry.user}"></a></li>
-
-                <li><a th:href="@{/sign-out}" th:text="#{sign.out}"></a></li>
+                <div sec:autorize="!isAuthenticated()">
+                    <li th:class="sign-in-registry"><a th:href="@{login}" th:text="#{sign.in}"></a></li>
+                    <li><a th:href="@{registry}" th:text="#{registry.user}"></a></li>
+                </div>
+                <div sec:autorize="isAuthenticated()">
+                    <li><a th:href="@{/sign-out}" th:text="#{sign.out}"></a></li>
+                </div>
             </ul>
 
         </nav>

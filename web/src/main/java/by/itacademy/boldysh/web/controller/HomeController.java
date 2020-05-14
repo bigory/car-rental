@@ -2,6 +2,7 @@ package by.itacademy.boldysh.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -33,7 +34,12 @@ public class HomeController {
 
     @GetMapping("/sign-out")
     public String showLogOut() {
-        return "forward:home";
+        return "sign-out";
+    }
+
+    @PostMapping("/sign-out")
+    public String logOut() {
+        return "login";
     }
 }
 
