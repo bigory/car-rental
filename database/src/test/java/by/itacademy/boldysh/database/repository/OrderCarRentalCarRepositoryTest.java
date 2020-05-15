@@ -54,5 +54,4 @@ public class OrderCarRentalCarRepositoryTest {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(1L);
         assertNotNull(orderRentalCar);
     }
-
 }

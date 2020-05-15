@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface OrderCarRentalCarRepository extends PagingAndSortingRepository<OrderRentalCar, Long> {
@@ -16,6 +17,10 @@ public interface OrderCarRentalCarRepository extends PagingAndSortingRepository<
     OrderRentalCar findByDateStartRentalAndDateFinishRental(LocalDate startRentalCar, LocalDate finishRentalCar);
 
     OrderRentalCar findByCarIdAndUserServiceId(Long carId, Long userServiceId);
+
+    @Modifying
+    @Transactional
+    List<OrderRentalCar> findAllByUserServiceEmail(String userServiceEmail);
 
     @Modifying
     @Transactional

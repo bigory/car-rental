@@ -20,9 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    /*private final String PAGES_ADMIN = "/add-brand" + "/add-cars" + "/black-list-user" + "/brand" + "/delete-brand" + "/delete-car" + "/delete-order" + "/delete-user" + "/info-delete" + "/list-car-update" + "/orders" + "/update-car" + "/update-order" + "/users";
-    private final String PAGES_USER = "/order" + "/add-order";*/
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
