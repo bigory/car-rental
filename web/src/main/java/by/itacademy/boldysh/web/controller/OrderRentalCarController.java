@@ -4,7 +4,6 @@ import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
 import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
-import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -121,7 +119,7 @@ public class OrderRentalCarController {
         return "order";
     }
 
-    @RequestMapping(value = "/user-orders", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/user-orders", method = RequestMethod.GET)
     public String getPagesOrderRentalCarUserService(Model model, @RequestParam(value = "page") Optional<Integer> page,
                                                     @RequestParam(value = "size") Optional<Integer> size) {
         final int currentPage = page.orElse(1);
@@ -138,6 +136,6 @@ public class OrderRentalCarController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         return "user-orders";
-    }
+    }*/
 
 }

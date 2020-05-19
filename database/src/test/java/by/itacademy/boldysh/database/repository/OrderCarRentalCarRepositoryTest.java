@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertNotNull;
@@ -53,5 +54,11 @@ public class OrderCarRentalCarRepositoryTest {
     public void findById() {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(1L);
         assertNotNull(orderRentalCar);
+    }
+
+    @Test
+    public void findAllByUserServiceEmail() {
+        List<OrderRentalCar> orderRentalCarList = orderCarRentalCarRepository.findAllByUserServiceEmail(1L);
+        assertNotNull(orderRentalCarList);
     }
 }

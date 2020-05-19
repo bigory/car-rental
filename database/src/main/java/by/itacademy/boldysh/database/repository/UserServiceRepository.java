@@ -10,7 +10,7 @@ public interface UserServiceRepository extends PagingAndSortingRepository<UserSe
 
     UserService findByPassportNumber(String passportNumber);
 
-   UserService findByEmail(String email);
+    UserService findByEmail(String email);
 
     UserService findByBlackListUserService(String passportNumber);
 }

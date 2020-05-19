@@ -20,7 +20,8 @@ public interface OrderCarRentalCarRepository extends PagingAndSortingRepository<
 
     @Modifying
     @Transactional
-    List<OrderRentalCar> findAllByUserServiceEmail(String userServiceEmail);
+    @Query("select o from OrderRentalCar o where  o.userServiceId=?1")
+    List<OrderRentalCar> findAllByUserServiceEmail(Long id);
 
     @Modifying
     @Transactional
