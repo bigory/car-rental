@@ -57,8 +57,9 @@ public class OrderCarRentalCarRepositoryTest {
     }
 
     @Test
-    public void findAllByUserServiceEmail() {
-        List<OrderRentalCar> orderRentalCarList = orderCarRentalCarRepository.findAllByUserServiceEmail(1L);
+    public void findAllByUserServiceId() {
+        List<OrderRentalCar> orderRentalCarList = orderCarRentalCarRepository.findAllByUserServiceId(1L);
+        System.out.println(orderRentalCarList);
         assertNotNull(orderRentalCarList);
     }
 }

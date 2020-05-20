@@ -4,6 +4,7 @@ import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
 import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.StatusOrder;
+import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
@@ -13,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -105,7 +108,7 @@ public class OrderRentalCarController {
     public String getPageAddCars(Model model) {
         model.addAttribute("orderRentalCarDto", new OrderRentalCarDto());
         model.addAttribute("cars", carRepository.findAll());
-        model.addAttribute("additionalService", additionalServiceRepository.findAll());
+        model.addAttribute("additionalServices", additionalServiceRepository.findAll());
         model.addAttribute("userDto", new UserDto());
         return "add-order";
     }
@@ -119,14 +122,15 @@ public class OrderRentalCarController {
         return "order";
     }
 
-   /* @RequestMapping(value = "/user-orders", method = RequestMethod.GET)
+    @RequestMapping(value = "/user-orders", method = RequestMethod.GET)
     public String getPagesOrderRentalCarUserService(Model model, @RequestParam(value = "page") Optional<Integer> page,
                                                     @RequestParam(value = "size") Optional<Integer> size) {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(3);
-        UserService userService = (UserService) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserService userService1 = userServiceRepository.findByEmail(user.getUsername());
         Page<OrderRentalCarDto> pageOrdersRentalCarDto = orderRentalCarService.paginationOrdersRentalCar(PageRequest.of(currentPage - 1, pageSize),
-                orderCarRentalCarRepository.findAllByUserServiceEmail(userService.getEmail()));
+                orderCarRentalCarRepository.findAllByUserServiceId(userService1.getId()));
 
         model.addAttribute("pageOrdersRentalCarDto", pageOrdersRentalCarDto);
 
@@ -136,6 +140,12 @@ public class OrderRentalCarController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         return "user-orders";
-    }*/
+    }
 
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public void getOrderRentalCarUserService(Model model, @RequestParam(value = "id") Long id) {
+        Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
+        OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderRentalCar, id);
+        model.addAttribute("orderRentalCarDto", orderRentalCarDto);
+    }
 }

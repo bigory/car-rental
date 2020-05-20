@@ -35,6 +35,23 @@
                                 </option>
                             </select>
                         </div>
+
+
+                        <div th:each="transmission:${transmissions}">
+                            <span th:text="${transmission}">AKPP</span>
+                            <input type="radio" name="Transmission" th:value="${transmission}">
+                        </div>
+
+                        <div>
+                            <span th:text="#{additional.service.service}">Class</span>
+                            <br>
+                            <div th:each="additionalService:${additionalServices}">
+                                <span th:text="${additionalService.getServices()}"></span>
+                                <span th:text="${additionalService.getCost()}"></span>
+                                <input type="radio" th:value="${additionalService.getId()}">
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </section>

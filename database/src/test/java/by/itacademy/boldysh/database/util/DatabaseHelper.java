@@ -78,10 +78,13 @@ public class DatabaseHelper {
 
         OrderRentalCar orderRentalCarOne = new OrderRentalCar(userOne.getId(), bmw.getId(), LocalDate.of(2019, 10, 10),
                 LocalDate.of(2019, 10, 20), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
+        OrderRentalCar orderRentalCarThree = new OrderRentalCar(userOne.getId(), bmw.getId(), LocalDate.of(2019, 10, 10),
+                LocalDate.of(2019, 10, 20), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
         OrderRentalCar orderRentalCarTwo = new OrderRentalCar(userTwo.getId(), volvo.getId(), LocalDate.of(2019, 10, 20),
                 LocalDate.of(2019, 10, 23), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
         entityManager.persist(orderRentalCarOne);
         entityManager.persist(orderRentalCarTwo);
+        entityManager.persist(orderRentalCarThree);
 
         entityManager.getTransaction().commit();
         entityManager.close();

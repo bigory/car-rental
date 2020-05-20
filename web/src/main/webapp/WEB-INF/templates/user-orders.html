@@ -34,6 +34,7 @@
                     <tr>
                         <th scope="col">№</th>
                         <th scope="col" th:text="#{first.name}"></th>
+                        <th scope="col" th:text="#{second.name}"></th>
                         <th scope="col" th:text="#{car.brand}"></th>
                         <th scope="col" th:text="#{additional.equipment}"></th>
                         <th scope="col" th:text="#{order.dateStartRental}"></th>
@@ -49,12 +50,14 @@
                         <th scope="row" th:text="${iterStat.count}"></th>
 
                         <td th:text="${order.getFirstName()}"></td>
+                        <td th:text="${order.getSecondName()}"></td>
                         <td th:text="${order.getBrandCar()}"></td>
                         <td th:text="${order.getAdditionalService().getServices()}"></td>
                         <td th:text="${order.getStartRentalCar()}"></td>
                         <td th:text="${order.getFinishRentalCar()}"></td>
                         <td th:text="${order.getCostOrder()}"></td>
                         <td th:text="${order.getStatusOrder()}"></td>
+                        <td><a th:href="@{/order(id=${order.getId()})}" th:text="#{order.info}"></a></td>
                     </tr>
                     </tbody>
                 </table>
