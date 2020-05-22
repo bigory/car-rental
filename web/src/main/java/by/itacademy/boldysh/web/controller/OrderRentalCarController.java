@@ -106,18 +106,36 @@ public class OrderRentalCarController {
 
     @RequestMapping(value = "/add-order", method = RequestMethod.GET)
     public String getPageAddCars(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserService userService = userServiceRepository.findByEmail(user.getUsername());
+
         model.addAttribute("orderRentalCarDto", new OrderRentalCarDto());
         model.addAttribute("cars", carRepository.findAll());
         model.addAttribute("additionalServices", additionalServiceRepository.findAll());
-        model.addAttribute("userDto", new UserDto());
+        UserDto userDto = UserDto.builder()
+                .firstName(userService.getFirstName())
+                .secondName(userService.getSecondName())
+                .email(userService.getEmail())
+                .passportNumber(userService.getPassportNumber())
+                .telephone(userService.getTelephone())
+                .build();
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("statusOrder", StatusOrder.ACCEPTED);
         return "add-order";
     }
 
 
     @RequestMapping(value = "/add-order", method = RequestMethod.POST)
-    public String createCar() {
+    public String createCar(OrderRentalCarDto orderRentalCarDto) {
 
         OrderRentalCar orderRentalCar = new OrderRentalCar();
+        orderRentalCar.setUserServiceId(userServiceRepository.findByBlackListUserService(orderRentalCarDto.getPassportNumber()).getId());
+        orderRentalCar.setCarId(carRepository.findByVinNumber(orderRentalCarDto.getVinNumber()).getId());
+        orderRentalCar.setAdditionalService(orderRentalCarDto.getAdditionalService());
+        orderRentalCar.setDateStartRental(orderRentalCarDto.getStartRentalCar());
+        orderRentalCar.setDateFinishRental(orderRentalCarDto.getFinishRentalCar());
+        orderRentalCar.setStatusOrder(orderRentalCarDto.getStatusOrder());
+        orderRentalCar.setCost(orderRentalCarDto.getCostCar().add(orderRentalCarDto.getCostAdditionalService()));
         orderRentalCarService.save(orderRentalCar);
         return "order";
     }
@@ -128,9 +146,9 @@ public class OrderRentalCarController {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(3);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserService userService1 = userServiceRepository.findByEmail(user.getUsername());
+        UserService userService = userServiceRepository.findByEmail(user.getUsername());
         Page<OrderRentalCarDto> pageOrdersRentalCarDto = orderRentalCarService.paginationOrdersRentalCar(PageRequest.of(currentPage - 1, pageSize),
-                orderCarRentalCarRepository.findAllByUserServiceId(userService1.getId()));
+                orderCarRentalCarRepository.findAllByUserServiceId(userService.getId()));
 
         model.addAttribute("pageOrdersRentalCarDto", pageOrdersRentalCarDto);
 

@@ -23,8 +23,19 @@
                 <div th:id="section-block">
                     <div th:id="form-add">
 
-                        <span th:text="#{car}"></span>
+                        <div th:text="#{data.user}"></div>
+                        <input th:type="text" th:value="${userDto.getFirstName()}" >
+                        <br>
 
+                        <input th:type="text" th:value="${userDto.getSecondName()}">
+
+                        <br>
+
+                        <input th:type="text" th:value="${userDto.getPassportNumber()}">
+
+                        <br>
+
+                        <span th:text="#{car}"></span>
                         <div>
                             <select th:field="*{id}">
                                 <option th:each="car: ${cars}"
@@ -32,6 +43,7 @@
                                     <span th:text="${car.getBrandCar().brand}"></span>
                                     <span th:text="${car.getModel()}"></span>
                                     <span th:text="${car.getVinNumber()}"></span>
+                                    <span th:text="${car.getCostRentalOfDay()}+BYN"></span>
                                 </option>
                             </select>
                         </div>
@@ -43,16 +55,23 @@
                             <div th:each="additionalService:${additionalServices}">
                                 <span th:text="${additionalService.getServices()}"></span>
                                 <span th:text="${additionalService.getCost()}"></span>
-                                <input th:type="radio" th:name="AdditionalService" th:value="${additionalService}">
+                                <input th:type="radio" th:name="AdditionalService" th:value="*{additionalService}">
                             </div>
                         </div>
                         <div>
-                            <input th:type="date" th:field="${orderRentalCarDto.startRentalCar}">
+                            <div th:text="#{date.order}"></div>
+                            <input th:type="date" th:field="*{startRentalCar}">
                             <br>
-                            <input th:type="date" th:field="${orderRentalCarDto.finishRentalCar}">
+                            <input th:type="date" th:field="*{finishRentalCar}">
+                        </div>
+
+                        <div th:text="#{order.status}"></div>
+                        <input th:type="text"  th:value="${statusOrder.ACCEPTED}">
+                        <br>
+                        <div>
+                            <input type="submit" th:value="#{save.object}" class="rounded-lg">
                         </div>
                     </div>
-                </div>
             </section>
         </form>
 
