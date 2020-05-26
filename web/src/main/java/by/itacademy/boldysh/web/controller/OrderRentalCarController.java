@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -103,7 +105,6 @@ public class OrderRentalCarController {
         return "info-delete";
     }
 
-
     @RequestMapping(value = "/add-order", method = RequestMethod.GET)
     public String getPageAddCars(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -126,14 +127,16 @@ public class OrderRentalCarController {
 
 
     @RequestMapping(value = "/add-order", method = RequestMethod.POST)
-    public String createCar(OrderRentalCarDto orderRentalCarDto) {
+    public String createCar(OrderRentalCarDto orderRentalCarDto, @RequestParam("startRentalCar")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startRentalCar,
+                            @RequestParam("finishRentalCar") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finishRentalCar) {
 
         OrderRentalCar orderRentalCar = new OrderRentalCar();
         orderRentalCar.setUserServiceId(userServiceRepository.findByBlackListUserService(orderRentalCarDto.getPassportNumber()).getId());
         orderRentalCar.setCarId(carRepository.findByVinNumber(orderRentalCarDto.getVinNumber()).getId());
         orderRentalCar.setAdditionalService(orderRentalCarDto.getAdditionalService());
-        orderRentalCar.setDateStartRental(orderRentalCarDto.getStartRentalCar());
-        orderRentalCar.setDateFinishRental(orderRentalCarDto.getFinishRentalCar());
+        orderRentalCar.setDateStartRental(startRentalCar);
+        orderRentalCar.setDateFinishRental(finishRentalCar);
         orderRentalCar.setStatusOrder(orderRentalCarDto.getStatusOrder());
         orderRentalCar.setCost(orderRentalCarDto.getCostCar().add(orderRentalCarDto.getCostAdditionalService()));
         orderRentalCarService.save(orderRentalCar);

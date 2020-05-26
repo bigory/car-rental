@@ -18,26 +18,26 @@
         <div th:insert="~{fragments::aside}">
         </div>
 
-        <form th:action="@{/add-order}" th:object="${orderRentalCarDto}" method="post">
+        <form th:action="@{/add-order(startRentalCar=${startRentalCar},finishRentalCar=${finishRentalCar})}" th:object="${orderRentalCarDto}" method="post">
             <section th:id="section">
                 <div th:id="section-block">
                     <div th:id="form-add">
 
                         <div th:text="#{data.user}"></div>
-                        <input th:type="text" th:value="${userDto.getFirstName()}" >
+                        <input th:type="text" th:name="FirstName" th:value="${userDto.getFirstName()}">
                         <br>
 
-                        <input th:type="text" th:value="${userDto.getSecondName()}">
+                        <input th:type="text" th:name="SecondName" th:value="${userDto.getSecondName()}">
 
                         <br>
 
-                        <input th:type="text" th:value="${userDto.getPassportNumber()}">
+                        <input th:type="text" th:name="PassportNumber" th:value="${userDto.getPassportNumber()}">
 
                         <br>
 
                         <span th:text="#{car}"></span>
                         <div>
-                            <select th:field="*{id}">
+                            <select th:field="*{brandCar}">
                                 <option th:each="car: ${cars}"
                                         th:value="${car.brandCar.getBrand()}">
                                     <span th:text="${car.getBrandCar().brand}"></span>
@@ -60,13 +60,14 @@
                         </div>
                         <div>
                             <div th:text="#{date.order}"></div>
-                            <input th:type="date" th:field="*{startRentalCar}">
+                            <input th:type="date" th:name="StartRentalCar"
+                                   th:field="*{startRentalCar}">
                             <br>
-                            <input th:type="date" th:field="*{finishRentalCar}">
+                            <input th:type="date" th:name="StartRentalCar" th:field="*{finishRentalCar}">
                         </div>
 
                         <div th:text="#{order.status}"></div>
-                        <input th:type="text"  th:value="${statusOrder.ACCEPTED}">
+                        <input th:type="text" th:name="StatusOrder" th:value="${statusOrder.ACCEPTED}">
                         <br>
                         <div>
                             <input type="submit" th:value="#{save.object}" class="rounded-lg">

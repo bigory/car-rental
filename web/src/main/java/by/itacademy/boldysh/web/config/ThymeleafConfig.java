@@ -36,8 +36,8 @@ public class ThymeleafConfig implements WebMvcConfigurer {
     SpringTemplateEngine templateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
-        engine.setTemplateResolver(templateResolver());
         engine.addDialect(new SpringSecurityDialect());
+        engine.setTemplateResolver(templateResolver());
         return engine;
     }
 
