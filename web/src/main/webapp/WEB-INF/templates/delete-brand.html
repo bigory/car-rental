@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DeleteCars</title>
+</head>
+<body>
+<div class="container">
+    <div th:insert="~{fragments::language}">
+    </div>
+
+<form th:action="@{delete-brand}" th:object="${brandDto}" method="post">
+    <span th:text="#{car.brand}"></span>
+
+    <br>
+    <div>
+        <select th:field="*{brand}">
+            <option th:each="brands: ${brandCars}"
+                    th:value="${brands.getBrand()}"
+                    th:text="${brands.getBrand()}">
+        </select>
+    </div>
+    <br>
+    <div>
+        <input type="submit" value="Delete">
+    </div>
+</form>
+</body>
+</html>

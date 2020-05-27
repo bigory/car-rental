@@ -1,0 +1,169 @@
+body {
+    color: aliceblue;
+}
+
+@media (min-width: 1220px) {
+    #wrapper {
+        position: fixed;
+        max-width: 1080px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+#line-vertical {
+    position: absolute;
+    width: 10px;
+    height: 1160px;
+    background-color: #FF1D25;
+    left: 25px;
+    z-index: 1;
+}
+
+#header {
+    padding-top: 8px;
+    background-color: #515152;
+    height: 160px;
+    padding-right: 0;
+}
+
+#line-horizon-header {
+    margin-top: 35px;
+    height: 15px;
+    background-color: #FF1D25;
+}
+
+
+#language {
+    float: right;
+}
+
+nav a {
+    color: azure;
+}
+
+nav a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    list-style-position: inside;
+    font: 20px 'Marion', sans-serif;
+    padding: 5px;
+}
+
+.top-menu li {
+    display: inline-block;
+    margin: 0;
+    padding: 7px 60px;
+}
+
+aside {
+    float: left;
+    background-color: #515152;
+    height: 1000px;
+    width: 350px;
+    border-top: 1px solid #708090;
+}
+
+.aside-menu li {
+    padding-top: 5px;
+    list-style-type: none;
+    font-weight: 200;
+    margin-left: 25px;
+    padding-left: 25px;
+    padding-bottom: 5px;
+}
+
+.aside-menu li.sign-in-registry {
+    padding-top: 60px;
+}
+
+
+.aside-menu a:hover {
+    color: azure;
+    text-decoration: none;
+}
+
+.aside-menu a {
+    font-size: 15px;
+    color:#FF8C00;
+}
+
+#section {
+    margin: 10px 10px 10px 360px;
+    padding: 5px 5px 5px 5px;
+    text-align: justify;
+}
+
+#section-block {
+    border: red 1px solid;
+    border-radius: 25px;
+    background: rosybrown;
+}
+
+#section-block p {
+    padding: 10px 10px 10px 10px;
+}
+
+#section-block span {
+    padding: 10px 10px 10px 10px;
+}
+
+#section-block input {
+    margin-left: 10px;
+}
+
+#form-add {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+#info {
+    font: 12px 'Marion', sans-serif;
+    white-space: pre;
+    text-align: right;
+    color: slategrey;
+    padding-right: 10px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+
+#footer {
+    background: #515152;
+    height: 165px;
+    width: 1080px;
+
+}
+
+#line-horizon-footer {
+    height: 30px;
+    background-color: #FF1D25;
+}
+
+#form-login {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#credentials {
+    color: red;
+    size: 20px;
+}
+
+

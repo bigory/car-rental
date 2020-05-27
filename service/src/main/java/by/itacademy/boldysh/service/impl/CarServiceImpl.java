@@ -1,24 +1,37 @@
 package by.itacademy.boldysh.service.impl;
 
-import by.itacademy.boldysh.database.entity.*;
+import by.itacademy.boldysh.database.dto.FilterDto;
+import by.itacademy.boldysh.database.entity.BrandCar_;
+import by.itacademy.boldysh.database.entity.Car;
+import by.itacademy.boldysh.database.entity.Car_;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
-
-import by.itacademy.boldysh.service.interfaces.CustomFilterCars;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.*;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
-public class CarServiceImpl implements CarService, CustomFilterCars {
+@Cacheable("cars")
+public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
 
@@ -38,54 +51,76 @@ public class CarServiceImpl implements CarService, CustomFilterCars {
     }
 
     @Override
-    public void updateCar(String vinNumber, Integer costRentalOfDay) {
-        Car car = carRepository.findByVinNumber(vinNumber);
-        car.setCostRentalOfDay(costRentalOfDay);
-        carRepository.save(car);
-    }
-
-    @Override
     public void delete(Car car) {
     }
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Override
+    public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Car> listCar;
 
-    public List<Car> findByFilterCars(String model, Integer yearOfIssue, Transmission transmission, CarClass carClass, Integer costRentalOfDay, BrandCar brandCar) {
+        if (cars.size() < startItem) {
+            listCar = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, cars.size());
+            listCar = cars.subList(startItem, toIndex);
+        }
+
+        Page<Car> carPage = new PageImpl<Car>(listCar, PageRequest.of(currentPage, pageSize), cars.size());
+
+        return carPage;
+    }
+
+    @PersistenceContext
+    EntityManager entityManager;
+
+    @Override
+    public Page<Car> findByFilterAndPaginationCars(FilterDto filterDto, Pageable page) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
-        carRoot.fetch(Car_.brandCar, JoinType.LEFT);
         criteriaQuery.select(carRoot).distinct(true);
 
         Predicate criteria = criteriaBuilder.conjunction();
 
-        if (brandCar != null) {
-            Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar), brandCar);
+        if (!filterDto.getBrandCar().equals("")) {
+            Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar).get(BrandCar_.brand), filterDto.getBrandCar());
             criteria = criteriaBuilder.and(criteria, brand);
         }
-        if (model != null) {
-            Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), model);
+        if (!filterDto.getModelCar().equals("")) {
+            Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), filterDto.getModelCar());
             criteria = criteriaBuilder.and(criteria, modelCar);
         }
-        if (yearOfIssue != null) {
-            Predicate yearOfIssueCar = criteriaBuilder.equal(carRoot.get(Car_.yearOfIssue), yearOfIssue);
+        if (filterDto.getYearOfIssue() != null) {
+            Predicate yearOfIssueCar = criteriaBuilder.equal(carRoot.get(Car_.yearOfIssue), filterDto.getYearOfIssue());
             criteria = criteriaBuilder.and(criteria, yearOfIssueCar);
         }
-        if (transmission != null) {
-            Predicate transmissionCar = criteriaBuilder.equal(carRoot.get(Car_.transmission), transmission);
+        if (filterDto.getTransmission() != null) {
+            Predicate transmissionCar = criteriaBuilder.equal(carRoot.get(Car_.transmission), filterDto.getTransmission());
             criteria = criteriaBuilder.and(criteria, transmissionCar);
         }
-        if (carClass != null) {
-            Predicate classCar = criteriaBuilder.equal(carRoot.get(Car_.carClass), carClass);
+        if (filterDto.getClassCar() != null) {
+            Predicate classCar = criteriaBuilder.equal(carRoot.get(Car_.carClass), filterDto.getClassCar());
             criteria = criteriaBuilder.and(criteria, classCar);
         }
-        if (costRentalOfDay != null) {
-            Predicate costRentalOfDayCar = criteriaBuilder.equal(carRoot.get(Car_.costRentalOfDay), costRentalOfDay);
+        if (filterDto.getCostRentalOfDay() != null) {
+            Predicate costRentalOfDayCar = criteriaBuilder.equal(carRoot.get(Car_.costRentalOfDay), filterDto.getCostRentalOfDay());
             criteria = criteriaBuilder.and(criteria, costRentalOfDayCar);
         }
         criteriaQuery.where(criteria);
-        return entityManager.createQuery(criteriaQuery).getResultList();
+
+        TypedQuery<Car> carsList = entityManager.createQuery(criteriaQuery);
+        int totalPages = carsList.getResultList().size();
+
+        carsList.setFirstResult(page.getPageNumber() * page.getPageSize());
+        carsList.setMaxResults(page.getPageSize());
+
+        Page<Car> carPage = new PageImpl<Car>(carsList.getResultList(), page, totalPages);
+
+        entityManager.close();
+        return carPage;
     }
 }
 

@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -59,7 +60,7 @@ public class CarRepositoryTest {
     @Test
     public void findAllByBrandCarBrandAndCostRentalOfDayAndCarClassAndTransmission() {
         List<Car> list = carRepository.findAllByBrandCarBrandAndCostRentalOfDayAndCarClassAndTransmission("Volvo",
-                45, CarClass.BUSINESS, Transmission.MACHINE);
+                BigDecimal.valueOf(45), CarClass.BUSINESS, Transmission.MACHINE);
         assertEquals(1, list.size());
     }
 
@@ -68,5 +69,11 @@ public class CarRepositoryTest {
         Car car = carRepository.findByVinNumber("ZXS2312121");
         carRepository.deleteByVinNumber("ZXS2312121");
         assertNull(carRepository.findByVinNumber("ZXS2312121"));
+    }
+
+    @Test
+    public void findByOrderByCostRentalOfDayAsc() {
+        List<Car> cars = carRepository.findByOrderByCostRentalOfDayAsc();
+        System.out.println(cars);
     }
 }

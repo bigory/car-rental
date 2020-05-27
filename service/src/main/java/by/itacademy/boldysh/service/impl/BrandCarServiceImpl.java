@@ -4,6 +4,9 @@ import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.service.interfaces.BrandCarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,7 @@ public class BrandCarServiceImpl implements BrandCarService {
     }
 
     @Override
+    @Cacheable("allBrandCar")
     public List<BrandCar> findAll() {
         return StreamSupport.stream(brandCarRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
@@ -35,5 +39,10 @@ public class BrandCarServiceImpl implements BrandCarService {
     @Override
     public void delete(BrandCar brandCar) {
         brandCarRepository.delete(brandCar);
+    }
+
+    @Override
+    public Page<BrandCar> findByPaginated(Pageable pageable, List<BrandCar> entities) {
+        return null;
     }
 }

@@ -13,6 +13,12 @@
     <packaging>war</packaging>
     <artifactId>web</artifactId>
 
+    <properties>
+        <spring-security.version>5.1.5.RELEASE</spring-security.version>
+        <thymeleaf-extras.version>3.0.4.RELEASE</thymeleaf-extras.version>
+
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -32,6 +38,27 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
             <version>3.0.11.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <version>${thymeleaf-extras.version}</version>
         </dependency>
 
     </dependencies>

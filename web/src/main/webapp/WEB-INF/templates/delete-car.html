@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Car</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div th:id="wrapper">
+    <div th:id="line-vertical"></div>
+    <div th:id="line-vertiacal-wrapper"></div>
+
+    <div th:insert="~{fragments::header}"></div>
+    <div th:insert="~{fragments::aside}"></div>
+
+    <form th:action="@{delete-car}" th:object="${carDto}" method="post">
+        <section th:id="section">
+            <div th:id="section-block">
+                <div th:id="form-add">
+                    <span th:text="#{input.vin.number}"></span>
+
+                    <br>
+                    <div>
+                        <span th:text="#{vin.number}"></span>
+                        <input type="text" th:field="*{vinNumber}">
+                    </div>
+
+                    <br>
+                    <div>
+                        <input type="submit" value="Delete">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+    <div th:insert="~{fragments::footer}"></div>
+</div>
+</body>
+</html>

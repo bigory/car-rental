@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div th:id="wrapper">
+    <div th:id="line-vertical"></div>
+    <div th:id="line-vertiacal-wrapper"></div>
+
+    <div th:insert="~{fragments::header}"></div>
+    <div th:insert="~{fragments::aside}"></div>
+
+    <form th:action="@{/registry}" th:object="${userDto}" method="post">
+        <section th:id="section">
+            <div th:id="section-block">
+                <div th:id="form-add">
+                    <span th:text="#{registry.user}" th:class="registry">Registration</span>
+                    <br>
+
+                    <div>
+                        <span th:text="#{first.name}">First Name</span>
+                        <br>
+                        <input type="text" th:field="*{firstName}" required="required" class="rounded-lg">
+                    </div>
+
+                    <div>
+                        <span th:text="#{second.name}">Second Name</span>
+                        <br>
+                        <input type="text" th:field="*{secondName}" required="required" class="rounded-lg">
+                    </div>
+
+                    <div>
+                        <span th:text="#{passport.number}">Passport Number</span>
+                        <br>
+                        <input type="text" th:field="*{passportNumber}" required="required" class="rounded-lg">
+                    </div>
+
+                    <div>
+                        <span th:text="#{telephone}">Telephone</span>
+                        <br>
+                        <input type="text" th:field="*{telephone}" required="required" class="rounded-lg">
+                    </div>
+
+                    <div>
+                        <span th:text="#{email}">Email</span>
+                        <br>
+                        <input type="email" th:field="*{email}" required="required" class="rounded-lg">
+                    </div>
+
+                    <div>
+                        <span th:text="#{password}">Password</span>
+                        <br>
+                        <input type="password" th:field="*{password}" required="required" class="rounded-lg">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="submit" th:value="#{registration.user}" class="rounded-lg">
+                    </div>
+                    <div>
+                        <input type="reset" th:value="#{reset.form}" class="rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+
+    <div th:insert="~{fragments::footer}"></div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

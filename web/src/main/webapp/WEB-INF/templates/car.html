@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Car</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+<div th:id="wrapper">
+    <div th:id="line-vertical"></div>
+    <div th:id="line-vertiacal-wrapper"></div>
 
-<div>
-    <span>Added car</span><br>
-    <span>Brand</span> <span th:text="${carDto.brandCar}"></span><br>
-    <span>Model</span> <span th:text="${carDto.modelCar}"></span><br>
-    <span>VinNumber</span> <span th:text="${carDto.vinNumber}"></span><br>
-    <span>Class</span> <span th:text="${carDto.classCar}"></span><br>
-    <span>Year of issue</span> <span th:text="${carDto.yearOfIssue}"></span><br>
-    <span>Cost Rental Of Day</span> <span th:text="${carDto.costRentalOfDay}"></span>
+    <div th:insert="~{fragments::header}"></div>
+    <div th:insert="~{fragments::aside}"></div>
+    <section th:id="section">
+        <div th:id="section-block">
+            <div th:id="form-add">
+                <span th:text="#{car}"></span><br>
+                <span th:text="#{car.brand}"></span> <span th:text="${carDto.brandCar}"></span><br>
+                <span th:text="#{car.model}"> </span> <span th:text="${carDto.modelCar}"></span><br>
+                <span th:text="#{car.vinNumber}"></span> <span th:text="${carDto.vinNumber}"></span><br>
+                <span th:text="#{car.class}"></span> <span th:text="${carDto.classCar}"></span><br>
+                <span th:text="#{car.yearOfIssue}">Year of issue</span> <span
+                    th:text="${carDto.yearOfIssue}"></span><br>
+                <span th:text="#{car.costRentalOfDay}">Cost Rental Of Day</span> <span
+                    th:text="${carDto.costRentalOfDay}"></span>
+            </div>
+        </div>
+    </section>
+
+    <div th:insert="~{fragments::footer}"></div>
 </div>
 </body>
 </html>

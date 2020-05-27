@@ -53,7 +53,9 @@ public class BrandCarServiceImplTest {
     public void findAll() {
         List<BrandCar> brandCars = brandCarService.findAll();
         brandCars.forEach(System.out::println);
-        assertEquals(3, brandCars.size());
+        List<BrandCar> brandCars1 = brandCarService.findAll();
+        brandCars1.forEach(System.out::println);
+        assertEquals(brandCars1.size(), brandCars.size());
     }
 
     @Test

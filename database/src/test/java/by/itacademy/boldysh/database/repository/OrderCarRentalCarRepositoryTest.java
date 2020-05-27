@@ -12,8 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
@@ -26,12 +29,12 @@ public class OrderCarRentalCarRepositoryTest {
     @Autowired
     private OrderCarRentalCarRepository orderCarRentalCarRepository;
 
+
     @Before
     public void init() {
         databaseHelper.cleanDatabase();
         databaseHelper.prepareData();
     }
-
 
     @Test
     public void findByDateStartRentalAndDateFinishRental() {
@@ -39,5 +42,24 @@ public class OrderCarRentalCarRepositoryTest {
         System.out.println(orderRentalCar);
         assertNotNull(orderRentalCar);
 
+    }
+
+    @Test
+    public void findByCarIdAndUserServiceId() {
+        OrderRentalCar orderRentalCar = orderCarRentalCarRepository.findByCarIdAndUserServiceId(1L, 1L);
+        assertNull(orderRentalCar);
+    }
+
+    @Test
+    public void findById() {
+        Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(1L);
+        assertNotNull(orderRentalCar);
+    }
+
+    @Test
+    public void findAllByUserServiceId() {
+        List<OrderRentalCar> orderRentalCarList = orderCarRentalCarRepository.findAllByUserServiceId(1L);
+        System.out.println(orderRentalCarList);
+        assertNotNull(orderRentalCarList);
     }
 }

@@ -21,7 +21,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] {SERVLET_MAPPING};
+        return new String[]{SERVLET_MAPPING};
     }
 
     @Override

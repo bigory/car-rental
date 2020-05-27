@@ -53,7 +53,7 @@ public class BlackListUserServiceServiceImplTest {
                 .telephone("+37521324431221")
                 .email("artem.petrov@gmail.com")
                 .password("RTRVR23")
-                .isAdmin(false)
+                .role("USER")
                 .build();
         userServiceRepository.save(userService);
         blackListUserServiceService.save(BlackListUserService.builder()

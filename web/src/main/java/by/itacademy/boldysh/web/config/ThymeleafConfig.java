@@ -2,6 +2,9 @@ package by.itacademy.boldysh.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -9,7 +12,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Configuration
-public class ThymeleafConfig {
+public class ThymeleafConfig implements WebMvcConfigurer {
 
     @Bean
     public ThymeleafViewResolver viewResolver() {
@@ -33,7 +36,14 @@ public class ThymeleafConfig {
     SpringTemplateEngine templateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
+        engine.addDialect(new SpringSecurityDialect());
         engine.setTemplateResolver(templateResolver());
         return engine;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 }

@@ -12,7 +12,8 @@ CREATE TABLE user_service
     telephone       VARCHAR(64)                  NOT NULL,
     email           VARCHAR(256)                 NOT NULL,
     password        VARCHAR(128)                 NOT NULL,
-    isAdmin         BOOLEAN
+    isAdmin         VARCHAR(64) DEFAULT  'USER',
+    version         INTEGER
 );
 
 CREATE TABLE black_list
@@ -20,13 +21,15 @@ CREATE TABLE black_list
     id      BIGSERIAL PRIMARY KEY,
     user_id BIGINT UNIQUE NOT NULL REFERENCES user_service (id),
     cause   TEXT
+
 );
 
 
 CREATE TABLE brand_car
 (
-    id    BIGSERIAL PRIMARY KEY,
-    brand VARCHAR(256) UNIQUE NOT NULL
+    id      BIGSERIAL PRIMARY KEY,
+    brand   VARCHAR(256) UNIQUE NOT NULL
+
 );
 
 CREATE TABLE car
@@ -46,7 +49,8 @@ CREATE TABLE additional_services
 (
     id       BIGSERIAL PRIMARY KEY,
     services VARCHAR(256) UNIQUE NOT NULL,
-    cost     INTEGER             NOT NULL
+    cost     INTEGER             NOT NULL,
+    version  INTEGER
 );
 
 CREATE TABLE order_rental_car
@@ -58,7 +62,8 @@ CREATE TABLE order_rental_car
     date_start_rental      DATE         NOT NULL,
     date_finish_rental     DATE         NOT NULL,
     cost                   INTEGER      NOT NULL,
-    status_order           VARCHAR(128) NOT NULL
+    status_order           VARCHAR(128) NOT NULL,
+
 );
 
 DROP TABLE user_service;
@@ -81,3 +86,24 @@ INSERT INTO car
 VALUES (2, 2, 'Polo', 'XWR123431243', 2017, 'MECHANIC', 'COMFORT', 20);
 INSERT INTO car
 VALUES (3, 3, 'Rav4', 'XER12312143', 2017, 'MACHINE', 'COMFORT', 20);
+
+INSERT INTO user_service
+VALUES (1,'Ivanov', 'Ivan', 'MC123123213', '+375255467654', 'ivan.ivanov@gmail.com', 'QWE12345678', 'ADMIN');
+
+INSERT INTO user_service
+VALUES (2,'Petrov', 'Petr', 'MC232323232', '+375295467654', 'petr.petrov@gmail.com', 'QQE12345678', 'USER');
+
+INSERT INTO user_service
+VALUES (3,'Sidorova', 'Vera', 'MP332323232', '+375335463241', 'vera.sidorova@gmail.com', 'ASE12345678', 'USER');
+
+INSERT INTO additional_services
+VALUES (1, 'NAVIGATOR', 10);
+
+INSERT INTO additional_services
+VALUES (2, 'BABYCHAIR', 20);
+
+INSERT INTO order_rental_car
+VALUES (1, 1, 1, 1, '2019-10-20', '2019-10-25', 50, 'ACCEPTED');
+
+INSERT INTO order_rental_car
+VALUES (2, 2, 2, 2, '2019-10-23', '2019-10-26', 70, 'ACCEPTED');

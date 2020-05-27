@@ -1,26 +1,29 @@
 package by.itacademy.boldysh.service.impl;
 
+import by.itacademy.boldysh.database.dto.FilterDto;
 import by.itacademy.boldysh.database.entity.BrandCar;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.CarClass;
 import by.itacademy.boldysh.database.entity.Transmission;
+import by.itacademy.boldysh.database.repository.BrandCarRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.config.TestConfigurationServiceTest;
 import by.itacademy.boldysh.service.interfaces.CarService;
-import by.itacademy.boldysh.service.interfaces.CustomFilterCars;
 import by.itacademy.boldysh.service.util.DatabaseHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigurationServiceTest.class)
@@ -37,7 +40,8 @@ public class CarServiceImplTest {
     private CarRepository carRepository;
 
     @Autowired
-    private CustomFilterCars customFilterCars;
+    private BrandCarRepository brandCarRepository;
+
 
     @Before
     public void init() {
@@ -54,33 +58,42 @@ public class CarServiceImplTest {
 
     @Test
     public void save() {
+        BrandCar brandCar = BrandCar.builder()
+                .brand("BMW")
+                .build();
+        brandCarRepository.save(brandCar);
+
         Car car = Car.builder()
-                .brandCar(BrandCar.builder()
-                        .brand("BMW")
-                        .build())
+                .brandCar(brandCar)
                 .carClass(CarClass.BUSINESS)
                 .model("540")
                 .transmission(Transmission.MACHINE)
-                .costRentalOfDay(50)
+                .costRentalOfDay(BigDecimal.valueOf(50))
                 .vinNumber("WADASDQQ123123".toUpperCase())
                 .yearOfIssue(2019)
                 .build();
+
+
         carService.save(car);
+        Car car1 = carRepository.findByVinNumber("WADASDQQ123123");
         System.out.println(car);
+        System.out.println(car1);
     }
 
     @Test
-    public void updateCar() {
-        Integer startCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
-        carService.updateCar("DSDS233232", 60);
-        Integer finishCost = carRepository.findByVinNumber("DSDS233232").getCostRentalOfDay();
-        assertTrue(startCost < finishCost);
+    public void findByFilterAndPaginationCars() {
+        FilterDto filterDto = new FilterDto("", "",
+                null, null, null, null);
+        Page<Car> cars = carService.findByFilterAndPaginationCars(filterDto, PageRequest.of(0, 2));
+        System.out.println(cars.getContent().get(0));
+        assertEquals(2, cars.getContent().size());
     }
 
-
     @Test
-    public void findByFilterCars() {
-        List<Car> cars = customFilterCars.findByFilterCars(null, null, null, null, null, null);
-        assertEquals(0, 0);
+    public void findByPaginated() {
+        List<Car> cars = (List<Car>) carRepository.findAll();
+        Page<Car> pagesCar = carService.findByPaginated(PageRequest.of(0, 2), cars);
+        assertEquals(2, pagesCar.getContent().size());
+
     }
 }

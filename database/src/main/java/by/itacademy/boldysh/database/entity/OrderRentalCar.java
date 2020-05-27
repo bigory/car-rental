@@ -6,13 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -36,7 +31,7 @@ public class OrderRentalCar extends BaseEntity<Long> {
     private LocalDate dateFinishRental;
 
     @Column(name = "cost")
-    private Integer cost;
+    private BigDecimal cost;
 
     @Column(name = "status_order")
     @Enumerated(EnumType.STRING)
@@ -46,7 +41,7 @@ public class OrderRentalCar extends BaseEntity<Long> {
     @JoinColumn(name = "additional_services_id")
     private AdditionalService additionalService;
 
-    public OrderRentalCar(Long userServiceId, Long carId, LocalDate dateStartRental, LocalDate dateFinishRental, Integer cost, StatusOrder statusOrder, AdditionalService additionalService) {
+    public OrderRentalCar(Long userServiceId, Long carId, LocalDate dateStartRental, LocalDate dateFinishRental, BigDecimal cost, StatusOrder statusOrder, AdditionalService additionalService) {
         this.userServiceId = userServiceId;
         this.carId = carId;
         this.dateStartRental = dateStartRental;

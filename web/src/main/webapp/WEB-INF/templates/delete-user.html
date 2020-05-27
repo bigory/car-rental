@@ -2,18 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>DeleteCars</title>
+    <title>DeleteUser</title>
 </head>
 <body>
 
 
-<form th:action="@{/delete-cars.html}" th:object="${carDto}" method="post">
-    <span>Input vin number</span>
+<form th:action="@{delete-user}" th:object="${userDto}" method="post">
+    <span>Input passport number</span>
 
     <br>
     <div>
-        <span>Vin number</span>
-        <input type="text" th:field="*{vinNumber}">
+        <span>Passport number</span>
+        <input type="text" th:field="*{passportNumber}">
     </div>
 
     <br>

@@ -6,7 +6,7 @@
 
     <groupId>by.itacademy.boldysh</groupId>
     <artifactId>car-rental</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -18,12 +18,13 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring.verison>5.2.3.RELEASE</spring.verison>
+        <spring.version>5.1.7.RELEASE</spring.version>
         <file.encoding>UTF-8</file.encoding>
         <junit.version>4.13</junit.version>
         <h2.version>1.4.199</h2.version>
         <log4j.verison>1.2.17</log4j.verison>
         <lombok.version>1.18.6</lombok.version>
+        <aspectj.verison>1.9.3</aspectj.verison>
     </properties>
 
     <dependencies>
@@ -43,34 +44,52 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${spring.verison}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.verison}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.verison}</version>
+            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.verison}</version>
+            <version>${spring.version}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${spring.verison}</version>
+            <version>${spring.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>5.2.4.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -82,7 +101,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring.verison}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
@@ -107,10 +126,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.8.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>${file.encoding}</encoding>
                 </configuration>
             </plugin>
@@ -123,6 +142,14 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12.4</version>
+                </plugin>
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

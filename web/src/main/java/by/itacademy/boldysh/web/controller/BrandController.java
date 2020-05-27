@@ -16,18 +16,33 @@ public class BrandController {
     @Autowired
     private BrandCarService brandCarService;
 
+    @Autowired
+    private BrandCarRepository brandCarRepository;
+
     @RequestMapping(value = "/add-brand", method = RequestMethod.GET)
     public String addBrand(Model model) {
-        BrandDto brandDto = new BrandDto();
-        model.addAttribute("brandDto", brandDto);
+        model.addAttribute("brandDto", new BrandDto());
         return "add-brand";
     }
 
-    @RequestMapping(value = "/add-brand", method = RequestMethod.POST)
+    @RequestMapping(value = "/brand", method = RequestMethod.POST)
     public String addBrands(BrandDto brandDto) {
-        String brand = brandDto.getBrand();
-        BrandCar brandCar = new BrandCar(brand);
-        brandCarService.save(brandCar);
+        brandCarService.save(new BrandCar(brandDto.getBrand()));
+        return "brand";
+    }
+
+    @RequestMapping(value = "delete-brand", method = RequestMethod.GET)
+    public void getBrand(Model model) {
+        BrandDto brandDto = new BrandDto();
+        model.addAttribute("brandDto", brandDto);
+        model.addAttribute("brandCars", brandCarService.findAll());
+    }
+
+    @RequestMapping(value = "delete-brand", method = RequestMethod.POST)
+    public String deleteBrand(BrandDto brandDto) {
+        BrandCar brandCar = brandCarRepository.findByBrand(brandDto.getBrand());
+        brandDto.setBrand(brandCar.getBrand());
+        brandCarRepository.deleteBrandCarByBrand(brandDto.getBrand());
         return "brand";
     }
 }

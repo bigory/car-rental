@@ -8,14 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +42,7 @@ public class UserService extends BaseEntity<Long> {
     private String password;
 
     @Column(name = "isadmin")
-    private boolean isAdmin;
+    private String role;
 
     @OneToOne(mappedBy = "userService", cascade = CascadeType.ALL)
     private BlackListUserService blackListUserService;
@@ -61,13 +54,22 @@ public class UserService extends BaseEntity<Long> {
     private List<Car> cars = new ArrayList<>();
 
     public UserService(String firstName, String secondName, String passportNumber,
-                       String telephone, String email, String password, boolean isAdmin) {
+                       String telephone, String email, String password, String role) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.passportNumber = passportNumber;
         this.telephone = telephone;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.role = role;
+    }
+
+    public UserService(String firstName, String secondName, String passportNumber, String telephone, String email, String password) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.passportNumber = passportNumber;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
     }
 }

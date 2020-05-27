@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div th:fragment="home">
+    <div th:id="wrapper">
+
+        <div th:id="line-vertical"></div>
+        <div th:id="line-vertiacal-wrapper"></div>
+        <div th:insert="~{fragments::header}"></div>
+        <div th:insert="~{fragments::aside}">
+        </div>
+
+        <form th:action="@{/filter-car-result}" th:object="${filterDto}" method="get">
+            <section th:id="section">
+                <div th:id="section-block">
+                    <div th:id="form-add">
+                        <br>
+                        <div>
+                            <span th:text="#{car.brand}">Brand</span>
+                            <select th:field="*{brandCar}">
+                                <option value="" th:text="All"></option>
+                                <option th:each="brand: ${brandCars}"
+                                        th:value="${brand.getBrand()}"
+                                        th:text="${brand.getBrand()}">
+                            </select>
+                        </div>
+
+                        <br>
+                        <div>
+                            <span th:text="#{car.model}">Model</span>
+                            <br>
+                            <input type="text" th:field="*{modelCar}">
+                        </div>
+
+                        <br>
+                        <div>
+                            <span th:text="#{car.class}">Class</span>
+                            <select th:field="*{classCar}">
+                                <option value="" th:text="All"></option>
+                                <option th:each="class: ${carClass}"
+                                        th:value="${class}"
+                                        th:text="${class}"></option>
+                            </select>
+                        </div>
+
+                        <br>
+                        <div>
+                            <span th:text="#{car.yearOfIssue}">Year of issue</span>
+                            <br>
+                            <input type="text" th:field="*{yearOfIssue}">
+                        </div>
+
+                        <br>
+                        <span th:text="#{car.transmissions}">Transmission</span><br>
+
+                        <div th:each="transmission:${transmissions}">
+                            <span th:text="${transmission}">AKPP</span>
+                            <input th:type="radio" name="Transmission" th:value="${transmission}">
+                        </div>
+
+                        <br>
+                        <div>
+                            <span th:text="#{car.costRentalOfDay}">Cost</span>
+                            <br>
+                            <input type="text" th:field="*{costRentalOfDay}">
+                        </div>
+
+                        <br>
+                        <div>
+                            <button class="btn btn-outline-success my-2 " type="submit" th:text="#{search.car}"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+
+        <div th:insert="~{fragments::footer}"></div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

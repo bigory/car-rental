@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -35,5 +35,14 @@ public class BrandCarRepositoryTest {
     public void findByBrandCar() {
         BrandCar brandCars = brandCarRepository.findByBrand("BMW");
         assertEquals("BMW", brandCars.getBrand());
+    }
+
+    @Test
+    public void deleteBrandCarByBrand() {
+        BrandCar brandCars = brandCarRepository.findByBrand("BMW");
+        brandCarRepository.deleteBrandCarByBrand(brandCars.getBrand());
+        BrandCar brandCar = brandCarRepository.findByBrand("BMW");
+        assertNull(brandCar);
+
     }
 }
