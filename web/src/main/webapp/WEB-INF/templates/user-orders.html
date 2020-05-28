@@ -68,7 +68,7 @@
                             <div th:if="${pageOrdersRentalCarDto.totalPages > 0}"
                                  th:each="pageNumber:${pageNumbers}">
                                 <a class="page-link"
-                                   th:href="@{/orders.html(size=${pageOrdersRentalCarDto.size}, page=${pageNumber})}"
+                                   th:href="@{/user-orders(size=${pageOrdersRentalCarDto.size}, page=${pageNumber})}"
                                    th:text="${pageNumber}"
                                    th:class="${pageNumber==pageOrdersRentalCarDto.number+1}?active"></a>
                             </div>

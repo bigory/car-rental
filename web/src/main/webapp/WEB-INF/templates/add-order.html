@@ -18,7 +18,8 @@
         <div th:insert="~{fragments::aside}">
         </div>
 
-        <form th:action="@{/add-order(startRentalCar=${startRentalCar},finishRentalCar=${finishRentalCar})}" th:object="${orderRentalCarDto}" method="post">
+        <form th:action="@{/add-order}"
+              th:object="${orderRentalCarDtoNew}" method="post">
             <section th:id="section">
                 <div th:id="section-block">
                     <div th:id="form-add">
@@ -36,10 +37,11 @@
                         <br>
 
                         <span th:text="#{car}"></span>
+
                         <div>
-                            <select th:field="*{brandCar}">
+                            <select th:field="*{vinNumber}">
                                 <option th:each="car: ${cars}"
-                                        th:value="${car.brandCar.getBrand()}">
+                                        th:value="${car.getVinNumber()}">
                                     <span th:text="${car.getBrandCar().brand}"></span>
                                     <span th:text="${car.getModel()}"></span>
                                     <span th:text="${car.getVinNumber()}"></span>
@@ -54,20 +56,24 @@
 
                             <div th:each="additionalService:${additionalServices}">
                                 <span th:text="${additionalService.getServices()}"></span>
-                                <span th:text="${additionalService.getCost()}"></span>
-                                <input th:type="radio" th:name="AdditionalService" th:value="*{additionalService}">
+                                <span th:text="${additionalService.getCost()} + BYN"></span>
+                                <input th:type="radio" th:checked="${additionalService.getServices()==defaultService}"
+                                       th:name="AdditionalService"
+                                       th:value="${additionalService.getServices()}">
                             </div>
                         </div>
+
                         <div>
                             <div th:text="#{date.order}"></div>
                             <input th:type="date" th:name="StartRentalCar"
-                                   th:field="*{startRentalCar}">
+                                   th:field="*{startRentalCar}" th:min="${localDate.now()}" th:required="required">
                             <br>
-                            <input th:type="date" th:name="StartRentalCar" th:field="*{finishRentalCar}">
+                            <input th:type="date" th:name="FinishRentalCar" th:field="*{finishRentalCar}"
+                                   th:min="${localDate.now().plusDays(1)}" th:required="required">
                         </div>
 
                         <div th:text="#{order.status}"></div>
-                        <input th:type="text" th:name="StatusOrder" th:value="${statusOrder.ACCEPTED}">
+                        <input th:type="text" th:name="StatusOrder" th:value="${statusOrder.ACCEPTED}" readonly>
                         <br>
                         <div>
                             <input type="submit" th:value="#{save.object}" class="rounded-lg">
