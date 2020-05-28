@@ -44,10 +44,10 @@ public class UserService extends BaseEntity<Long> {
     @Column(name = "isadmin")
     private String role;
 
-    @OneToOne(mappedBy = "userService", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "userService", fetch = FetchType.EAGER)
     private BlackListUserService blackListUserService;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "order_rental_car", schema = "car_storage",
             joinColumns = @JoinColumn(name = "user_service_id"),
             inverseJoinColumns = @JoinColumn(name = "car_id"))

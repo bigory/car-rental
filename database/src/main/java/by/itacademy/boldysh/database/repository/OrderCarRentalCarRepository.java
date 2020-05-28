@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface OrderCarRentalCarRepository extends PagingAndSortingRepository<OrderRentalCar, Long> {
 
-    OrderRentalCar findByDateStartRentalAndDateFinishRental(LocalDate startRentalCar, LocalDate finishRentalCar);
+    List<OrderRentalCar> findByDateStartRentalIsAfter(LocalDate startRentalCar);
 
     OrderRentalCar findByCarIdAndUserServiceId(Long carId, Long userServiceId);
 

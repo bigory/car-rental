@@ -38,10 +38,9 @@ public class OrderCarRentalCarRepositoryTest {
 
     @Test
     public void findByDateStartRentalAndDateFinishRental() {
-        OrderRentalCar orderRentalCar = orderCarRentalCarRepository.findByDateStartRentalAndDateFinishRental(LocalDate.of(2019, 10, 10), LocalDate.of(2019, 10, 20));
-        System.out.println(orderRentalCar);
+        List<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findByDateStartRentalIsAfter(LocalDate.of(2019, 10, 10));
+        System.out.println(orderRentalCar.size());
         assertNotNull(orderRentalCar);
-
     }
 
     @Test

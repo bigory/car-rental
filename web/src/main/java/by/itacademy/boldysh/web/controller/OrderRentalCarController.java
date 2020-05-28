@@ -1,13 +1,11 @@
 package by.itacademy.boldysh.web.controller;
 
+import by.itacademy.boldysh.database.dto.BlackListUserServiceDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDtoNew;
 import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.*;
-import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
-import by.itacademy.boldysh.database.repository.CarRepository;
-import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
-import by.itacademy.boldysh.database.repository.UserServiceRepository;
+import by.itacademy.boldysh.database.repository.*;
 import by.itacademy.boldysh.service.interfaces.OrderRentalCarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +43,9 @@ public class OrderRentalCarController {
     CarRepository carRepository;
 
     @Autowired
+    BlackListUserServiceRepository blackListUserServiceRepository;
+
+    @Autowired
     AdditionalServiceRepository additionalServiceRepository;
 
     @ModelAttribute
@@ -70,6 +71,7 @@ public class OrderRentalCarController {
         }
         return "orders";
     }
+
 
     @RequestMapping(value = "/update-order", method = RequestMethod.GET)
     public void getPageParametrUpdateCar(Model model, @RequestParam(value = "id") Long id) {
@@ -107,23 +109,27 @@ public class OrderRentalCarController {
     public String getPageAddCars(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserService userService = userServiceRepository.findByEmail(user.getUsername());
-
-        model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
-        model.addAttribute("cars", carRepository.findAll());
-        model.addAttribute("additionalServices", additionalServiceRepository.findAll());
-        model.addAttribute("defaultService", Services.NO);
-        UserDto userDto = UserDto.builder()
-                .firstName(userService.getFirstName())
-                .secondName(userService.getSecondName())
-                .email(userService.getEmail())
-                .passportNumber(userService.getPassportNumber())
-                .telephone(userService.getTelephone())
-                .build();
-        model.addAttribute("userDto", userDto);
-        model.addAttribute("statusOrder", StatusOrder.ACCEPTED);
-        model.addAttribute("localDate", LocalDate.now());
-        return "add-order";
+        if (userService.equals(blackListUserServiceRepository.findByUserService(userService).getUserService())) {
+            return "redirect:info-cause-add-blacklist";
+        } else {
+            model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
+            model.addAttribute("cars", carRepository.findAll());
+            model.addAttribute("additionalServices", additionalServiceRepository.findAll());
+            model.addAttribute("defaultService", Services.NO);
+            UserDto userDto = UserDto.builder()
+                    .firstName(userService.getFirstName())
+                    .secondName(userService.getSecondName())
+                    .email(userService.getEmail())
+                    .passportNumber(userService.getPassportNumber())
+                    .telephone(userService.getTelephone())
+                    .build();
+            model.addAttribute("userDto", userDto);
+            model.addAttribute("statusOrder", StatusOrder.ACCEPTED);
+            model.addAttribute("localDate", LocalDate.now());
+            return "add-order";
+        }
     }
+
 
     @RequestMapping(value = "/add-order", method = RequestMethod.POST)
     public String createCar(OrderRentalCarDtoNew orderRentalCarDtoNew, @RequestParam("startRentalCar")
@@ -144,6 +150,17 @@ public class OrderRentalCarController {
         orderRentalCarService.save(orderRentalCar);
         return "order";
     }
+
+    @RequestMapping(value = "/info-cause-add-blacklist", method = RequestMethod.GET)
+    public String getInfoCauseAddBlackList(Model model, UserService userService) {
+        BlackListUserServiceDto blackListUserServiceDto = BlackListUserServiceDto.builder()
+                .cause(blackListUserServiceRepository.findByUserService(userService).getCause())
+                .userService(userService)
+                .build();
+        model.addAttribute("blackListUserServiceDto", blackListUserServiceDto);
+        return "info-cause-add-blacklist";
+    }
+
 
     @RequestMapping(value = "/user-orders", method = RequestMethod.GET)
     public String getPagesOrderRentalCarUserService(Model model, @RequestParam(value = "page") Optional<Integer> page,
