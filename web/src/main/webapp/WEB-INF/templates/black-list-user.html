@@ -26,6 +26,7 @@
                         <th scope="col" th:text="#{first.name}"></th>
                         <th scope="col" th:text="#{second.name}"></th>
                         <th scope="col" th:text="#{black.list.cause}"></th>
+                        <th scope="col" th:text="#{black.list.cause}"></th>
                     </tr>
                     </thead>
 
@@ -35,6 +36,7 @@
                         <td th:text="${blackList.userService.firstName}"></td>
                         <td th:text="${blackList.userService.secondName}"></td>
                         <td th:text="${blackList.cause}"></td>
+                        <td><a th:href="@{/delete-user-blacklist(id=${blackList.getId()})}" th:text="#{delete.user}"></a></td>
                     </tr>
                     </tbody>
                 </table>

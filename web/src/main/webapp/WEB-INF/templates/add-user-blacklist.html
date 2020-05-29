@@ -15,23 +15,40 @@
         <div th:id="line-vertical"></div>
         <div th:id="line-vertiacal-wrapper"></div>
         <div th:insert="~{fragments::header}"></div>
-        <div th:insert="~{fragments::aside}"></div>
+        <div th:insert="~{fragments::aside}">
+        </div>
 
-        <section th:id="section">
-            <div th:id="section-block">
-                <div th:id="form-add">
-                    <span th:text="#{info.blacklist.user}"></span>
-                    <br>
-                    <span th:text="#{black.list.cause}+':'"></span>
-                    <br>
-                    <span th:text="${cause}"></span>
+        <form th:action="@{/add-user-blacklist}"
+              th:object="${blackListUserServiceDto}" method="post">
+            <section th:id="section">
+                <div th:id="section-block">
+                    <div th:id="form-add">
+                        <div>
+                            <select th:field="*{userServiceId}">
+                                <option th:each="userService: ${userServices}"
+                                        th:value="${userService.getId()}">
+                                    <span th:text="${userService.firstName}"></span>
+                                    <span th:text="${userService.secondName}"></span>
+                                    <span th:text="${userService.passportNumber}"></span>
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <input th:type="text" th:name="Cause" th:value="*{cause}" required>
+                        </div>
+                        <br>
+                        <div>
+                            <input type="submit" th:value="#{save.object}" class="rounded-lg">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </form>
 
         <div th:insert="~{fragments::footer}"></div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -41,6 +58,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+</body>
+</html></title>
+</head>
+<body>
 
 </body>
 </html>

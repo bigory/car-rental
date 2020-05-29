@@ -44,7 +44,7 @@ public class UserService extends BaseEntity<Long> {
     @Column(name = "isadmin")
     private String role;
 
-    @OneToOne(mappedBy = "userService", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "userService", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private BlackListUserService blackListUserService;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

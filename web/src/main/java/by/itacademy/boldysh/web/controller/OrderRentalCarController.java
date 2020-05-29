@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.web.controller;
 
-import by.itacademy.boldysh.database.dto.BlackListUserServiceDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDtoNew;
 import by.itacademy.boldysh.database.dto.UserDto;
@@ -109,30 +108,30 @@ public class OrderRentalCarController {
     public String getPageAddCars(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserService userService = userServiceRepository.findByEmail(user.getUsername());
-        if (userService.equals(blackListUserServiceRepository.findByUserService(userService).getUserService())) {
-            return "redirect:info-cause-add-blacklist";
-        } else {
-            model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
-            model.addAttribute("cars", carRepository.findAll());
-            model.addAttribute("additionalServices", additionalServiceRepository.findAll());
-            model.addAttribute("defaultService", Services.NO);
-            UserDto userDto = UserDto.builder()
-                    .firstName(userService.getFirstName())
-                    .secondName(userService.getSecondName())
-                    .email(userService.getEmail())
-                    .passportNumber(userService.getPassportNumber())
-                    .telephone(userService.getTelephone())
-                    .build();
-            model.addAttribute("userDto", userDto);
-            model.addAttribute("statusOrder", StatusOrder.ACCEPTED);
-            model.addAttribute("localDate", LocalDate.now());
-            return "add-order";
+        if (!(blackListUserServiceRepository.findByUserService(userService) == null)) {
+            model.addAttribute("cause", blackListUserServiceRepository.findByUserServiceId(userService.getId()).getCause());
+            return "info-cause-add-blacklist";
         }
+        model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
+        model.addAttribute("cars", carRepository.findAll());
+        model.addAttribute("additionalServices", additionalServiceRepository.findAll());
+        model.addAttribute("defaultService", Services.NO);
+        UserDto userDto = UserDto.builder()
+                .firstName(userService.getFirstName())
+                .secondName(userService.getSecondName())
+                .email(userService.getEmail())
+                .passportNumber(userService.getPassportNumber())
+                .telephone(userService.getTelephone())
+                .build();
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("statusOrder", StatusOrder.ACCEPTED);
+        model.addAttribute("localDate", LocalDate.now());
+        return "add-order";
     }
 
 
     @RequestMapping(value = "/add-order", method = RequestMethod.POST)
-    public String createCar(OrderRentalCarDtoNew orderRentalCarDtoNew, @RequestParam("startRentalCar")
+    public String createCar(Model model, OrderRentalCarDtoNew orderRentalCarDtoNew, @RequestParam("startRentalCar")
             String startRentalCar, @RequestParam("finishRentalCar") String finishRentalCar) {
 
         Car car = carRepository.findByVinNumber(orderRentalCarDtoNew.getVinNumber());
@@ -147,20 +146,25 @@ public class OrderRentalCarController {
         orderRentalCar.setDateFinishRental(LocalDate.parse(finishRentalCar));
         orderRentalCar.setStatusOrder(orderRentalCarDtoNew.getStatusOrder());
         orderRentalCar.setCost(car.getCostRentalOfDay().add(additionalService.getCost()));
+        OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
+                .firstName(userService.getFirstName())
+                .secondName(userService.getSecondName())
+                .passportNumber(userService.getPassportNumber())
+                .brandCar(car.getBrandCar().getBrand())
+                .modelCar(car.getModel())
+                .vinNumber(car.getVinNumber())
+                .costCar(car.getCostRentalOfDay())
+                .additionalService(additionalService)
+                .costAdditionalService(additionalService.getCost())
+                .startRentalCar(LocalDate.parse(orderRentalCarDtoNew.getStartRentalCar()))
+                .finishRentalCar(LocalDate.parse(orderRentalCarDtoNew.getFinishRentalCar()))
+                .costOrder(car.getCostRentalOfDay().add(additionalService.getCost()))
+                .statusOrder(orderRentalCarDtoNew.getStatusOrder())
+                .build();
+        model.addAttribute(orderRentalCarDto);
         orderRentalCarService.save(orderRentalCar);
         return "order";
     }
-
-    @RequestMapping(value = "/info-cause-add-blacklist", method = RequestMethod.GET)
-    public String getInfoCauseAddBlackList(Model model, UserService userService) {
-        BlackListUserServiceDto blackListUserServiceDto = BlackListUserServiceDto.builder()
-                .cause(blackListUserServiceRepository.findByUserService(userService).getCause())
-                .userService(userService)
-                .build();
-        model.addAttribute("blackListUserServiceDto", blackListUserServiceDto);
-        return "info-cause-add-blacklist";
-    }
-
 
     @RequestMapping(value = "/user-orders", method = RequestMethod.GET)
     public String getPagesOrderRentalCarUserService(Model model, @RequestParam(value = "page") Optional<Integer> page,

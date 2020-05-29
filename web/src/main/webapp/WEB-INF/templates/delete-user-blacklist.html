@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -17,16 +17,31 @@
         <div th:insert="~{fragments::header}"></div>
         <div th:insert="~{fragments::aside}"></div>
 
-        <section th:id="section">
-            <div th:id="section-block">
-                <p><span th:text="#{home.page.info}"></span></p>
-            </div>
-        </section>
+        <form th:action="@{/delete-user-blacklist(id=${blackListUserServiceDto.getId()})}"
+              th:object="${blackListUserServiceDto}"
+              method="post">
+            <section th:id="section">
+                <div th:id="section-block">
+                    <div th:id="form-add">
+                        <span th:text="#{users.service}"></span><br>
+                        <span th:text="#{first.name}"></span>
+                        <span th:text="${userDto.firstName}"></span><br>
+                        <span th:text="#{second.name}"></span> <span
+                            th:text="${userDto.getSecondName()}"></span><br>
+                        <span th:text="#{passport.number}"></span>
+                        <span th:text="${userDto.getPassportNumber()}"></span><br>
+                        <div>
+                            <input type="submit" th:value="#{delete.user}">
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </form>
 
         <div th:insert="~{fragments::footer}"></div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

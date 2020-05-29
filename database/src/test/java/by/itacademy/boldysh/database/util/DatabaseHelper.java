@@ -53,6 +53,9 @@ public class DatabaseHelper {
         entityManager.persist(userTwo);
         entityManager.persist(userThree);
 
+        BlackListUserService blackListUserService = new BlackListUserService("BAD DRIVER", userOne);
+        entityManager.persist(blackListUserService);
+
         BrandCar brandCarBMW = new BrandCar("BMW");
         BrandCar brandCarVW = new BrandCar("VW");
         BrandCar brandCarVolvo = new BrandCar("Volvo");

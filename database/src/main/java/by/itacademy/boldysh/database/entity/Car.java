@@ -51,7 +51,7 @@ public class Car extends BaseEntity<Long> {
     @JoinColumn(name = "brand_car_id")
     private BrandCar brandCar;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_rental_car", schema = "car_storage",
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "user_service_id"))

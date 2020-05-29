@@ -10,4 +10,6 @@ public interface BlackListUserServiceRepository extends PagingAndSortingReposito
 
     BlackListUserService findByUserService(UserService userService);
 
+    BlackListUserService findByUserServiceId(Long id);
+
 }
