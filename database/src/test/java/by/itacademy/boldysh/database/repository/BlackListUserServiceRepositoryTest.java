@@ -42,10 +42,4 @@ public class BlackListUserServiceRepositoryTest {
         assertNotNull(blackListUserService);
     }
 
-    @Test
-    public void testFindByUserServiceId() {
-        BlackListUserService blackListUserService = blackListUserServiceRepository.findByUserServiceId(1L);
-        System.out.println(blackListUserService);
-        assertNotNull(blackListUserService);
-    }
 }

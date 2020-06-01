@@ -19,7 +19,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigurationServiceTest.class)
@@ -70,15 +69,5 @@ public class BlackListUserServiceServiceImplTest {
         List<BlackListUserService> blackListUserServices = blackListUserServiceService.findAll();
         blackListUserServices.forEach(System.out::println);
         assertEquals(1, blackListUserServices.size());
-    }
-
-    @Test
-    public void delete() {
-        UserService userService = userServiceRepository.findByPassportNumber("MP332323232");
-        BlackListUserService blackListUserService = blackListUserServiceRepository.findByUserService(userService);
-        blackListUserServiceService.delete(blackListUserService);
-        BlackListUserService blackListUserService1 = blackListUserServiceRepository.findByUserService(userService);
-        assertNull(blackListUserService1);
-
     }
 }

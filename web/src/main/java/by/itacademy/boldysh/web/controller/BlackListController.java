@@ -98,8 +98,8 @@ public class BlackListController {
     }
 
     @RequestMapping(value = "/delete-user-blacklist", method = RequestMethod.POST)
-    public String deleteCar(@RequestParam(value = "id") Long id) {
-        blackListUserServiceRepository.delete(blackListUserServiceRepository.findById(id).get());
+    public String deleteBlackListUserService(@RequestParam(value = "id") Long id) {
+        blackListUserServiceRepository.deleteByBlackListUserService(blackListUserServiceRepository.findById(id).get().getUserService());
         return "info-delete-user-black";
     }
 

@@ -44,6 +44,7 @@
                 <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
 
                 <div sec:authorize="hasAuthority('ADMIN')">
+                    <li><a th:href="@{add-brand}" th:text="#{add.brand}"></a></li>
                     <li><a th:href="@{add-cars}" th:text="#{add.car}"></a></li>
                     <li><a th:href="@{list-car-update}" th:text="#{update.car}"></a></li>
                     <li><a th:href="@{delete-car}" th:text="#{delete.car}"></a></li>

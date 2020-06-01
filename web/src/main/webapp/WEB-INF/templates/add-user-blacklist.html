@@ -24,6 +24,7 @@
                 <div th:id="section-block">
                     <div th:id="form-add">
                         <div>
+                            <div th:text="#{users.service}"></div>
                             <select th:field="*{userServiceId}">
                                 <option th:each="userService: ${userServices}"
                                         th:value="${userService.getId()}">
@@ -33,6 +34,7 @@
                                 </option>
                             </select>
                         </div>
+                        <div th:text="#{black.list.cause}"></div>
                         <div>
                             <input th:type="text" th:name="Cause" th:value="*{cause}" required>
                         </div>

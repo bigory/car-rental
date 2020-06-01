@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
-    <title>Add brand car</title>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div th:insert="~{fragments::language}">
+<div th:fragment="home">
+    <div th:id="wrapper">
+
+        <div th:id="line-vertical"></div>
+        <div th:id="line-vertiacal-wrapper"></div>
+        <div th:insert="~{fragments::header}"></div>
+        <div th:insert="~{fragments::aside}">
+        </div>
+
+        <form th:action="@{/add-brand}" th:object="${brandDto}" method="post">
+            <section th:id="section">
+                <div th:id="section-block">
+                    <div th:id="form-add">
+                        <div>
+                            <span th:text="#{car.brand}">Brand</span>
+                            <br>
+                            <input type="text" th:field="*{brand}" class="text-uppercase font-weight-bold">
+                        </div>
+                        <div>
+                            <input type="submit" th:value="#{save.object}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+
+        <div th:insert="~{fragments::footer}"></div>
     </div>
-    <form th:action="@{/brand}" th:object="${brandDto}" method="post">
-        <div>
-            <span th:text="#{car.brand}">Brand</span>
-            <br>
-            <input type="text" th:field="*{brand}" class="text-uppercase font-weight-bold">
-        </div>
-        <div>
-            <input type="submit" th:value="#{save.object}">
-        </div>
-    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
