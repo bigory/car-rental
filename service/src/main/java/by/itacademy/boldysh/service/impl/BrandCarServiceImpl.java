@@ -42,6 +42,7 @@ public class BrandCarServiceImpl implements BrandCarService {
     }
 
     @Override
+    @Cacheable("allBrandCar")
     public Page<BrandCar> findByPaginated(Pageable pageable, List<BrandCar> entities) {
         return null;
     }

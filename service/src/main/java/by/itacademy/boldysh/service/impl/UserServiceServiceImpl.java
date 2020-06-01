@@ -4,6 +4,7 @@ import by.itacademy.boldysh.database.entity.UserService;
 import by.itacademy.boldysh.database.repository.UserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.UserServiceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +35,7 @@ public class UserServiceServiceImpl implements UserServiceService {
     }
 
     @Override
+    @Cacheable("userServices")
     public List<UserService> findAll() {
         return StreamSupport.stream(userServiceRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }

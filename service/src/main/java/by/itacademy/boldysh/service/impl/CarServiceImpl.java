@@ -22,7 +22,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +54,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Cacheable({"cars", "allBrandCar"})
     public Page<Car> findByPaginated(Pageable pageable, List<Car> cars) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
@@ -77,6 +77,7 @@ public class CarServiceImpl implements CarService {
     EntityManager entityManager;
 
     @Override
+    @Cacheable({"cars", "allBrandCar"})
     public Page<Car> findByFilterAndPaginationCars(FilterDto filterDto, Pageable page) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
