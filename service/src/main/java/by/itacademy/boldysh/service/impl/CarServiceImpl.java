@@ -1,9 +1,7 @@
 package by.itacademy.boldysh.service.impl;
 
 import by.itacademy.boldysh.database.dto.FilterDto;
-import by.itacademy.boldysh.database.entity.BrandCar_;
-import by.itacademy.boldysh.database.entity.Car;
-import by.itacademy.boldysh.database.entity.Car_;
+import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +28,6 @@ import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
-@Cacheable("cars")
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
@@ -122,6 +120,18 @@ public class CarServiceImpl implements CarService {
 
         entityManager.close();
         return carPage;
+    }
+
+    @Override
+    public List<Car> findByCarNoOrderRental(List<Car> cars, List<OrderRentalCar> orderRentalCarList) {
+        List<Car> carList = new ArrayList<>();
+        for (Car car : cars) {
+            for (OrderRentalCar orderRentalCar : orderRentalCarList)
+                if (!(car.getId().equals(orderRentalCar.getCarId())) || car.getId().equals(orderRentalCar.getCarId()) && orderRentalCar.getStatusOrder() == StatusOrder.COMPLETED) {
+                    carList.add(car);
+                }
+        }
+        return carList;
     }
 }
 

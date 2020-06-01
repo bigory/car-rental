@@ -5,6 +5,7 @@ import by.itacademy.boldysh.database.dto.OrderRentalCarDtoNew;
 import by.itacademy.boldysh.database.dto.UserDto;
 import by.itacademy.boldysh.database.entity.*;
 import by.itacademy.boldysh.database.repository.*;
+import by.itacademy.boldysh.service.interfaces.CarService;
 import by.itacademy.boldysh.service.interfaces.OrderRentalCarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class OrderRentalCarController {
 
     @Autowired
     CarRepository carRepository;
+
+    @Autowired
+    CarService carService;
 
     @Autowired
     BlackListUserServiceRepository blackListUserServiceRepository;
@@ -106,14 +110,17 @@ public class OrderRentalCarController {
 
     @RequestMapping(value = "/add-order", method = RequestMethod.GET)
     public String getPageAddCars(Model model) {
+        List<Car> carList = (List<Car>) carRepository.findAll();
+        List<OrderRentalCar> ordersRentalCar = (List<OrderRentalCar>) orderCarRentalCarRepository.findAll();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserService userService = userServiceRepository.findByEmail(user.getUsername());
+        List<Car> cars = carService.findByCarNoOrderRental(carList, ordersRentalCar);
         if (!(blackListUserServiceRepository.findByUserService(userService) == null)) {
             model.addAttribute("cause", blackListUserServiceRepository.findByUserServiceId(userService.getId()).getCause());
             return "info-cause-add-blacklist";
         }
         model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
-        model.addAttribute("cars", carRepository.findAll());
+        model.addAttribute("cars", cars);
         model.addAttribute("additionalServices", additionalServiceRepository.findAll());
         model.addAttribute("defaultService", Services.NO);
         UserDto userDto = UserDto.builder()
