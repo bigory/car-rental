@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.database.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +20,7 @@ public class BlackListUserService extends BaseEntity<Long> {
     @Column(name = "cause")
     private String cause;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private UserService userService;
 

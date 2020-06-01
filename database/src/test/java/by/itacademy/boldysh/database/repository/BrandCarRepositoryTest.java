@@ -37,12 +37,4 @@ public class BrandCarRepositoryTest {
         assertEquals("BMW", brandCars.getBrand());
     }
 
-    @Test
-    public void deleteBrandCarByBrand() {
-        BrandCar brandCars = brandCarRepository.findByBrand("BMW");
-        brandCarRepository.deleteBrandCarByBrand(brandCars.getBrand());
-        BrandCar brandCar = brandCarRepository.findByBrand("BMW");
-        assertNull(brandCar);
-
-    }
 }

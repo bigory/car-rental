@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -15,11 +15,25 @@
         <div th:id="line-vertical"></div>
         <div th:id="line-vertiacal-wrapper"></div>
         <div th:insert="~{fragments::header}"></div>
-        <div th:insert="~{fragments::aside}"></div>
+        <div th:insert="~{fragments::aside}">
+        </div>
 
         <section th:id="section">
             <div th:id="section-block">
-                <p><span th:text="#{home.page.info}"></span></p>
+                <div th:id="form-add">
+                    <div>
+                        <span th:text="#{add.user}"></span>
+                        <br>
+                        <span th:text="${userService.firstName}"> </span>
+                        <br>
+                        <span th:text="${userService.secondName}"> </span>
+                        <br>
+                        <span th:text="${userService.passportNumber}"> </span>
+                        </br>
+                        <span th:text="${blackListUserServiceDto.getCause()}"></span>
+                    </div>
+                    <br>
+                </div>
             </div>
         </section>
 
@@ -36,6 +50,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+</body>
+</html></title>
+</head>
+<body>
 
 </body>
 </html>

@@ -44,13 +44,14 @@
                 <li><a th:href="@{additional-services}" th:text="#{additional.equipment}"></a></li>
 
                 <div sec:authorize="hasAuthority('ADMIN')">
+                    <li><a th:href="@{add-brand}" th:text="#{add.brand}"></a></li>
                     <li><a th:href="@{add-cars}" th:text="#{add.car}"></a></li>
                     <li><a th:href="@{list-car-update}" th:text="#{update.car}"></a></li>
                     <li><a th:href="@{delete-car}" th:text="#{delete.car}"></a></li>
                     <li><a th:href="@{users}" th:text="#{users.service}"></a></li>
                     <li><a th:href="@{black-list-user}" th:text="#{user.black.list}"></a></li>
                     <li><a th:href="@{orders}" th:text="#{orders.user}"></a></li>
-
+                    <li><a th:href="@{add-user-blacklist}" th:text="#{add.user.black.list}"></a></li>
                 </div>
 
                 <div sec:authorize="hasAuthority('USER')">

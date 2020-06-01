@@ -1,7 +1,6 @@
 package by.itacademy.boldysh.service.impl;
 
 import by.itacademy.boldysh.database.entity.BlackListUserService;
-import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.repository.BlackListUserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.BlackListUserServiceService;
 import org.springframework.beans.factory.annotation.Autowired;

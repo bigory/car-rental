@@ -53,6 +53,9 @@ public class DatabaseHelper {
         entityManager.persist(userTwo);
         entityManager.persist(userThree);
 
+        BlackListUserService blackListUserService = new BlackListUserService("BAD DRIVER", userOne);
+        entityManager.persist(blackListUserService);
+
         BrandCar brandCarBMW = new BrandCar("BMW");
         BrandCar brandCarVW = new BrandCar("VW");
         BrandCar brandCarVolvo = new BrandCar("Volvo");
@@ -78,8 +81,10 @@ public class DatabaseHelper {
 
         OrderRentalCar orderRentalCarOne = new OrderRentalCar(userOne.getId(), bmw.getId(), LocalDate.of(2019, 10, 10),
                 LocalDate.of(2019, 10, 20), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
+
         OrderRentalCar orderRentalCarThree = new OrderRentalCar(userOne.getId(), bmw.getId(), LocalDate.of(2019, 10, 11),
                 LocalDate.of(2019, 10, 19), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
+
         OrderRentalCar orderRentalCarTwo = new OrderRentalCar(userTwo.getId(), volvo.getId(), LocalDate.of(2019, 10, 20),
                 LocalDate.of(2019, 10, 23), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
         entityManager.persist(orderRentalCarOne);

@@ -1,20 +1,15 @@
 package by.itacademy.boldysh.web.controller;
 
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
+import by.itacademy.boldysh.database.dto.OrderRentalCarDtoNew;
 import by.itacademy.boldysh.database.dto.UserDto;
-import by.itacademy.boldysh.database.entity.OrderRentalCar;
-import by.itacademy.boldysh.database.entity.StatusOrder;
-import by.itacademy.boldysh.database.entity.UserService;
-import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
-import by.itacademy.boldysh.database.repository.CarRepository;
-import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
-import by.itacademy.boldysh.database.repository.UserServiceRepository;
+import by.itacademy.boldysh.database.entity.*;
+import by.itacademy.boldysh.database.repository.*;
 import by.itacademy.boldysh.service.interfaces.OrderRentalCarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -47,6 +42,9 @@ public class OrderRentalCarController {
     CarRepository carRepository;
 
     @Autowired
+    BlackListUserServiceRepository blackListUserServiceRepository;
+
+    @Autowired
     AdditionalServiceRepository additionalServiceRepository;
 
     @ModelAttribute
@@ -72,6 +70,7 @@ public class OrderRentalCarController {
         }
         return "orders";
     }
+
 
     @RequestMapping(value = "/update-order", method = RequestMethod.GET)
     public void getPageParametrUpdateCar(Model model, @RequestParam(value = "id") Long id) {
@@ -109,10 +108,14 @@ public class OrderRentalCarController {
     public String getPageAddCars(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserService userService = userServiceRepository.findByEmail(user.getUsername());
-
-        model.addAttribute("orderRentalCarDto", new OrderRentalCarDto());
+        if (!(blackListUserServiceRepository.findByUserService(userService) == null)) {
+            model.addAttribute("cause", blackListUserServiceRepository.findByUserServiceId(userService.getId()).getCause());
+            return "info-cause-add-blacklist";
+        }
+        model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
         model.addAttribute("cars", carRepository.findAll());
         model.addAttribute("additionalServices", additionalServiceRepository.findAll());
+        model.addAttribute("defaultService", Services.NO);
         UserDto userDto = UserDto.builder()
                 .firstName(userService.getFirstName())
                 .secondName(userService.getSecondName())
@@ -122,23 +125,43 @@ public class OrderRentalCarController {
                 .build();
         model.addAttribute("userDto", userDto);
         model.addAttribute("statusOrder", StatusOrder.ACCEPTED);
+        model.addAttribute("localDate", LocalDate.now());
         return "add-order";
     }
 
 
     @RequestMapping(value = "/add-order", method = RequestMethod.POST)
-    public String createCar(OrderRentalCarDto orderRentalCarDto, @RequestParam("startRentalCar")
-    @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startRentalCar,
-                            @RequestParam("finishRentalCar") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finishRentalCar) {
+    public String createCar(Model model, OrderRentalCarDtoNew orderRentalCarDtoNew, @RequestParam("startRentalCar")
+            String startRentalCar, @RequestParam("finishRentalCar") String finishRentalCar) {
+
+        Car car = carRepository.findByVinNumber(orderRentalCarDtoNew.getVinNumber());
+        AdditionalService additionalService = additionalServiceRepository.findByServices(Services.valueOf(orderRentalCarDtoNew.getAdditionalService()));
+        UserService userService = userServiceRepository.findByPassportNumber(orderRentalCarDtoNew.getPassportNumber());
 
         OrderRentalCar orderRentalCar = new OrderRentalCar();
-        orderRentalCar.setUserServiceId(userServiceRepository.findByBlackListUserService(orderRentalCarDto.getPassportNumber()).getId());
-        orderRentalCar.setCarId(carRepository.findByVinNumber(orderRentalCarDto.getVinNumber()).getId());
-        orderRentalCar.setAdditionalService(orderRentalCarDto.getAdditionalService());
-        orderRentalCar.setDateStartRental(startRentalCar);
-        orderRentalCar.setDateFinishRental(finishRentalCar);
-        orderRentalCar.setStatusOrder(orderRentalCarDto.getStatusOrder());
-        orderRentalCar.setCost(orderRentalCarDto.getCostCar().add(orderRentalCarDto.getCostAdditionalService()));
+        orderRentalCar.setUserServiceId(userService.getId());
+        orderRentalCar.setCarId(car.getId());
+        orderRentalCar.setAdditionalService(additionalService);
+        orderRentalCar.setDateStartRental(LocalDate.parse(startRentalCar));
+        orderRentalCar.setDateFinishRental(LocalDate.parse(finishRentalCar));
+        orderRentalCar.setStatusOrder(orderRentalCarDtoNew.getStatusOrder());
+        orderRentalCar.setCost(car.getCostRentalOfDay().add(additionalService.getCost()));
+        OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
+                .firstName(userService.getFirstName())
+                .secondName(userService.getSecondName())
+                .passportNumber(userService.getPassportNumber())
+                .brandCar(car.getBrandCar().getBrand())
+                .modelCar(car.getModel())
+                .vinNumber(car.getVinNumber())
+                .costCar(car.getCostRentalOfDay())
+                .additionalService(additionalService)
+                .costAdditionalService(additionalService.getCost())
+                .startRentalCar(LocalDate.parse(orderRentalCarDtoNew.getStartRentalCar()))
+                .finishRentalCar(LocalDate.parse(orderRentalCarDtoNew.getFinishRentalCar()))
+                .costOrder(car.getCostRentalOfDay().add(additionalService.getCost()))
+                .statusOrder(orderRentalCarDtoNew.getStatusOrder())
+                .build();
+        model.addAttribute(orderRentalCarDto);
         orderRentalCarService.save(orderRentalCar);
         return "order";
     }

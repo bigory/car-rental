@@ -41,4 +41,5 @@ public class BlackListUserServiceRepositoryTest {
         System.out.println(blackListUserService);
         assertNotNull(blackListUserService);
     }
+
 }

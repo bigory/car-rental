@@ -17,7 +17,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigurationServiceTest.class)
@@ -56,13 +55,5 @@ public class BrandCarServiceImplTest {
         List<BrandCar> brandCars1 = brandCarService.findAll();
         brandCars1.forEach(System.out::println);
         assertEquals(brandCars1.size(), brandCars.size());
-    }
-
-    @Test
-    public void delete() {
-        BrandCar brandCar = brandCarRepository.findByBrand("BMW");
-        brandCarService.delete(brandCar);
-        BrandCar brandCar1 = brandCarRepository.findByBrand("BMW");
-        assertNull(brandCar1);
     }
 }

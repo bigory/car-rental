@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -19,14 +19,19 @@
 
         <section th:id="section">
             <div th:id="section-block">
-                <p><span th:text="#{home.page.info}"></span></p>
+                <div th:id="form-add">
+                    <span th:text="#{info.blacklist.user}"></span>
+                    <br>
+                    <span th:text="#{black.list.cause}+':'"></span>
+                    <br>
+                    <span th:text="${cause}"></span>
+                </div>
             </div>
         </section>
 
         <div th:insert="~{fragments::footer}"></div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

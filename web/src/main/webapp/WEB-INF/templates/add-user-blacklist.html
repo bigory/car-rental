@@ -18,17 +18,29 @@
         <div th:insert="~{fragments::aside}">
         </div>
 
-        <form th:action="@{/add-brand}" th:object="${brandDto}" method="post">
+        <form th:action="@{/add-user-blacklist}"
+              th:object="${blackListUserServiceDto}" method="post">
             <section th:id="section">
                 <div th:id="section-block">
                     <div th:id="form-add">
                         <div>
-                            <span th:text="#{car.brand}">Brand</span>
-                            <br>
-                            <input type="text" th:field="*{brand}" class="text-uppercase font-weight-bold">
+                            <div th:text="#{users.service}"></div>
+                            <select th:field="*{userServiceId}">
+                                <option th:each="userService: ${userServices}"
+                                        th:value="${userService.getId()}">
+                                    <span th:text="${userService.firstName}"></span>
+                                    <span th:text="${userService.secondName}"></span>
+                                    <span th:text="${userService.passportNumber}"></span>
+                                </option>
+                            </select>
                         </div>
+                        <div th:text="#{black.list.cause}"></div>
                         <div>
-                            <input type="submit" th:value="#{save.object}">
+                            <input th:type="text" th:name="Cause" th:value="*{cause}" required>
+                        </div>
+                        <br>
+                        <div>
+                            <input type="submit" th:value="#{save.object}" class="rounded-lg">
                         </div>
                     </div>
                 </div>
@@ -48,5 +60,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+</body>
+</html></title>
+</head>
+<body>
+
 </body>
 </html>
