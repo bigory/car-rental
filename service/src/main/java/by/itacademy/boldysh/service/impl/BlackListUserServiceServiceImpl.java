@@ -4,6 +4,7 @@ import by.itacademy.boldysh.database.entity.BlackListUserService;
 import by.itacademy.boldysh.database.repository.BlackListUserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.BlackListUserServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +44,7 @@ public class BlackListUserServiceServiceImpl implements BlackListUserServiceServ
     }
 
     @Override
+    @Cacheable("userServices")
     public Page<BlackListUserService> findByPaginated(Pageable pageable, List<BlackListUserService> blackListUserServices) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();

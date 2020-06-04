@@ -26,7 +26,7 @@ public class BrandCar extends BaseEntity<Long> {
     @Column(name = "brand")
     private String brand;
 
-    @OneToMany(mappedBy = "brandCar",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "brandCar")
     private List<Car> cars = new ArrayList<>();
 
     public BrandCar(String brand) {

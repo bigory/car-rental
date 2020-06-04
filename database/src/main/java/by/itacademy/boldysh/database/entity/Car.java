@@ -47,7 +47,7 @@ public class Car extends BaseEntity<Long> {
     @Column(name = "cost_rental_of_day")
     private BigDecimal costRentalOfDay;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_car_id")
     private BrandCar brandCar;
 

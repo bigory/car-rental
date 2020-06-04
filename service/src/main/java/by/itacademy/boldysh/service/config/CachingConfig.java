@@ -27,7 +27,6 @@ public class CachingConfig {
         EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
         factoryBean.setConfigLocation(ehCacheConfig);
         factoryBean.setShared(true);
-
         return factoryBean;
     }
 }
