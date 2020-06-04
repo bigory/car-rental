@@ -105,6 +105,7 @@ public class CarController {
     @RequestMapping(value = "/delete-car", method = RequestMethod.GET)
     public String getPageDeleteCar(Model model) {
         CarDto carDto = new CarDto();
+        model.addAttribute("cars", carRepository.findAll());
         model.addAttribute("carDto", carDto);
         return "delete-car";
     }

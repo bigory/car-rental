@@ -38,6 +38,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Cacheable("allBrandCar")
     public void save(Car car) {
         carRepository.save(car);
     }
@@ -126,12 +127,21 @@ public class CarServiceImpl implements CarService {
     public List<Car> findByCarNoOrderRental(List<Car> cars, List<OrderRentalCar> orderRentalCarList) {
         List<Car> carList = new ArrayList<>();
         for (Car car : cars) {
-            for (OrderRentalCar orderRentalCar : orderRentalCarList)
-                if (!(car.getId().equals(orderRentalCar.getCarId())) || car.getId().equals(orderRentalCar.getCarId()) && orderRentalCar.getStatusOrder() == StatusOrder.COMPLETED) {
+            int i = 0;
+            for (OrderRentalCar orderRentalCar : orderRentalCarList) {
+                if (car.getId().equals(orderRentalCar.getCarId()) & orderRentalCar.getStatusOrder() == StatusOrder.COMPLETED) {
                     carList.add(car);
+                    i++;
+                    break;
+                } else if (car.getId().equals(orderRentalCar.getCarId())) {
+                    i++;
+                    break;
                 }
+            }
+            if (i == 0) {
+                carList.add(car);
+            }
         }
         return carList;
     }
 }
-

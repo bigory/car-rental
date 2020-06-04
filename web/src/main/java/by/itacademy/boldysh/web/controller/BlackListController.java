@@ -79,7 +79,7 @@ public class BlackListController {
     }
 
     @RequestMapping(value = "/delete-user-blacklist", method = RequestMethod.GET)
-    public String getPageDeleteCar(Model model, @RequestParam(value = "id") Long id) {
+    public String getPageDeleteUserService(Model model, @RequestParam(value = "id") Long id) {
         Optional<BlackListUserService> blackListUserService = blackListUserServiceRepository.findById(id);
         Optional<UserService> userService = userServiceRepository.findById(blackListUserService.get().getUserService().getId());
         UserDto userDto = UserDto.builder()

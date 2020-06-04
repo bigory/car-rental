@@ -119,6 +119,10 @@ public class OrderRentalCarController {
             model.addAttribute("cause", blackListUserServiceRepository.findByUserServiceId(userService.getId()).getCause());
             return "info-cause-add-blacklist";
         }
+        if (cars.size() == 0) {
+            model.addAttribute("userService", userService);
+            return "no-car-order";
+        }
         model.addAttribute("orderRentalCarDtoNew", new OrderRentalCarDtoNew());
         model.addAttribute("cars", cars);
         model.addAttribute("additionalServices", additionalServiceRepository.findAll());
@@ -199,4 +203,6 @@ public class OrderRentalCarController {
         OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderRentalCar, id);
         model.addAttribute("orderRentalCarDto", orderRentalCarDto);
     }
+
+
 }

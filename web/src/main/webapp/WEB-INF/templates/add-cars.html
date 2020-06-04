@@ -26,7 +26,7 @@
                         <span th:text="#{car.brand}"></span>
 
                         <div>
-                            <select th:field="*{brandCar}">
+                            <select th:field="*{brandCar}" required>
                                 <option th:each="brand: ${brandCars}"
                                         th:value="${brand.getBrand()}"
                                         th:text="${brand.getBrand()}">
@@ -37,14 +37,14 @@
                         <div>
                             <span th:text="#{car.model}"></span>
                             <br>
-                            <input type="text" th:field="*{modelCar}">
+                            <input type="text" th:field="*{modelCar}" required>
                         </div>
 
                         <br>
                         <div>
                             <span th:text="#{car.vinNumber}"></span>
                             <br>
-                            <input type="text" th:field="*{vinNumber}">
+                            <input type="text" th:field="*{vinNumber}" required>
                         </div>
 
                         <br>
@@ -61,21 +61,21 @@
                         <span th:text="#{car.transmissions}"></span>
                         <div th:each="transmission:${transmissions}">
                             <span th:text="${transmission}"></span>
-                            <input type="radio" name="Transmission" th:value="${transmission}">
+                            <input type="radio" name="Transmission" th:value="${transmission}" required>
                         </div>
 
                         <br>
                         <div>
                             <span th:text="#{car.costRentalOfDay}"></span>
                             <br>
-                            <input type="text" th:field="*{costRentalOfDay}">
+                            <input type="text" th:field="*{costRentalOfDay}" required>
                         </div>
 
                         <br>
                         <div>
                             <span th:text="#{car.yearOfIssue}"></span>
                             <br>
-                            <input type="text" th:field="*{yearOfIssue}">
+                            <input type="text" th:field="*{yearOfIssue}" required>
                         </div>
 
                         <br>

@@ -15,8 +15,7 @@
         <div th:id="line-vertical"></div>
         <div th:id="line-vertiacal-wrapper"></div>
         <div th:insert="~{fragments::header}"></div>
-        <div th:insert="~{fragments::aside}">
-        </div>
+        <div th:insert="~{fragments::aside}"></div>
 
         <form th:action="@{/add-order}"
               th:object="${orderRentalCarDtoNew}" method="post">
@@ -37,17 +36,19 @@
                         <br>
 
                         <span th:text="#{car}"></span>
-
                         <div>
-                            <select th:field="*{vinNumber}">
-                                <option th:each="car: ${cars}"
-                                        th:value="${car.getVinNumber()}">
-                                    <span th:text="${car.getBrandCar().brand}"></span>
-                                    <span th:text="${car.getModel()}"></span>
-                                    <span th:text="${car.getVinNumber()}"></span>
-                                    <span th:text="${car.getCostRentalOfDay()}+BYN"></span>
-                                </option>
-                            </select>
+                            <div th:if="${cars.size()!=0}">
+                                <select th:field="*{vinNumber}">
+                                    <option th:each="car: ${cars}"
+                                            th:value="${car.getVinNumber()}">
+                                        <span th:text="${car.getBrandCar().brand}"></span>
+                                        <span th:text="${car.getModel()}"></span>
+                                        <span th:text="${car.getVinNumber()}"></span>
+                                        <span th:text="${car.getCostRentalOfDay()}+BYN"></span>
+                                    </option>
+                                </select>
+                            </div>
+
                         </div>
 
                         <div>
@@ -57,7 +58,8 @@
                             <div th:each="additionalService:${additionalServices}">
                                 <span th:text="${additionalService.getServices()}"></span>
                                 <span th:text="${additionalService.getCost()} + BYN"></span>
-                                <input th:type="radio" th:checked="${additionalService.getServices()==defaultService}"
+                                <input th:type="radio"
+                                       th:checked="${additionalService.getServices()==defaultService}"
                                        th:name="AdditionalService"
                                        th:value="${additionalService.getServices()}">
                             </div>
@@ -79,6 +81,7 @@
                             <input type="submit" th:value="#{save.object}" class="rounded-lg">
                         </div>
                     </div>
+                </div>
             </section>
         </form>
 

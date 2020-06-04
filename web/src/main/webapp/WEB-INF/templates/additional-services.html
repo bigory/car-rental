@@ -10,44 +10,47 @@
 <body>
 <div class="container">
     <div th:id="wrapper">
+
         <div th:id="line-vertical"></div>
         <div th:id="line-vertiacal-wrapper"></div>
-
         <div th:insert="~{fragments::header}"></div>
         <div th:insert="~{fragments::aside}"></div>
 
         <section th:id="section">
             <div th:id="section-block">
-                <span th:text="#{list.additional.service}"></span><br>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">№</th>
-                        <th scope="col" th:text="#{additional.service.service}"></th>
-                        <th scope="col" th:text="#{additional.service.cost}"></th>
-                    </tr>
-                    </thead>
+                <div th:id="form-add">
+                    <span th:text="#{list.additional.service}"></span><br>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col" th:text="#{additional.service.service}"></th>
+                            <th scope="col" th:text="#{additional.service.cost}"></th>
+                        </tr>
+                        </thead>
 
-                    <tbody>
-                    <tr th:each="service,iterStat:${additionalServicesPage}">
-                        <th scope="row" th:text="${iterStat.count}"></th>
-                        <td th:text="${service.services}"></td>
-                        <td th:text="${service.cost}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item d-flex justify-content-center">
-                            <div th:if="${additionalServicesPage.totalPages > 0}"
-                                 th:each="pageNumber:${pageNumbers}">
-                                <a class="page-link" th:href="@{/additional-services(size=${additionalServicesPage.size}, page=${pageNumber})}"
-                                   th:text="${pageNumber}"
-                                   th:class="${pageNumber==additionalServicesPage.number+1}?active"></a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
+                        <tbody>
+                        <tr th:each="service,iterStat:${additionalServicesPage}">
+                            <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${service.services}"></td>
+                            <td th:text="${service.cost}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item d-flex justify-content-center">
+                                <div th:if="${additionalServicesPage.totalPages > 0}"
+                                     th:each="pageNumber:${pageNumbers}">
+                                    <a class="page-link"
+                                       th:href="@{/additional-services(size=${additionalServicesPage.size}, page=${pageNumber})}"
+                                       th:text="${pageNumber}"
+                                       th:class="${pageNumber==additionalServicesPage.number+1}?active"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </section>
 
