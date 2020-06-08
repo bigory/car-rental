@@ -28,13 +28,13 @@ import java.util.stream.IntStream;
 public class BlackListController {
 
     @Autowired
-    BlackListUserServiceService blackListUserServiceService;
+    private BlackListUserServiceService blackListUserServiceService;
 
     @Autowired
-    BlackListUserServiceRepository blackListUserServiceRepository;
+    private BlackListUserServiceRepository blackListUserServiceRepository;
 
     @Autowired
-    UserServiceRepository userServiceRepository;
+    private UserServiceRepository userServiceRepository;
 
 
     @RequestMapping(value = "black-list-user", method = RequestMethod.GET)

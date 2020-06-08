@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/add-brand", "/add-cars", "/black-list-user", "/brand", "/delete-brand", "/delete-car", "/delete-order", "/delete-user", "/info-delete", "/list-car-update", "/orders", "/update-car", "/update-order", "/users","/add-user-blacklist").hasAuthority("ADMIN")
+                .antMatchers("/add-brand", "/add-cars", "/black-list-user", "/brand", "/delete-brand", "/delete-car", "/delete-order", "/delete-user", "/info-delete", "/list-car-update", "/orders", "/update-car", "/update-order", "/users", "/add-user-blacklist").hasAuthority("ADMIN")
                 .antMatchers("/order", "/add-order").hasAuthority("USER")
                 .anyRequest().permitAll()
                 .and()

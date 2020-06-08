@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OrderRentalCarDtoNew {
 
-    String passportNumber;
-    String vinNumber;
-    String additionalService;
-    String startRentalCar;
-    String finishRentalCar;
-    StatusOrder statusOrder;
+    private String passportNumber;
+    private String vinNumber;
+    private String additionalService;
+    private String startRentalCar;
+    private String finishRentalCar;
+    private StatusOrder statusOrder;
 
 }

@@ -55,7 +55,7 @@ public class CarController {
     private BrandCarService brandCarService;
 
     @Autowired
-    BrandCarRepository brandCarRepository;
+    private BrandCarRepository brandCarRepository;
 
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public String getPagesCars(Model model, @RequestParam(value = "page") Optional<Integer> page,

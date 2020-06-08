@@ -29,13 +29,13 @@ import java.util.stream.StreamSupport;
 public class OrderRentalCarImpl implements OrderRentalCarService {
 
     @Autowired
-    OrderCarRentalCarRepository orderCarRentalCarRepository;
+    private OrderCarRentalCarRepository orderCarRentalCarRepository;
 
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
 
     @Autowired
-    UserServiceRepository userServiceRepository;
+    private UserServiceRepository userServiceRepository;
 
     @Override
     public void save(OrderRentalCar orderRentalCar) {
@@ -64,12 +64,12 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
 
         List<OrderRentalCarDto> orderRentalCarDtos = new ArrayList<OrderRentalCarDto>();
 
-        for (int i = 0; i < orderRentalCars.size(); i++) {
-            Optional<Car> car = carRepository.findById(orderRentalCars.get(i).getCarId());
-            Optional<UserService> userService = userServiceRepository.findById(orderRentalCars.get(i).getUserServiceId());
+        for (OrderRentalCar orderRentalCar : orderRentalCars) {
+            Optional<Car> car = carRepository.findById(orderRentalCar.getCarId());
+            Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.getUserServiceId());
 
             OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
-                    .id(orderRentalCars.get(i).getId())
+                    .id(orderRentalCar.getId())
                     .brandCar(car.get().getBrandCar().getBrand())
                     .modelCar(car.get().getModel())
                     .vinNumber(car.get().getVinNumber())
@@ -77,12 +77,12 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
                     .firstName(userService.get().getFirstName())
                     .secondName(userService.get().getSecondName())
                     .passportNumber(userService.get().getPassportNumber())
-                    .additionalService(orderRentalCars.get(i).getAdditionalService())
-                    .costAdditionalService(orderRentalCars.get(i).getAdditionalService().getCost())
-                    .startRentalCar(orderRentalCars.get(i).getDateStartRental())
-                    .finishRentalCar(orderRentalCars.get(i).getDateFinishRental())
-                    .costOrder(car.get().getCostRentalOfDay().add(orderRentalCars.get(i).getAdditionalService().getCost()))
-                    .statusOrder(orderRentalCars.get(i).getStatusOrder())
+                    .additionalService(orderRentalCar.getAdditionalService())
+                    .costAdditionalService(orderRentalCar.getAdditionalService().getCost())
+                    .startRentalCar(orderRentalCar.getDateStartRental())
+                    .finishRentalCar(orderRentalCar.getDateFinishRental())
+                    .costOrder(car.get().getCostRentalOfDay().add(orderRentalCar.getAdditionalService().getCost()))
+                    .statusOrder(orderRentalCar.getStatusOrder())
                     .build();
             orderRentalCarDtos.add(orderRentalCarDto);
         }
@@ -95,9 +95,8 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
             int toIndex = Math.min(startItem + pageSize, orderRentalCarDtos.size());
             orderRentalCarDtoList = orderRentalCarDtos.subList(startItem, toIndex);
         }
-        Page<OrderRentalCarDto> orderRentalCarPage = new PageImpl<OrderRentalCarDto>(orderRentalCarDtoList, PageRequest.of(currentPage, pageSize), orderRentalCarDtos.size());
 
-        return orderRentalCarPage;
+        return new PageImpl<OrderRentalCarDto>(orderRentalCarDtoList, PageRequest.of(currentPage, pageSize), orderRentalCarDtos.size());
     }
 
     @Override
@@ -105,7 +104,7 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
         Optional<Car> car = carRepository.findById(orderRentalCar.get().getCarId());
         Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.get().getUserServiceId());
 
-        OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
+        return OrderRentalCarDto.builder()
                 .id(orderRentalCar.get().getId())
                 .firstName(userService.get().getFirstName())
                 .secondName(userService.get().getSecondName())
@@ -123,7 +122,5 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
                 .costOrder(orderRentalCar.get().getCost())
                 .statusOrder(orderRentalCar.get().getStatusOrder())
                 .build();
-
-        return orderRentalCarDto;
     }
 }
