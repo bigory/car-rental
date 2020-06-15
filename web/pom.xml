@@ -14,7 +14,7 @@
     <artifactId>web</artifactId>
 
     <properties>
-        <spring-security.version>5.1.5.RELEASE</spring-security.version>
+        <spring-security.version>5.3.3.RELEASE</spring-security.version>
         <thymeleaf-extras.version>3.0.4.RELEASE</thymeleaf-extras.version>
 
     </properties>
