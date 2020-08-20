@@ -16,6 +16,8 @@
 
 <div th:fragment="header">
     <header th:id="header">
+        <img th:id="car" th:src="@{/resources/icon/car.png}">
+        <script th:src="@{/resources/js/script.js}"></script>
         <div class="container">
             <div th:insert="~{fragments::language}" th:name="language" th:id="language">
             </div>
@@ -23,7 +25,11 @@
         <div id="line-horizon-header"></div>
         <nav>
             <ul th:class="top-menu">
-                <li><a th:href="@{home}" th:text="#{home.page}"></a></li>
+                <li>
+                    <a th:href="@{home}">
+                        <img th:id="car" th:src="@{/resources/icon/home.png}"></a>
+                    <a th:href="@{home}" th:text="#{home.page}"></a>
+                </li>
                 <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>
                 <li><a th:href="@{contact}" th:text="#{contact}"></a></li>
                 <li><a th:href="@{about-us}" th:text="#{about.us}"></a></li>
@@ -92,8 +98,8 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"

@@ -55,7 +55,7 @@ public class UserService extends BaseEntity<Long> {
     @OneToOne(mappedBy = "userService", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private BlackListUserService blackListUserService;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_rental_car", schema = "car_storage",
             joinColumns = @JoinColumn(name = "user_service_id"),
             inverseJoinColumns = @JoinColumn(name = "car_id"))
