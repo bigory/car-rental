@@ -8,7 +8,15 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +55,7 @@ public class UserService extends BaseEntity<Long> {
     @OneToOne(mappedBy = "userService", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private BlackListUserService blackListUserService;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_rental_car", schema = "car_storage",
             joinColumns = @JoinColumn(name = "user_service_id"),
             inverseJoinColumns = @JoinColumn(name = "car_id"))

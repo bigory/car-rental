@@ -1,7 +1,11 @@
 package by.itacademy.boldysh.service.impl;
 
 import by.itacademy.boldysh.database.dto.FilterDto;
-import by.itacademy.boldysh.database.entity.*;
+import by.itacademy.boldysh.database.entity.BrandCar_;
+import by.itacademy.boldysh.database.entity.Car;
+import by.itacademy.boldysh.database.entity.Car_;
+import by.itacademy.boldysh.database.entity.OrderRentalCar;
+import by.itacademy.boldysh.database.entity.StatusOrder;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +34,8 @@ import java.util.stream.StreamSupport;
 @Transactional
 public class CarServiceImpl implements CarService {
 
-    private final CarRepository carRepository;
-
     @Autowired
-    public CarServiceImpl(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
+    private CarRepository carRepository;
 
     @Override
     @Cacheable("allBrandCar")
@@ -66,14 +66,11 @@ public class CarServiceImpl implements CarService {
             int toIndex = Math.min(startItem + pageSize, cars.size());
             listCar = cars.subList(startItem, toIndex);
         }
-
-        Page<Car> carPage = new PageImpl<Car>(listCar, PageRequest.of(currentPage, pageSize), cars.size());
-
-        return carPage;
+        return new PageImpl<>(listCar, PageRequest.of(currentPage, pageSize), cars.size());
     }
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     @Cacheable({"cars", "allBrandCar"})
@@ -82,14 +79,15 @@ public class CarServiceImpl implements CarService {
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
         criteriaQuery.select(carRoot).distinct(true);
-
         Predicate criteria = criteriaBuilder.conjunction();
 
-        if (!filterDto.getBrandCar().equals("")) {
+        final String valueBrandCar = "";
+
+        if (!filterDto.getBrandCar().equals(valueBrandCar)) {
             Predicate brand = criteriaBuilder.equal(carRoot.get(Car_.brandCar).get(BrandCar_.brand), filterDto.getBrandCar());
             criteria = criteriaBuilder.and(criteria, brand);
         }
-        if (!filterDto.getModelCar().equals("")) {
+        if (!filterDto.getModelCar().equals(valueBrandCar)) {
             Predicate modelCar = criteriaBuilder.equal(carRoot.get(Car_.model), filterDto.getModelCar());
             criteria = criteriaBuilder.and(criteria, modelCar);
         }
@@ -117,7 +115,7 @@ public class CarServiceImpl implements CarService {
         carsList.setFirstResult(page.getPageNumber() * page.getPageSize());
         carsList.setMaxResults(page.getPageSize());
 
-        Page<Car> carPage = new PageImpl<Car>(carsList.getResultList(), page, totalPages);
+        Page<Car> carPage = new PageImpl<>(carsList.getResultList(), page, totalPages);
 
         entityManager.close();
         return carPage;
@@ -129,7 +127,7 @@ public class CarServiceImpl implements CarService {
         for (Car car : cars) {
             int i = 0;
             for (OrderRentalCar orderRentalCar : orderRentalCarList) {
-                if (car.getId().equals(orderRentalCar.getCarId()) & orderRentalCar.getStatusOrder() == StatusOrder.COMPLETED) {
+                if (car.getId().equals(orderRentalCar.getCarId()) & orderRentalCar.getStatusOrder().equals(StatusOrder.COMPLETED)) {
                     carList.add(car);
                     i++;
                     break;

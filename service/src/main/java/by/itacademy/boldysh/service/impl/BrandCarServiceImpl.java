@@ -18,12 +18,8 @@ import java.util.stream.StreamSupport;
 @Transactional
 public class BrandCarServiceImpl implements BrandCarService {
 
-    private final BrandCarRepository brandCarRepository;
-
     @Autowired
-    public BrandCarServiceImpl(BrandCarRepository brandCarRepository) {
-        this.brandCarRepository = brandCarRepository;
-    }
+    private BrandCarRepository brandCarRepository;
 
     @Override
     public void save(BrandCar brandCar) {

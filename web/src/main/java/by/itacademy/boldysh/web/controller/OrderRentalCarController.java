@@ -3,8 +3,17 @@ package by.itacademy.boldysh.web.controller;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDto;
 import by.itacademy.boldysh.database.dto.OrderRentalCarDtoNew;
 import by.itacademy.boldysh.database.dto.UserDto;
-import by.itacademy.boldysh.database.entity.*;
-import by.itacademy.boldysh.database.repository.*;
+import by.itacademy.boldysh.database.entity.AdditionalService;
+import by.itacademy.boldysh.database.entity.Car;
+import by.itacademy.boldysh.database.entity.OrderRentalCar;
+import by.itacademy.boldysh.database.entity.Services;
+import by.itacademy.boldysh.database.entity.StatusOrder;
+import by.itacademy.boldysh.database.entity.UserService;
+import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
+import by.itacademy.boldysh.database.repository.BlackListUserServiceRepository;
+import by.itacademy.boldysh.database.repository.CarRepository;
+import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
+import by.itacademy.boldysh.database.repository.UserServiceRepository;
 import by.itacademy.boldysh.service.interfaces.CarService;
 import by.itacademy.boldysh.service.interfaces.OrderRentalCarService;
 import lombok.RequiredArgsConstructor;
@@ -31,25 +40,25 @@ import java.util.stream.IntStream;
 public class OrderRentalCarController {
 
     @Autowired
-    OrderCarRentalCarRepository orderCarRentalCarRepository;
+    private OrderCarRentalCarRepository orderCarRentalCarRepository;
 
     @Autowired
-    OrderRentalCarService orderRentalCarService;
+    private OrderRentalCarService orderRentalCarService;
 
     @Autowired
-    UserServiceRepository userServiceRepository;
+    private UserServiceRepository userServiceRepository;
 
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
 
     @Autowired
-    CarService carService;
+    private CarService carService;
 
     @Autowired
-    BlackListUserServiceRepository blackListUserServiceRepository;
+    private BlackListUserServiceRepository blackListUserServiceRepository;
 
     @Autowired
-    AdditionalServiceRepository additionalServiceRepository;
+    private AdditionalServiceRepository additionalServiceRepository;
 
     @ModelAttribute
     public StatusOrder[] getStatusOrder() {

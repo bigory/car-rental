@@ -1,6 +1,5 @@
 package by.itacademy.boldysh.database.dto;
 
-
 import by.itacademy.boldysh.database.entity.AdditionalService;
 import by.itacademy.boldysh.database.entity.StatusOrder;
 import lombok.AllArgsConstructor;
@@ -17,18 +16,18 @@ import java.time.LocalDate;
 @Builder
 public class OrderRentalCarDto {
 
-    Long id;
-    String firstName;
-    String secondName;
-    String passportNumber;
-    String brandCar;
-    String modelCar;
-    String vinNumber;
-    BigDecimal costCar;
-    AdditionalService additionalService;
-    BigDecimal costAdditionalService;
-    LocalDate startRentalCar;
-    LocalDate finishRentalCar;
-    BigDecimal costOrder;
-    StatusOrder statusOrder;
+    private Long id;
+    private String firstName;
+    private String secondName;
+    private String passportNumber;
+    private String brandCar;
+    private String modelCar;
+    private String vinNumber;
+    private BigDecimal costCar;
+    private AdditionalService additionalService;
+    private BigDecimal costAdditionalService;
+    private LocalDate startRentalCar;
+    private LocalDate finishRentalCar;
+    private BigDecimal costOrder;
+    private StatusOrder statusOrder;
 }
