@@ -16,7 +16,7 @@
     <properties>
         <spring-security.version>5.1.5.RELEASE</spring-security.version>
         <thymeleaf-extras.version>3.0.4.RELEASE</thymeleaf-extras.version>
-      </properties>
+    </properties>
 
     <dependencies>
 
@@ -69,16 +69,22 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>3.0.4</version>
                 <configuration>
-                    <appName>fierce-springs-28736.herokuapp.com</appName>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+                    </processTypes>
+                    <appName>car-rental</appName>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
                         <phase>package</phase>
-                        <goals><goal>copy</goal></goals>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
