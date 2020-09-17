@@ -70,7 +70,7 @@
                 <version>3.0.4</version>
                 <configuration>
                     <warFile>web</warFile>
-                    <appName>car-rental-2345</appName>
+                    <appName>fierce-springs-28736</appName>
                 </configuration>
             </plugin>
         </plugins>
