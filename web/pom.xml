@@ -63,6 +63,17 @@
     </dependencies>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.4</version>
+                <configuration>
+                    <warFile>web</warFile>
+                    <appName>car-rental-2345</appName>
+                </configuration>
+            </plugin>
+        </plugins>
         <finalName>web</finalName>
     </build>
 
