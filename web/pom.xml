@@ -16,8 +16,7 @@
     <properties>
         <spring-security.version>5.1.5.RELEASE</spring-security.version>
         <thymeleaf-extras.version>3.0.4.RELEASE</thymeleaf-extras.version>
-
-    </properties>
+      </properties>
 
     <dependencies>
 
@@ -64,6 +63,18 @@
     </dependencies>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.4</version>
+                <configuration>
+                    <appName>fierce-springs-28736</appName>
+                </configuration>
+            </plugin>
+        </plugins>
+
+
         <finalName>web</finalName>
     </build>
 
