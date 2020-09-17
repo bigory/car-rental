@@ -161,7 +161,7 @@
                 <version>3.0.4</version>
                 <configuration>
                     <warFile>web</warFile>
-                    <appName>car-rental</appName>
+                    <appName>car-rental-2345</appName>
                 </configuration>
             </plugin>
 
