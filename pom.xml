@@ -161,6 +161,7 @@
                 <version>3.0.4</version>
                 <configuration>
                     <configVars>
+                        <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
                         <PORT>8080</PORT>
                     </configVars>
                     <warFile>web.war</warFile>
