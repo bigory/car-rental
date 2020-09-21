@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
-    public String showHomePage() {
+    @GetMapping("/")
+    public String defaultShowHomePage() {
         return "home";
     }
 
-    @GetMapping("/")
-    public String defaultShowHomePage() {
+    @GetMapping("/home")
+    public String showHomePage() {
         return "home";
     }
 
