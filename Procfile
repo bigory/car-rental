@@ -1,1 +1,1 @@
-web: java -cp target/dependency/webapp-runner.jar --port target/*.war
+web: deploy target/*.war --app fierce-springs-28736
