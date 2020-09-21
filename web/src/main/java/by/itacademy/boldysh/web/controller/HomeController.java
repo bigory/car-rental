@@ -12,6 +12,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/")
+    public String defaultShowHomePage() {
+        return "home";
+    }
+
     @GetMapping("/news-sale")
     public String showNewsSale() {
         return "news-sale";
