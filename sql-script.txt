@@ -62,7 +62,7 @@ CREATE TABLE order_rental_car
     date_start_rental      DATE         NOT NULL,
     date_finish_rental     DATE         NOT NULL,
     cost                   INTEGER      NOT NULL,
-    status_order           VARCHAR(128) NOT NULL,
+    status_order           VARCHAR(128) NOT NULL
 
 );
 
