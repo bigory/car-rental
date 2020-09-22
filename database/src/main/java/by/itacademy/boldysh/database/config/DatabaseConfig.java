@@ -27,10 +27,10 @@ import java.util.Properties;
 public class DatabaseConfig {
 
     @Bean
-    public DataSource dataSource(@Value("${JDBC_DATABASE_USERNAME}") String username,
-                                 @Value("${JDBC_DATABASE_URL}") String url,
-                                 @Value("${JDBC_DATABASE_PASSWORD}") String password,
-                                 @Value("${DATABASE_URL}") String driverClassName) {
+    public DataSource dataSource(@Value("${db.user1}") String username,
+                                 @Value("${db.url1}") String url,
+                                 @Value("${db.password1}") String password,
+                                 @Value("${db.driver1}") String driverClassName) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setPassword(password);
