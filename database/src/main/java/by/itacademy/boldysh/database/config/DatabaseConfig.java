@@ -27,9 +27,9 @@ import java.util.Properties;
 public class DatabaseConfig {
 
     @Bean
-    public DataSource dataSource(@Value("${db.user}") String username,
-                                 @Value("${db.url}") String url,
-                                 @Value("${db.password}") String password)
+    public DataSource dataSource(@Value("${db.user1}") String username,
+                                 @Value("${db.url1}") String url,
+                                 @Value("${db.password1}") String password)
                                 /* @Value("${db.driver}") String driverClassName)*/ {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
