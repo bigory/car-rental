@@ -30,13 +30,12 @@ public class DatabaseConfig {
     public DataSource dataSource(@Value("${db.user}") String username,
                                  @Value("${db.url}") String url,
                                  @Value("${db.password}") String password
-                                 /*@Value("${db.driver}") String driverClassName*/) {
+            /*@Value("${db.driver}") String driverClassName*/) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        dataSource.setUrl(url);
         dataSource.setDriverClassName("org.postgresql.Driver");
-
+        dataSource.setUrl(url);
         return dataSource;
     }
 
