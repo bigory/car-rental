@@ -26,7 +26,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "by.itacademy.boldysh.database.repository")
 public class DatabaseConfig {
 
-    @Bean
+    /*@Bean
     public DataSource dataSource(@Value("${db.url}") String username,
                                  @Value("${db.user}") String url,
                                  @Value("${db.password}") String password,
@@ -38,7 +38,7 @@ public class DatabaseConfig {
         dataSource.setDriverClassName(driverClassName);
 
         return dataSource;
-    }
+    }*/
 
     @Bean
     public DataSource dataSourceHeroku(@Value("${JDBC_DATABASE_USERNAME}") String username,
