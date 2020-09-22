@@ -29,13 +29,13 @@ public class DatabaseConfig {
     @Bean
     public DataSource dataSource(@Value("${db.user}") String username,
                                  @Value("${db.url}") String url,
-                                 @Value("${db.password}") String password,
-                                 @Value("${db.driver}") String driverClassName) {
+                                 @Value("${db.password}") String password
+                                 /*@Value("${db.driver}") String driverClassName*/) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        dataSource.setUrl(url);
-        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(System.getenv(url));
+        dataSource.setDriverClassName("org.postgresql.Driver");
 
         return dataSource;
     }
