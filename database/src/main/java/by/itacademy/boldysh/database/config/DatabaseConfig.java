@@ -27,15 +27,27 @@ import java.util.Properties;
 public class DatabaseConfig {
 
     @Bean
-    public DataSource dataSource(@Value("${JDBC_DATABASE_USERNAME}") String username,
-                                 @Value("${JDBC_DATABASE_URL}") String url,
-                                 @Value("${JDBC_DATABASE_PASSWORD}") String password)
-                                 /*@Value("${db.driver}") String driverClassName)*/ {
+    public DataSource dataSource(@Value("${db.url}") String username,
+                                 @Value("${db.user}") String url,
+                                 @Value("${db.password}") String password,
+                                 @Value("${db.driver}") String driverClassName) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         dataSource.setUrl(url);
-        /*dataSource.setDriverClassName(driverClassName);*/
+        dataSource.setDriverClassName(driverClassName);
+
+        return dataSource;
+    }
+
+    @Bean
+    public DataSource dataSourceHeroku(@Value("${JDBC_DATABASE_USERNAME}") String username,
+                                       @Value("${JDBC_DATABASE_URL}") String url,
+                                       @Value("${JDBC_DATABASE_PASSWORD}") String password) {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setUrl(url);
 
         return dataSource;
     }
