@@ -28,9 +28,9 @@ public class DatabaseConfig {
 
     @Bean
     public DataSource dataSource(@Value("${JDBC_DATABASE_USERNAME}") String username,
-                                 @Value("${DATABASE_URL}") String url,
+                                 @Value("${JDBC_DATABASE_URL}") String url,
                                  @Value("${JDBC_DATABASE_PASSWORD}") String password,
-                                 @Value("${JDBC_DATABASE_URL}") String driverClassName) {
+                                 @Value("${DATABASE_URL}") String driverClassName) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setPassword(password);
