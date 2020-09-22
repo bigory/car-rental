@@ -27,15 +27,16 @@ import java.util.Properties;
 public class DatabaseConfig {
 
     @Bean
-    public DataSource dataSource(@Value("${db.user}") String username,
-                                 @Value("${db.url}") String url,
-                                 @Value("${db.password}") String password
-            /*@Value("${db.driver}") String driverClassName*/) {
+    public DataSource dataSource(@Value("${JDBC_DATABASE_USERNAME}") String username,
+                                 @Value("${JDBC_DATABASE_URL}") String url,
+                                 @Value("${JDBC_DATABASE_PASSWORD}") String password)
+                                 /*@Value("${db.driver}") String driverClassName)*/ {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl(url);
+        /*dataSource.setDriverClassName(driverClassName);*/
+
         return dataSource;
     }
 
