@@ -26,22 +26,9 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "by.itacademy.boldysh.database.repository")
 public class DatabaseConfig {
 
-    @Bean
-    public DataSource dataSource(@Value("${db.user}") String username,
-                                 @Value("${db.url}") String url,
-                                 @Value("${db.password}") String password,
-                                 @Value("${db.driver}") String driverClassName) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        dataSource.setUrl(url);
-        dataSource.setDriverClassName(driverClassName);
-
-        return dataSource;
-    }
 
     //Heroku connection database
-    /*@Bean
+    @Bean
     public DataSource dataSourceHeroku(@Value("${JDBC_DATABASE_USERNAME}") String username,
                                        @Value("${JDBC_DATABASE_URL}") String url,
                                        @Value("${JDBC_DATABASE_PASSWORD}") String password) {
@@ -51,7 +38,7 @@ public class DatabaseConfig {
         dataSource.setUrl(url);
 
         return dataSource;
-    }*/
+    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
