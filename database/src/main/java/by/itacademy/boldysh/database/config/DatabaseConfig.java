@@ -40,19 +40,6 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    //Heroku connection database
-    /*@Bean
-    public DataSource dataSourceHeroku(@Value("${JDBC_DATABASE_USERNAME}") String username,
-                                       @Value("${JDBC_DATABASE_URL}") String url,
-                                       @Value("${JDBC_DATABASE_PASSWORD}") String password) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        dataSource.setUrl(url);
-
-        return dataSource;
-    }*/
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
                                                                        Properties jpaProperties) {
