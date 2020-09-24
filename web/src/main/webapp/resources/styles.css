@@ -190,5 +190,15 @@ footer {
     transition: left 3s cubic-bezier(0.36, 0, 0.66, 0.76);
     left: 2%;
 }
+#home {
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+
+#home:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
 
 
