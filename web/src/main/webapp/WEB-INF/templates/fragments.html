@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}"/>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -16,8 +17,8 @@
 
 <div th:fragment="header">
     <header th:id="header">
-       <!-- <img th:id="car" th:src="@{/resources/icon/car.png}">
-        <script th:src="@{/resources/js/script.js}"></script>-->
+        <img th:id="car" th:src="@{/resources/icon/car.png}">
+        <script type="text/javascript" th:src="@{/resources/js/script.js}"></script>
         <div class="container">
             <div th:insert="~{fragments::language}" th:name="language" th:id="language">
             </div>
@@ -27,7 +28,7 @@
             <ul th:class="top-menu">
                 <li>
                     <a th:href="@{home}">
-                        <img th:id="car" th:src="@{/resources/icon/home.png}"></a>
+                        <img th:id="home" th:src="@{/resources/icon/home.png}"></a>
                     <a th:href="@{home}" th:text="#{home.page}"></a>
                 </li>
                 <li><a th:href="@{news-sale}" th:text="#{news.sale}"></a></li>

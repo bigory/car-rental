@@ -1,15 +1,19 @@
-const car = new Image();
-car.src = '/resources/icon/car.png'
-
-car.onclick = function () {
-    let start = Date.now();
-
-    let timer = setInterval(function () {
-        let timePassed = Date.now() - start;
-
-        car.style.left = timePassed / 5 + 'px';
-
-        if (timePassed > 2000) clearInterval(timer);
-
-    }, 20);
-}
+(function(){
+    let car = document.getElementById("car");
+    if (car instanceof HTMLElement && car.parentNode != null) {
+        car.addEventListener("click" , (e) =>  {
+            e.preventDefault();
+            car.classList.add("start");
+        });
+        car.addEventListener("transitionend", (e) => {
+            if (car.classList.contains("start") && !car.classList.contains("finish")) {
+                car.classList.add("finish");
+                car.classList.add("rotate")
+            } else {
+                car.classList.remove("start");
+                car.classList.remove("rotate");
+                car.classList.remove("finish");
+            }
+        })
+    }
+})();

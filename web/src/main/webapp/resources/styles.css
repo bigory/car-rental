@@ -27,6 +27,7 @@ body {
     background-color: #515152;
     height: 160px;
     padding-right: 0;
+    position: relative;
 }
 
 #line-horizon-header {
@@ -95,7 +96,7 @@ aside {
 
 .aside-menu a {
     font-size: 15px;
-    color:#FF8C00;
+    color: #FF8C00;
 }
 
 #section {
@@ -165,6 +166,29 @@ footer {
 #credentials {
     color: red;
     size: 20px;
+}
+
+
+#car {
+    position: absolute;
+    height: 40px;
+    object-fit: contain;
+    top: 0;
+    left: 5%;
+    transition: left 3s cubic-bezier(0.36, 0, 0.26, -0.36);
+}
+
+#car.start {
+    left: 85%;
+}
+
+#car.rotate {
+    transform: scale(-1, 1);
+}
+
+#car.finish {
+    transition: left 3s cubic-bezier(0.36, 0, 0.66, 0.76);
+    left: 2%;
 }
 
 
