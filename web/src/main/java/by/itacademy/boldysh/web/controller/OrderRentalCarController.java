@@ -151,7 +151,7 @@ public class OrderRentalCarController {
 
 
     @RequestMapping(value = "/add-order", method = RequestMethod.POST)
-    public String createCar(Model model, OrderRentalCarDtoNew orderRentalCarDtoNew, @RequestParam("startRentalCar")
+    public String createOrderRentalCar(Model model, OrderRentalCarDtoNew orderRentalCarDtoNew, @RequestParam("startRentalCar")
             String startRentalCar, @RequestParam("finishRentalCar") String finishRentalCar) {
 
         Car car = carRepository.findByVinNumber(orderRentalCarDtoNew.getVinNumber());
