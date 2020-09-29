@@ -40,7 +40,6 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
                                                                        Properties jpaProperties) {
