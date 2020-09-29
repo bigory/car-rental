@@ -27,20 +27,6 @@ import java.util.Properties;
 public class DatabaseConfig {
 
 
- /*   //Heroku connection database
-    @Bean
-    public DataSource dataSourceHeroku(@Value("${JDBC_DATABASE_USERNAME}") String username,
-                                       @Value("${JDBC_DATABASE_URL}") String url,
-                                       @Value("${JDBC_DATABASE_PASSWORD}") String password) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        dataSource.setUrl(url);
-
-        return dataSource;
-    }
-*/
-
     @Bean
     public DataSource dataSource(@Value("${db.user}") String username,
                                  @Value("${db.url}") String url,
@@ -54,6 +40,7 @@ public class DatabaseConfig {
 
         return dataSource;
     }
+
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
