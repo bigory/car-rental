@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -29,6 +31,7 @@ import java.util.List;
 @Component
 @Entity
 @Table(name = "additional_services", schema = "car_storage")
+@OptimisticLocking(type = OptimisticLockType.VERSION)
 public class AdditionalService extends BaseEntity<Long> {
 
 

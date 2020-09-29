@@ -12,8 +12,7 @@ CREATE TABLE user_service
     telephone       VARCHAR(64)                  NOT NULL,
     email           VARCHAR(256)                 NOT NULL,
     password        VARCHAR(128)                 NOT NULL,
-    isAdmin         VARCHAR(64) DEFAULT  'USER',
-    version         INTEGER
+    isAdmin         VARCHAR(64) DEFAULT  'USER'
 );
 
 CREATE TABLE black_list
