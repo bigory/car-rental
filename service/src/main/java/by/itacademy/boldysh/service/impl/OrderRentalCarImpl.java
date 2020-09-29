@@ -5,6 +5,7 @@ import by.itacademy.boldysh.database.entity.AdditionalService;
 import by.itacademy.boldysh.database.entity.Car;
 import by.itacademy.boldysh.database.entity.OrderRentalCar;
 import by.itacademy.boldysh.database.entity.UserService;
+import by.itacademy.boldysh.database.repository.AdditionalServiceRepository;
 import by.itacademy.boldysh.database.repository.CarRepository;
 import by.itacademy.boldysh.database.repository.OrderCarRentalCarRepository;
 import by.itacademy.boldysh.database.repository.UserServiceRepository;
@@ -37,6 +38,9 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
     @Autowired
     private UserServiceRepository userServiceRepository;
 
+    @Autowired
+    private AdditionalServiceRepository additionalServiceRepository;
+
     @Override
     public void save(OrderRentalCar orderRentalCar) {
         orderCarRentalCarRepository.save(orderRentalCar);
@@ -67,6 +71,7 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
         for (OrderRentalCar orderRentalCar : orderRentalCars) {
             Optional<Car> car = carRepository.findById(orderRentalCar.getCarId());
             Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.getUserServiceId());
+            Optional<AdditionalService> additionalService = additionalServiceRepository.findById(orderRentalCar.getAdditionalService().getId());
 
             OrderRentalCarDto orderRentalCarDto = OrderRentalCarDto.builder()
                     .id(orderRentalCar.getId())
@@ -77,11 +82,11 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
                     .firstName(userService.get().getFirstName())
                     .secondName(userService.get().getSecondName())
                     .passportNumber(userService.get().getPassportNumber())
-                    .additionalService(orderRentalCar.getAdditionalService())
-                    .costAdditionalService(orderRentalCar.getAdditionalService().getCost())
+                    .services(additionalService.get().getServices())
+                    .costAdditionalService(additionalService.get().getCost())
                     .startRentalCar(orderRentalCar.getDateStartRental())
                     .finishRentalCar(orderRentalCar.getDateFinishRental())
-                    .costOrder(car.get().getCostRentalOfDay().add(orderRentalCar.getAdditionalService().getCost()))
+                    .costOrder(car.get().getCostRentalOfDay().add(additionalService.get().getCost()))
                     .statusOrder(orderRentalCar.getStatusOrder())
                     .build();
             orderRentalCarDtos.add(orderRentalCarDto);
@@ -103,6 +108,7 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
     public OrderRentalCarDto conversionOrderRentalCar(Optional<OrderRentalCar> orderRentalCar, Long id) {
         Optional<Car> car = carRepository.findById(orderRentalCar.get().getCarId());
         Optional<UserService> userService = userServiceRepository.findById(orderRentalCar.get().getUserServiceId());
+        Optional<AdditionalService> additionalService = additionalServiceRepository.findById(orderRentalCar.get().getAdditionalService().getId());
 
         return OrderRentalCarDto.builder()
                 .id(orderRentalCar.get().getId())
@@ -113,10 +119,8 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
                 .modelCar(car.get().getModel())
                 .vinNumber(car.get().getVinNumber())
                 .costCar(car.get().getCostRentalOfDay())
-                .additionalService(AdditionalService.builder()
-                        .services(orderRentalCar.get().getAdditionalService().getServices())
-                        .build())
-                .costAdditionalService(orderRentalCar.get().getAdditionalService().getCost())
+                .services(additionalService.get().getServices())
+                .costAdditionalService(additionalService.get().getCost())
                 .startRentalCar(orderRentalCar.get().getDateStartRental())
                 .finishRentalCar(orderRentalCar.get().getDateFinishRental())
                 .costOrder(orderRentalCar.get().getCost())
