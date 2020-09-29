@@ -26,6 +26,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "by.itacademy.boldysh.database.repository")
 public class DatabaseConfig {
 
+
     @Bean
     public DataSource dataSource(@Value("${db.user}") String username,
                                  @Value("${db.url}") String url,
@@ -39,6 +40,7 @@ public class DatabaseConfig {
 
         return dataSource;
     }
+
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,

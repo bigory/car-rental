@@ -86,7 +86,7 @@ public class DatabaseHelper {
                 LocalDate.of(2019, 10, 19), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
 
         OrderRentalCar orderRentalCarTwo = new OrderRentalCar(userTwo.getId(), volvo.getId(), LocalDate.of(2019, 10, 20),
-                LocalDate.of(2019, 10, 23), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceOne);
+                LocalDate.of(2019, 10, 23), BigDecimal.valueOf(75), StatusOrder.ACCEPTED, additionalServiceTwo);
         entityManager.persist(orderRentalCarOne);
         entityManager.persist(orderRentalCarTwo);
         entityManager.persist(orderRentalCarThree);

@@ -1,6 +1,6 @@
 package by.itacademy.boldysh.database.dto;
 
-import by.itacademy.boldysh.database.entity.AdditionalService;
+import by.itacademy.boldysh.database.entity.Services;
 import by.itacademy.boldysh.database.entity.StatusOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ public class OrderRentalCarDto {
     private String modelCar;
     private String vinNumber;
     private BigDecimal costCar;
-    private AdditionalService additionalService;
+    private Services services;
     private BigDecimal costAdditionalService;
     private LocalDate startRentalCar;
     private LocalDate finishRentalCar;

@@ -174,7 +174,7 @@ public class OrderRentalCarController {
                 .modelCar(car.getModel())
                 .vinNumber(car.getVinNumber())
                 .costCar(car.getCostRentalOfDay())
-                .additionalService(additionalService)
+                .services(additionalService.getServices())
                 .costAdditionalService(additionalService.getCost())
                 .startRentalCar(LocalDate.parse(orderRentalCarDtoNew.getStartRentalCar()))
                 .finishRentalCar(LocalDate.parse(orderRentalCarDtoNew.getFinishRentalCar()))
