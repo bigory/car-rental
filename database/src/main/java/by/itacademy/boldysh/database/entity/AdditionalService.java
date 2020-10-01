@@ -11,6 +11,7 @@ import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -42,7 +43,7 @@ public class AdditionalService extends BaseEntity<Long> {
     @Column(name = "cost")
     private BigDecimal cost;
 
-    @OneToMany(mappedBy = "additionalService")
+    @OneToMany(mappedBy = "additionalService",cascade = CascadeType.ALL)
     private List<OrderRentalCar> orderRentalCars = new ArrayList<>();
 
     @Version
