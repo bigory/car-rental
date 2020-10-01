@@ -86,7 +86,7 @@ public class OrderRentalCarController {
 
 
     @RequestMapping(value = "/update-order", method = RequestMethod.GET)
-    public void getPageParametrUpdateCar(Model model, @RequestParam(value = "id") Long id) {
+    public void getPageParametrUpdateOrderRentalCar(Model model, @RequestParam(value = "id") Long id) {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
         OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderRentalCar, id);
         model.addAttribute("statusOrder", StatusOrder.values());
