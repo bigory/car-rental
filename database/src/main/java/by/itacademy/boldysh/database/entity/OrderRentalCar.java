@@ -44,7 +44,7 @@ public class OrderRentalCar extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private StatusOrder statusOrder;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "additional_services_id")
     private AdditionalService additionalService;
 
