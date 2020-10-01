@@ -43,7 +43,7 @@ public class AdditionalService extends BaseEntity<Long> {
     @Column(name = "cost")
     private BigDecimal cost;
 
-    @OneToMany(mappedBy = "additionalService", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "additionalService", cascade = CascadeType.ALL)
     private List<OrderRentalCar> orderRentalCars = new ArrayList<>();
 
     @Version
