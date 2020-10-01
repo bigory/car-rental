@@ -103,7 +103,7 @@ public class OrderRentalCarController {
     }
 
     @RequestMapping(value = "/delete-order", method = RequestMethod.GET)
-    public String getPageDeleteCar(Model model, @RequestParam(value = "id") Long id) {
+    public String getPageOrderRentalCar(Model model, @RequestParam(value = "id") Long id) {
         Optional<OrderRentalCar> orderRentalCar = orderCarRentalCarRepository.findById(id);
         OrderRentalCarDto orderRentalCarDto = orderRentalCarService.conversionOrderRentalCar(orderRentalCar, id);
         model.addAttribute("orderRentalCarDto", orderRentalCarDto);
@@ -112,7 +112,7 @@ public class OrderRentalCarController {
     }
 
     @RequestMapping(value = "/delete-order", method = RequestMethod.POST)
-    public String deleteCar(@RequestParam(value = "id") Long id) {
+    public String deleteOrderRentalCar(@RequestParam(value = "id") Long id) {
         orderCarRentalCarRepository.delete(orderCarRentalCarRepository.findById(id).get());
         return "info-delete";
     }

@@ -19,7 +19,6 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
     List<Car> findByModel(String name);
 
-
     @Transactional
     @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     Car findByVinNumber(String vinNumber);
