@@ -113,7 +113,8 @@ public class OrderRentalCarController {
 
     @RequestMapping(value = "/delete-order", method = RequestMethod.POST)
     public String deleteOrderRentalCar(@RequestParam(value = "id") Long id) {
-        orderCarRentalCarRepository.delete(orderCarRentalCarRepository.findById(id).get());
+        orderCarRentalCarRepository.deleteOrderRentalCarByUserServiceIdAndCarId(orderCarRentalCarRepository.findById(id).get().getUserServiceId(),
+                orderCarRentalCarRepository.findById(id).get().getCarId());
         return "info-delete";
     }
 

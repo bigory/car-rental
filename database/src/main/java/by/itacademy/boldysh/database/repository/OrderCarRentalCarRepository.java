@@ -28,4 +28,10 @@ public interface OrderCarRentalCarRepository extends PagingAndSortingRepository<
     @Query("update OrderRentalCar o set o.statusOrder=?1 where o.id=?2")
     void update(StatusOrder statusOrder, Long id);
 
+
+    @Modifying
+    @Transactional
+    @Query("delete from OrderRentalCar o where o.userServiceId=?1 and o.carId=?2")
+    void deleteOrderRentalCarByUserServiceIdAndCarId(Long userServiceId, Long carId);
+
 }

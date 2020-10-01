@@ -61,4 +61,11 @@ public class OrderCarRentalCarRepositoryTest {
         System.out.println(orderRentalCarList);
         assertNotNull(orderRentalCarList);
     }
+
+    @Test
+    public void testDeleteOrderRentalCarByUserServiceIdAndCarId() {
+        orderCarRentalCarRepository.deleteOrderRentalCarByUserServiceIdAndCarId(1L, 1L);
+        OrderRentalCar orderRentalCar = orderCarRentalCarRepository.findByCarIdAndUserServiceId(1L, 1L);
+        assertNull(orderRentalCar);
+    }
 }

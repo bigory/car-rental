@@ -53,7 +53,6 @@ public class OrderRentalCarImpl implements OrderRentalCarService {
 
     @Override
     public void delete(OrderRentalCar entity) {
-        orderCarRentalCarRepository.delete(entity);
     }
 
     @Override
