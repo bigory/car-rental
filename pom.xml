@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
         <spring.version>5.1.7.RELEASE</spring.version>
         <file.encoding>UTF-8</file.encoding>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <h2.version>1.4.199</h2.version>
         <log4j.verison>1.2.17</log4j.verison>
         <lombok.version>1.18.6</lombok.version>
